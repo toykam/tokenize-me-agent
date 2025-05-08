@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { TokenFactory__factory } from '../../../../blockchain/typechain-types';
 import { ethers } from 'ethers';
 
-const FACTORY_ADDRESS = process.env.NEXT_PUBLIC_FACTORY_ADDRESS;
+const FACTORY_ADDRESS = process.env.TOKEN_FACTORY_CONTRACT;
 const RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_URL;
 
 export async function GET() {

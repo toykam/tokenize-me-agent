@@ -6,4 +6,4 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const TOKEN_FACTORY_CONTRACT = process.env.TOKEN_FACTORY_CONTRACT!;
-export const DEPLOYER_PRIVATE_KEY = process.env.PRIVATE_KEY!;
+export const DEPLOYER_PRIVATE_KEY = process.env.DEPLOYER_PRIVATE_KEY!;
