@@ -39,7 +39,7 @@ export function HoldingsProvider({ children }: HoldingsProviderProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const {
-    isAuthenticated, loading
+    isAuthenticated
   } = useAuth()
 
   const refreshHoldings = async () => {

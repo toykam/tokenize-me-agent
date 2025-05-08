@@ -1,6 +1,5 @@
 "use client"
 
-import { PrivyProvider, SUPPORTED_CHAINS } from '@privy-io/react-auth'
 import React from 'react'
 import { HoldingsProvider } from './HoldingsProvider'
 import { NeynarContextProvider, Theme } from "@neynar/react";
@@ -15,13 +14,6 @@ export default function Providers({
             clientId: process.env.NEXT_PUBLIC_NEYNAR_CLIENT_ID || "",
             defaultTheme: Theme.Dark,
             eventsCallbacks: {
-                onAuthSuccess(params) {
-                    // console.log("Auth Success ::: ", params);
-                    
-                },
-                onSignout(user) {
-                    console.log("User Loggedout ::: ", user);
-                },
             }
         }}
         >

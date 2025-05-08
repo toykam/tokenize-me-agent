@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+
 import { createLinkedAccount, createUser, createWalletForUser, getUserByFID, initializeEngagementBuyAmount } from "@/lib/services/user.service";
 import { viemClient } from "@/lib/viem";
 import { NextResponse } from "next/server";
@@ -16,7 +16,7 @@ export async function POST(
                 fid: fid,
                 displayName: display_name,
                 username: username
-            }),
+            });
             await Promise.all([
                 createWalletForUser(user.id),
                 initializeEngagementBuyAmount(user.id),

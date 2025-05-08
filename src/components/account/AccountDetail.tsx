@@ -6,7 +6,7 @@ import React from 'react'
 export default function AccountDetail() {
     const {
         account,
-        isLoading
+        
     } = useProfileProvider()
   return (
     <div>

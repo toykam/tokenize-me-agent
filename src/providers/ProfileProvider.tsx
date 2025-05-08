@@ -2,7 +2,6 @@
 
 import { User } from '@/generated/prisma';
 import { useAuth } from '@/hooks/useAuth';
-import { setBalance } from '@nomicfoundation/hardhat-toolbox/network-helpers';
 import axios from "axios";
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
@@ -35,7 +34,7 @@ export function ProfileProvider({ children }: HoldingsProviderProps) {
   const [error, setError] = useState<Error | null>(null);
   const [ethBalance, setEthBalance] = useState("0");
   const {
-    isAuthenticated, loading, user
+    isAuthenticated, user
   } = useAuth()
 
   const fetchAccount = async () => {

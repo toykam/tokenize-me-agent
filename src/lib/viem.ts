@@ -1,6 +1,6 @@
-import { createClient, createPublicClient, createWalletClient, http } from "viem"
+import { createPublicClient, createWalletClient, http } from "viem"
 import { privateKeyToAccount } from "viem/accounts";
-import { base, beam } from "viem/chains"
+import { base } from "viem/chains"
 
 export const viemClient = createPublicClient({
     transport: http(),

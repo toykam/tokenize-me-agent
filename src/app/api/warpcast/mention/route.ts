@@ -1,10 +1,10 @@
-import { encryptPrivateKey } from '@/lib/encryption';
+
 import { farcasterAgentClient } from '@/lib/facaster-agent-client';
 import { prisma } from '@/lib/prisma';
 import { createLinkedAccount, createUser, createWalletForUser, getUserByFID, initializeEngagementBuyAmount } from '@/lib/services/user.service';
 import { DEPLOYER_PRIVATE_KEY, TOKEN_FACTORY_CONTRACT } from '@/lib/utils';
 import { signerWalletClient, viemClient } from '@/lib/viem';
-import { Wallet } from 'ethers';
+
 import { NextResponse } from 'next/server';
 import tokenFactoryAbi from "@/../blockchain/artifacts/contracts/TokenFactory.sol/TokenFactory.json"
 import { privateKeyToAccount } from 'viem/accounts';
@@ -24,19 +24,19 @@ export async function POST(
 
     if (!user) {
       console.log("This is a new user ::: ")
-      user = await createUser({
+      const usr = await createUser({
         displayName: author.display_name,
         fid: author.fid,
         username: author.username
       });
       
       // i want the agent to respond
-      const wallet = await createWalletForUser(user.id);
-      const buyAmounts = await initializeEngagementBuyAmount(user.id);
-      const linkedAccount = await createLinkedAccount({
+      const wallet = await createWalletForUser(usr.id);
+      await initializeEngagementBuyAmount(usr.id);
+      await createLinkedAccount({
         platform: "Farcaster",
         platformAccountId: `${author.fid}`,
-        userId: user.id,
+        userId: usr.id,
         username: `${author.username}`
       });
       
@@ -50,9 +50,9 @@ export async function POST(
     }
 
     // now go ahead to 
-    let userToken = await prisma.token.findFirst({
+    const userToken = await prisma.token.findFirst({
       where: {
-        userId: user.id
+        userId: user!.id
       }
     });
 
@@ -67,7 +67,7 @@ export async function POST(
 
     const account = privateKeyToAccount(`0x${DEPLOYER_PRIVATE_KEY}` as `0x${string}`)
 
-    const ownerAddress = user.wallet.address;
+    const ownerAddress = user!.wallet?.address;
 
     const tokenConfig = {
       'name': `${author.display_name}`,
@@ -111,7 +111,7 @@ export async function POST(
         tokenConfig.name,
         tokenConfig.symbol,
         account.address,
-        user.wallet.address,
+        ownerAddress,
         tokenConfig.handle,
         tokenConfig.platform,
         tokenConfig.profileurl,
@@ -127,7 +127,7 @@ export async function POST(
 
     const token = await prisma.token.create({
       data: {
-        userId: user.id,
+        userId: user!.id,
         address: salt[1],
         decimals: 18,
         name: tokenConfig.name,

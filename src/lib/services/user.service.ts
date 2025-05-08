@@ -1,7 +1,7 @@
 import { Wallet } from "ethers";
 import { prisma } from "../prisma";
 import { encryptPrivateKey } from "../encryption";
-import { LinkedAccount, User } from "@/generated/prisma";
+import { LinkedAccount } from "@/generated/prisma";
 
 interface CreateUser {
     fid: number;
@@ -53,7 +53,7 @@ export const initializeEngagementBuyAmount = async (userid: string) => {
 export const getUserByFID = async (fid: number): Promise<any | null> => {
     return await prisma.user.findFirst({
         where: {fid: fid },
-        include: {buyAmount: true, wallet: {select: {address: true}}, token: true, linkedAccounts: true}
+        include: {buyAmount: true, wallet: true, token: true, linkedAccounts: true}
     })
 }
 

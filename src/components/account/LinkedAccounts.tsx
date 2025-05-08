@@ -6,8 +6,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui
 
 export default function LinkedAccounts() {
     const {
-        account,
-        isLoading
+        account
     } = useProfileProvider()
   return (
     <Card>
@@ -20,7 +19,7 @@ export default function LinkedAccounts() {
       <CardContent className="space-y-2">
         <p>Linked Accounts</p>
         {account?.linkedAccounts?.map((v: any) => {
-          return (<p>{v.platform} {"<==>"} @{v.username}</p>)
+          return (<p key={v.id}>{v.platform} {"<==>"} @{v.username}</p>)
         })}
       </CardContent>
     </Card>

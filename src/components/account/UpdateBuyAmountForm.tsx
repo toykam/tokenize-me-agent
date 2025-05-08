@@ -1,6 +1,5 @@
 "use client"
 
-import { useProfileProvider } from '@/providers/ProfileProvider';
 import React from 'react'
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
@@ -8,10 +7,7 @@ import { InfoIcon } from 'lucide-react';
 import { Label } from '../ui/label';
 
 export default function UpdateBuyAmountForm() {
-      const {
-        account,
-        isLoading
-      } = useProfileProvider();
+
   return (
     <div className=''>
         <div className='space-y-1'>

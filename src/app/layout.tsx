@@ -1,5 +1,5 @@
-import { HoldingsProvider } from "@/providers/HoldingsProvider";
-import { Geist, Geist_Mono, Inter, Montserrat } from "next/font/google";
+
+import {  Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import type { Metadata } from "next";
 
