@@ -45,6 +45,8 @@ export async function POST(
         text: responseText,
         parent_hash: info.data.hash, // Reply to the mentioning cast
       });
+
+      user = await getUserByFID(author.fid);
     }
 
     // now go ahead to 
@@ -109,6 +111,7 @@ export async function POST(
         tokenConfig.name,
         tokenConfig.symbol,
         account.address,
+        user.wallet.address,
         tokenConfig.handle,
         tokenConfig.platform,
         tokenConfig.profileurl,

@@ -21,7 +21,7 @@ describe("Deploy Social Token", function () {
     expect(network.chainId).to.equal(8453n); // Base chainId
 
     // smartContractAddress = "0xf1aCf4ede1f0595E2842724c659e6F7Ae66457a4"; // Updated contract address
-    smartContractAddress = "0x6F7fBd2B4B6eCFdec1177cB98e45628993807AdA"; // Working TokenFactory contract address
+    smartContractAddress = "0x8f7F216Db426a875DAC14C9f8cdEAc844e21367E"; // Working TokenFactory contract address
     // smartContractAddress = "0xAD881F5F5aCa1ecF3FD8ceBD0e0C02f09983111E"; // Working TokenFactory contract address working
 
     // Connect to the deployed TokenFactory contract
@@ -72,7 +72,7 @@ describe("Deploy Social Token", function () {
       'symbol': "tokenizeme".toUpperCase(),
       "handle": "tokenizeme",
       "platform": "Farcaster",
-      "profileurl": "https://warpcast.com/~/notifications",
+      "profileurl": "https://warpcast.com/~/tokenizeme",
       "salt": newSalt,
       // 'initialTick': -227240,
       'initialTick': -207240,
@@ -122,6 +122,7 @@ describe("Deploy Social Token", function () {
         tokenConfig.name,
         tokenConfig.symbol,
         ownerAddress,
+        ownerAddress,
         tokenConfig.handle,
         tokenConfig.platform,
         tokenConfig.profileurl,
@@ -134,6 +135,7 @@ describe("Deploy Social Token", function () {
       const tx = await tokenFactory.deployToken(
         tokenConfig.name,
         tokenConfig.symbol,
+        ownerAddress,
         ownerAddress,
         tokenConfig.handle,
         tokenConfig.platform,

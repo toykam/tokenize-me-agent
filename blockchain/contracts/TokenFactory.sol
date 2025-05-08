@@ -128,6 +128,7 @@ contract TokenFactory is Ownable {
         string memory name,
         string memory symbol,
         address tokenOwner,
+        address profileAddress,
         string memory handle,
         string memory platform,
         string memory profileUrl,
@@ -136,8 +137,8 @@ contract TokenFactory is Ownable {
         bytes32 salt // Added salt parameter
     ) external payable onlyOwner returns (address) {
         emit Debug("Checking requirements", msg.value);
-        require(userToToken[tokenOwner] == address(0), "Token already exists for this user");
-        require(tokenOwner != address(0), "Invalid token owner");
+        require(userToToken[profileAddress] == address(0), "Token already exists for this user");
+        require(profileAddress != address(0), "Invalid token owner");
 
         emit Debug("Deploying SocialToken with CREATE2", 0);
         
@@ -174,7 +175,7 @@ contract TokenFactory is Ownable {
         
         SocialToken newToken = SocialToken(tokenAddress);
         
-        userToToken[tokenOwner] = address(newToken);
+        userToToken[profileAddress] = address(newToken);
         allTokens.push(address(newToken));
 
         // Get the total supply - We'll use ALL tokens for liquidity

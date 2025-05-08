@@ -34,7 +34,7 @@ describe("TokenFactory Live Test", function () {
     positionManagerAddress = "0x03a520b32c04bf3beef7beb72e919cf822ed34f1";
     factoryAddress = "0x33128a8fc17869897dce68ed026d694621f6fdfd";
     swapRouterAddress = "0x2626664c2603336E57B271c5C0b26F421741e481";
-    lpLocker = "0x94C2a616DfE686885867B3908e03d868062a26b8";
+    lpLocker = "0xe597A6824Be8EC458dFF39Fc588999263DA3d98A";
 
 
 
