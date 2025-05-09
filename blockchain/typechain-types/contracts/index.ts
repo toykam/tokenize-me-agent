@@ -3,6 +3,8 @@
 /* eslint-disable */
 import type * as tokenFactorySol from "./TokenFactory.sol";
 export type { tokenFactorySol };
+import type * as tokenizedProfileDexSol from "./TokenizedProfileDex.sol";
+export type { tokenizedProfileDexSol };
 import type * as tokenizedProfileLauncherSol from "./TokenizedProfileLauncher.sol";
 export type { tokenizedProfileLauncherSol };
 import type * as interfaceSol from "./interface.sol";

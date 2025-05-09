@@ -1,5 +1,5 @@
 
-import { farcasterAgentClient } from '@/lib/facaster-agent-client';
+import { farcasterAgentClient, farcasterClient } from '@/lib/facaster-agent-client';
 import { prisma } from '@/lib/prisma';
 import { createLinkedAccount, createUser, createWalletForUser, getUserByFID, initializeEngagementBuyAmount } from '@/lib/services/user.service';
 import { DEPLOYER_PRIVATE_KEY, TOKEN_FACTORY_CONTRACT } from '@/lib/utils';
@@ -9,6 +9,7 @@ import { NextResponse } from 'next/server';
 import tokenFactoryAbi from "@/../blockchain/artifacts/contracts/TokenFactory.sol/TokenFactory.json"
 import { privateKeyToAccount } from 'viem/accounts';
 import { config } from 'dotenv';
+import { createHmac } from 'crypto';
 
 config();
 
@@ -17,6 +18,7 @@ export async function POST(
 ) {
 
   try {
+
     const info = await req.json();
     const { author } = info.data;
 
@@ -142,7 +144,22 @@ export async function POST(
         text: responseText,
         parent_hash: info.data.hash, // Reply to the mentioning cast
       });
-   
+
+      // update webhook
+
+      const allusers = await prisma.user.findMany({select: {fid: true}})
+
+      
+      farcasterClient.updateWebhook({
+        webhookId: "01JTRXPBEQED2GN3XWZ2SEDHYD",
+        name: "Engagement Tracker",
+        url: "https://1531-102-88-111-194.ngrok-free.app/api/warpcast/engagement",
+        subscription: {
+          "reaction.created": {
+            target_fids: allusers.map((v) => v.fid)
+          }
+        }
+      });
     return NextResponse.json({ status: 'ok' });
 
   } catch (error: any) {

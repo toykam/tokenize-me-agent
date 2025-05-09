@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as tokenFactorySol from "./TokenFactory.sol";
+export * as tokenizedProfileDexSol from "./TokenizedProfileDex.sol";
 export * as tokenizedProfileLauncherSol from "./TokenizedProfileLauncher.sol";
 export * as interfaceSol from "./interface.sol";
 export * as mock from "./mock";

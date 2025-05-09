@@ -84,6 +84,8 @@ export type { IWETH } from "./contracts/TokenFactory.sol/IWETH";
 export { IWETH__factory } from "./factories/contracts/TokenFactory.sol/IWETH__factory";
 export type { TokenFactory } from "./contracts/TokenFactory.sol/TokenFactory";
 export { TokenFactory__factory } from "./factories/contracts/TokenFactory.sol/TokenFactory__factory";
+export type { TokenizedProfileDex } from "./contracts/TokenizedProfileDex.sol/TokenizedProfileDex";
+export { TokenizedProfileDex__factory } from "./factories/contracts/TokenizedProfileDex.sol/TokenizedProfileDex__factory";
 export type { IToken } from "./contracts/TokenizedProfileLauncher.sol/IToken";
 export { IToken__factory } from "./factories/contracts/TokenizedProfileLauncher.sol/IToken__factory";
 export type { Token } from "./contracts/TokenizedProfileLauncher.sol/Token";
