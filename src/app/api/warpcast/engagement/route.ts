@@ -2,7 +2,7 @@ import { decryptPrivateKey } from '@/lib/encryption';
 import { prisma } from '@/lib/prisma';
 import { signerWalletClient, viemClient } from '@/lib/viem';
 import { NextResponse } from 'next/server';
-import { erc20Abi, ethAddress, formatEther, parseEther } from 'viem';
+import { formatEther, parseEther } from 'viem';
 import dexAbi from "@/../blockchain/artifacts/contracts/TokenizedProfileDex.sol/TokenizedProfileDex.json"
 import { DEX_CONTRACT } from '@/lib/utils';
 

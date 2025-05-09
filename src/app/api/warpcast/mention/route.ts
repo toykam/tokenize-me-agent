@@ -9,7 +9,6 @@ import { NextResponse } from 'next/server';
 import tokenFactoryAbi from "@/../blockchain/artifacts/contracts/TokenFactory.sol/TokenFactory.json"
 import { privateKeyToAccount } from 'viem/accounts';
 import { config } from 'dotenv';
-import { createHmac } from 'crypto';
 
 config();
 
