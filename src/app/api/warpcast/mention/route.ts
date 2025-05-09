@@ -2,7 +2,7 @@
 import { farcasterAgentClient, farcasterClient } from '@/lib/facaster-agent-client';
 import { prisma } from '@/lib/prisma';
 import { createLinkedAccount, createUser, createWalletForUser, getUserByFID, initializeEngagementBuyAmount } from '@/lib/services/user.service';
-import { DEPLOYER_PRIVATE_KEY, TOKEN_FACTORY_CONTRACT } from '@/lib/utils';
+import { DEPLOYER_PRIVATE_KEY, ENGAGEMENT_WEBHOOK_ID, TOKEN_FACTORY_CONTRACT } from '@/lib/utils';
 import { signerWalletClient, viemClient } from '@/lib/viem';
 
 import { NextResponse } from 'next/server';
@@ -19,7 +19,7 @@ export async function POST(
   try {
 
     const info = await req.json();
-    const { author } = info.data;
+    const { author, text } = info.data;
 
     let user = await getUserByFID(author.fid);
 
@@ -48,6 +48,19 @@ export async function POST(
       });
 
       user = await getUserByFID(author.fid);
+    }
+
+
+    const triggerPhrases = ['put me onchain', 'tokenize me', 'tokenize my profile'];
+    const shouldProceed = triggerPhrases.some(phrase => text.toLowerCase().includes(phrase.toLowerCase()));
+    if (!shouldProceed) {
+      const responseText = `Hey @${info.data.author.username}, What do you want to tokenize your profile? Just tell me to put you onchain, and boom you will become tradeable onchain.`;
+      await farcasterAgentClient.publishCast({
+        text: responseText,
+        parent_hash: info.data.hash, // Reply to the mentioning cast
+      });
+      console.log('No trigger phrase detected, skipping swap.');
+      return NextResponse.json({ status: 'ok', message: 'No action taken.' });
     }
 
     // now go ahead to 
@@ -146,16 +159,23 @@ export async function POST(
 
       // update webhook
 
-      const allusers = await prisma.user.findMany({select: {fid: true}})
-
-      
+      const existingEngagementWebhook = await farcasterClient.lookupWebhook({
+        webhookId: ENGAGEMENT_WEBHOOK_ID
+      });
+      let fids: number[] = [];
+      if (existingEngagementWebhook.success == true) {
+        fids = existingEngagementWebhook.webhook?.subscription?.filters?.['reaction.created']?.target_fids ?? [];
+      } else {
+        const allusers = await prisma.user.findMany({select: {fid: true}})
+        fids = allusers.map((v) => v.fid);
+      }
       farcasterClient.updateWebhook({
-        webhookId: "01JTRXPBEQED2GN3XWZ2SEDHYD",
+        webhookId: ENGAGEMENT_WEBHOOK_ID,
         name: "Engagement Tracker",
         url: "https://1531-102-88-111-194.ngrok-free.app/api/warpcast/engagement",
         subscription: {
           "reaction.created": {
-            target_fids: allusers.map((v) => v.fid)
+            target_fids: fids
           }
         }
       });
