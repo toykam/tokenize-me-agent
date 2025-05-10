@@ -5,17 +5,22 @@ import { cn } from '@/lib/utils'
 import { useAuth } from '@/hooks/useAuth'
 import { NeynarAuthButton } from '@neynar/react';
 import { useProfileProvider } from '@/providers/ProfileProvider';
+import { Button } from '../ui/button';
+import Link from 'next/link';
 
 
 
 export default function AccountHero() {
     const {user, isAuthenticated, loading} = useAuth();
     const {
-        balance
+        balance,
+        account,
+        isLoading
     } = useProfileProvider()
+
+    const tokenizeMeCast = "Hey @tokenizeme, Put me onchain.";
   return (
     <>
-
         {!loading && isAuthenticated && <div className="bg-[url(/dashboard-hero-bg.png)] bg-cover w-full px-[24px]">
     
             <p className='text-white text-[24px] font-bold mb-2'>Hello {user?.displayName}</p>
@@ -34,13 +39,15 @@ export default function AccountHero() {
             </div>
             </div>
     
-            {/* <div className='flex w-full flex-col justify-items-stretch items-stretch mt-[18px] gap-[16px]'>
+            <div className='flex w-full flex-col justify-items-stretch items-stretch mt-[18px] gap-[16px]'>
                 <Button>Deposit</Button>
                 <Button variant={"outline"}>Withdraw</Button>
-                {!profileIsLoading && <>
-                    {account['token'] == null && <Button variant={"outline"}>Tokenize My Profile</Button>}
+                {!isLoading && <>
+                    {account['token'] == null && <Link target='_blank' className='w-screen' href={`https://warpcast.com/~/compose?text=${encodeURIComponent(tokenizeMeCast)}`}>
+                        <Button variant={"outline"}>Tokenize My Profile</Button>
+                    </Link>}
                 </>}
-            </div> */}
+            </div>
     
         </div>}
         {!loading && !isAuthenticated && <NeynarAuthButton className='bg-red-500 w-auto mx-[24px]'>Login</NeynarAuthButton>}

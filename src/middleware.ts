@@ -30,7 +30,7 @@ export const middleware = async (request: NextRequest) => {
     // Generate HMAC-SHA512 using CryptoJS
     const generatedSignature = CryptoJS.HmacSHA512(body, webhookSecret).toString(CryptoJS.enc.Hex);
 
-    console.log(generatedSignature, " ::: ", sig);
+    // console.log(generatedSignature, " ::: ", sig);
 
     const isValid = generatedSignature === sig;
     if (!isValid) {

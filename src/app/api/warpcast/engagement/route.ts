@@ -18,7 +18,7 @@ export async function POST(
     const { author } = cast;
 
 
-    console.log(author);
+    // console.log(author);
 
     const engagingUser = await prisma.user.findFirst({
       where: { fid: user.fid },
@@ -35,8 +35,10 @@ export async function POST(
 
         const balance = parseFloat(formatEther(engagingUserBalance));
 
-        console.log("EngagingUserBalance ::: ", balance);
-        if ((balance + 0.0005) > likeAmount) {
+        const cost = (likeAmount + 0.0005);
+
+        console.log("EngagingUserBalance ::: ", balance, " ::: ", cost);
+        if ((balance) > cost) {
           console.log("User have enough balance to buy token.");
           const authorUser = await prisma.user.findFirst({
             where: { fid: author.fid },
@@ -67,7 +69,7 @@ export async function POST(
               BigInt(deadline),
               Number(3000)
             ],
-            value: parseEther(`${likeAmount + 0.0003}`),
+            value: parseEther(`${likeAmount}`),
             account: engagingUserWalletClient.account
           })
 
@@ -80,7 +82,6 @@ export async function POST(
           console.log('Swap transaction mined:', receipt.transactionHash);
 
           return NextResponse.json({ status: 'ok', txHash });
-
         }
       }
     }
