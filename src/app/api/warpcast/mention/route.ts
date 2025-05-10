@@ -24,7 +24,7 @@ export async function POST(
     let user = await getUserByFID(author.fid);
 
     if (!user) {
-      console.log("This is a new user ::: ")
+      // console.log("This is a new user ::: ")
       const usr = await createUser({
         displayName: author.display_name,
         fid: author.fid,
@@ -54,7 +54,7 @@ export async function POST(
     const triggerPhrases = ['put me onchain', 'tokenize me', 'tokenize my profile'];
     const shouldProceed = triggerPhrases.some(phrase => text.toLowerCase().includes(phrase.toLowerCase()));
     if (!shouldProceed) {
-      const responseText = `Hey @${info.data.author.username}, What do you want to tokenize your profile? Just tell me to put you onchain, and boom you will become tradeable onchain.`;
+      const responseText = `Hey @${info.data.author.username}, Do you want to tokenize your profile? Just tell me to put you onchain, and boom you will become tradeable onchain.`;
       await farcasterAgentClient.publishCast({
         text: responseText,
         parent_hash: info.data.hash, // Reply to the mentioning cast

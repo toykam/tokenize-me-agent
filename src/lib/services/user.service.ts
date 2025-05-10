@@ -53,7 +53,9 @@ export const initializeEngagementBuyAmount = async (userid: string) => {
 export const getUserByFID = async (fid: number): Promise<any | null> => {
     return await prisma.user.findFirst({
         where: {fid: fid },
-        include: {buyAmount: true, wallet: true, token: true, linkedAccounts: true}
+        include: {buyAmount: true, wallet: true, token: {select: {
+            address: true, decimals: true, name: true, symbol: true, userId: true, user: true
+        }}, linkedAccounts: true}
     })
 }
 

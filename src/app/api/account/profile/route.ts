@@ -31,7 +31,7 @@ export async function POST(
             user = await getUserByFID(fid);
         }
 
-        console.log("User ::: ", user);
+        // console.log("User ::: ", user);
 
         const rawBalance = await viemClient.getBalance({
             address: user.wallet.address

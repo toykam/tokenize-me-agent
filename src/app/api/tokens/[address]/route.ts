@@ -2,10 +2,12 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
 
-export async function GET() {
+export async function GET(_: Request, { params }: { params: Promise<{ address: string }>  }) {
     try {
-        
-        const tokens = await prisma.token.findMany({
+        const { address } = await params;
+        console.log(address);
+        const tokens = await prisma.token.findFirst({
+            where: { address },
             select: {
                 user: true, address: true, name: true, decimals: true, symbol: true, createdAt: true,
                 _count: {select: {Engagement: true, transactions: true}}

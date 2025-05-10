@@ -1,4 +1,4 @@
-import { BuyAmount, LinkedAccount, Token, UserWallet } from "@/generated/prisma"
+import { BuyAmount, LinkedAccount, UserWallet } from "@/generated/prisma"
 
 export interface User {
     wallet: UserWallet | undefined,
@@ -9,4 +9,20 @@ export interface User {
     displayName: string,
     fid: string,
     username: string
+}
+
+
+export type Token = {
+    readonly user?:      User;
+    readonly address?:   string;
+    readonly name?:      string;
+    readonly decimals?:  number;
+    readonly symbol?:    string;
+    readonly _count?:    Count;
+    readonly createdAt?: Date;
+}
+
+export type Count = {
+    readonly Engagement?:   number;
+    readonly transactions?: number;
 }

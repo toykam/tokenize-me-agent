@@ -1,7 +1,6 @@
 "use client";
 
 import React from 'react'
-import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/hooks/useAuth'
 import { NeynarAuthButton } from '@neynar/react';
@@ -12,8 +11,6 @@ import { useProfileProvider } from '@/providers/ProfileProvider';
 export default function AccountHero() {
     const {user, isAuthenticated, loading} = useAuth();
     const {
-        account, 
-        isLoading: profileIsLoading,
         balance
     } = useProfileProvider()
   return (
@@ -37,13 +34,13 @@ export default function AccountHero() {
             </div>
             </div>
     
-            <div className='flex w-full flex-col justify-items-stretch items-stretch mt-[18px] gap-[16px]'>
+            {/* <div className='flex w-full flex-col justify-items-stretch items-stretch mt-[18px] gap-[16px]'>
                 <Button>Deposit</Button>
                 <Button variant={"outline"}>Withdraw</Button>
                 {!profileIsLoading && <>
                     {account['token'] == null && <Button variant={"outline"}>Tokenize My Profile</Button>}
                 </>}
-            </div>
+            </div> */}
     
         </div>}
         {!loading && !isAuthenticated && <NeynarAuthButton className='bg-red-500 w-auto mx-[24px]'>Login</NeynarAuthButton>}

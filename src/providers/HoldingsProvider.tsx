@@ -1,20 +1,12 @@
 'use client';
 
 import { useAuth } from '@/hooks/useAuth';
+import { Token } from '@/lib/types';
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-interface Holding {
-  tokenAddress: string;
-  balance: string;
-  name: string;
-  symbol: string;
-  handle?: string;
-  platform?: string;
-  profileUrl?: string;
-}
 
 interface HoldingsContextType {
-  holdings: Holding[];
+  holdings: Token[];
   isLoading: boolean;
   error: Error | null;
   refreshHoldings: () => Promise<void>;
@@ -35,7 +27,7 @@ interface HoldingsProviderProps {
 }
 
 export function HoldingsProvider({ children }: HoldingsProviderProps) {
-  const [holdings, setHoldings] = useState<Holding[]>([]);
+  const [holdings, setHoldings] = useState<Token[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const {
@@ -66,7 +58,7 @@ export function HoldingsProvider({ children }: HoldingsProviderProps) {
 
   useEffect(() => {
     if (isAuthenticated) {
-        // refreshHoldings();
+        refreshHoldings();
     }
   }, [isAuthenticated]);
 

@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 interface ISwapRouter {
-    struct ExactInputSingleParams {
+    struct   {
         address tokenIn;
         address tokenOut;
         uint24 fee;

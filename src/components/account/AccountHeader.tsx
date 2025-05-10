@@ -12,7 +12,7 @@ import "@neynar/react/dist/style.css";
 export default function AccountHeader({title = "TokenizedProfile"}: {title: string}) {
     const {isAuthenticated, user, logout} = useAuth();
   return (
-    <div className='flex justify-between mb-[16px] px-[24px] sticky top-0 z-10 py-[10px] items-center bg-[#070707]'>
+    <div className='flex justify-between mb-[16px] px-[24px] sticky top-0 z-10 py-[18px] items-center bg-[#070707]'>
         
         {isAuthenticated && <Avatar>
             <AvatarImage src={`${user?.pfp_url}`} alt={`${user?.display_name} PFP`} />

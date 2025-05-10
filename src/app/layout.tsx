@@ -3,6 +3,8 @@ import {  Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import type { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Toaster } from "@/components/ui/sonner";
+import { MiniKitContextProvider } from "@/providers/MiniKitContextProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -14,9 +16,28 @@ const montserrat = Montserrat({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Tokenize Agent",
-  description: "Create and manage social tokens",
+export const generateMetadata = (): Metadata => {
+  return {
+    title: process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME,
+    description: `${process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME}`,
+    other: {
+      "fc:frame": JSON.stringify({
+        version: process.env.NEXT_PUBLIC_VERSION,
+        imageUrl: process.env.NEXT_PUBLIC_IMAGE_URL,
+        aspectRatio: '1:1',
+        button: {
+          title: `Tokenize My Profile`,
+          action: {
+            type: "launch_frame",
+            name: process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME,
+            url: URL,
+            splashImageUrl: process.env.NEXT_PUBLIC_SPLASH_IMAGE_URL,
+            splashBackgroundColor: `#${process.env.NEXT_PUBLIC_SPLASH_BACKGROUND_COLOR}`,
+          },
+        },
+      }),
+    },
+  };
 };
 
 export default function RootLayout({
@@ -29,8 +50,11 @@ export default function RootLayout({
       <body
         className={`bg-[#070707]/40 ${inter.variable} ${montserrat.variable} antialiased`}
       >
-        <SpeedInsights />
-        {children}
+        <MiniKitContextProvider>
+          <SpeedInsights />
+          {children}
+          <Toaster />
+        </MiniKitContextProvider>
       </body>
     </html>
   );
