@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@coinbase/cdp-sdk": "^1.8.0",
+    "@coinbase/coinbase-sdk": "^0.24.0",
     "@coinbase/onchainkit": "^0.38.13",
     "@farcaster/hub-nodejs": "^0.13.4",
     "@neynar/nodejs-sdk": "^2.33.1",

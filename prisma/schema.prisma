@@ -33,6 +33,7 @@ model UserWallet {
   id           String   @id @default(uuid())
   userId       String   @unique
   address      String   @unique
+  newAddress   String   @unique @default(uuid())
   encryptedKey String
   iv           String
   authTag      String
