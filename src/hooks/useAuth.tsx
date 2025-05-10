@@ -23,6 +23,8 @@ export const useAuth = () => {
     context,
   } = useMiniKit();
 
+  const isNeynar = isAuthenticated;
+
   // Normalize Neynar user
   const normalizedNeynarUser: User = neynarUser
     ? {
@@ -53,7 +55,6 @@ export const useAuth = () => {
   // Merge user data, prioritizing Neynar if authenticated
   const usr: User = authenticated && normalizedNeynarUser.fid ? normalizedNeynarUser : normalizedContextUser || {};
 
-  const isNeynar = isAuthenticated;
   return {
     loading,
     isAuthenticated: authenticated,
