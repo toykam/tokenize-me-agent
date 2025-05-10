@@ -11,7 +11,7 @@ import { usePathname, useRouter } from 'next/navigation'
 
 
 export default function AccountHeader({title = "TokenizedProfile"}: {title: string}) {
-    const {isAuthenticated, user, logout} = useAuth();
+    const {isAuthenticated, user, logout, isNeynar} = useAuth();
 
     const router = useRouter();
     const pathname = usePathname();
@@ -47,7 +47,7 @@ export default function AccountHeader({title = "TokenizedProfile"}: {title: stri
         <Link href="/account/settings">
           <Settings color="white" />
         </Link>
-        {/* <LogOutIcon color="red" onClick={logout} /> */}
+        {isNeynar && <LogOutIcon className='text-red-500' onClick={logout} />}
       </div>
     )}
   </div>

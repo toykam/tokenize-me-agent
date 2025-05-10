@@ -53,10 +53,12 @@ export const useAuth = () => {
   // Merge user data, prioritizing Neynar if authenticated
   const usr: User = authenticated && normalizedNeynarUser.fid ? normalizedNeynarUser : normalizedContextUser || {};
 
+  const isNeynar = isAuthenticated;
   return {
     loading,
     isAuthenticated: authenticated,
     user: usr,
     logout: logoutUser,
+    isNeynar
   };
 };
