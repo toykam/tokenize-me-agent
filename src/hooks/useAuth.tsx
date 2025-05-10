@@ -48,7 +48,7 @@ export const useAuth = () => {
 
   // Determine authentication status
   const loading = !isAuthenticated && !context?.user;
-  const authenticated = isAuthenticated !== undefined ? isAuthenticated : context?.user != null;
+  const authenticated = isAuthenticated != false ? isAuthenticated : context?.user != null;
 
   // Merge user data, prioritizing Neynar if authenticated
   const usr: User = authenticated && normalizedNeynarUser.fid ? normalizedNeynarUser : normalizedContextUser || {};
