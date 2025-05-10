@@ -48,7 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`bg-[#070707]/40 ${inter.variable} ${montserrat.variable} antialiased`}
+        className={`bg-[#1a1a2e] ${inter.variable} ${montserrat.variable} antialiased`}
       >
         <MiniKitContextProvider>
           <SpeedInsights />

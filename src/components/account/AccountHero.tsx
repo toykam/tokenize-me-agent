@@ -18,7 +18,7 @@ export default function AccountHero() {
 
         {!loading && isAuthenticated && <div className="bg-[url(/dashboard-hero-bg.png)] bg-cover w-full px-[24px]">
     
-            <p className='text-white text-[24px] font-bold mb-2'>Hello {user?.display_name}</p>
+            <p className='text-white text-[24px] font-bold mb-2'>Hello {user?.displayName}</p>
     
             <div className={cn(
                 'rounded-2xl px-[20px] py-[12px] h-min-[110px] w-full',

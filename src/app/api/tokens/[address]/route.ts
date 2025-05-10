@@ -9,7 +9,9 @@ export async function GET(_: Request, { params }: { params: Promise<{ address: s
         const tokens = await prisma.token.findFirst({
             where: { address },
             select: {
-                user: true, address: true, name: true, decimals: true, symbol: true, createdAt: true,
+                user: {
+                    include: {linkedAccounts: {select: {platform: true, username: true}}}
+                }, address: true, name: true, decimals: true, symbol: true, createdAt: true,
                 _count: {select: {Engagement: true, transactions: true}}
             }
         });

@@ -8,7 +8,7 @@ export interface User {
     linkedAccounts: LinkedAccount[],
     displayName: string,
     fid: string,
-    username: string
+    username: string,
 }
 
 

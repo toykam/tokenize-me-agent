@@ -10,7 +10,7 @@ export default function HoldingItemComponent({token} : {token: Token}) {
 
           <div className=''>
               <p className='text-white font-extrabold text-[16px]'>{token.name}</p>
-              <p className='text-[#6C757D] font-medium text-[14px]'>{token.symbol}</p>
+              <p className='text-[#6C757D] font-medium text-[14px]'>{token.symbol}</p>  
           </div>
 
 
