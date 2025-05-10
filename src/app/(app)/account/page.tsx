@@ -38,8 +38,8 @@ export default function AccountPage() {
 
           <div className='flex flex-col gap-[32px]'>
             {isLoading && <>
-              {[1,2,3,4,5].map((v) => <div className="flex items-center space-x-4">
-                <Skeleton className="h-12 w-12 rounded-full" key={v} />
+              {[1,2,3,4,5].map((v) => <div key={v} className="flex items-center space-x-4">
+                <Skeleton className="h-12 w-12 rounded-full"  />
                 <div className="space-y-2">
                   <Skeleton className="h-4 w-[250px]" />
                   <Skeleton className="h-4 w-[200px]" />

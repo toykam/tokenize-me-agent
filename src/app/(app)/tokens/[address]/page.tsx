@@ -3,6 +3,7 @@
 import AccountHeader from '@/components/account/AccountHeader'
 import FrameReadyWrapper from '@/components/FrameReadyWrapper'
 import { useTokens } from '@/providers/TokensProvider'
+import { LucideLoader2 } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import React, { useEffect } from 'react'
 
@@ -36,7 +37,13 @@ export default function TokenDetailPage() {
       <div className='h-full'>
           <AccountHeader title={isLoadingTokenDetail ? "..." : token?.name ?? ""} />
 
-          <div className="bg-[#1a1a2e] text-[#e5e5e5] font-arial py-[clamp(1rem,2vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] max-w-[1200px] mx-auto rounded-[10px] min-h-screen">
+
+          {isLoadingTokenDetail && <div className='text-center flex flex-col items-center justify-center h-screen'>
+            <LucideLoader2 className='text-white'/>
+            <p className='text-center mt-2 text-white'>Loading token detail...</p>
+          </div>}
+
+          {!isLoadingTokenDetail && <div className="bg-[#1a1a2e] text-[#e5e5e5] font-arial py-[clamp(1rem,2vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] max-w-[1200px] mx-auto rounded-[10px] min-h-screen">
             {/* Hero Section */}
             <div className="bg-gradient-to-br from-[#16213e] to-[#1a1a2e] py-[clamp(1.5rem,3vw,2.5rem)] px-[clamp(1rem,2vw,2.5rem)] rounded-[10px] text-center mb-[clamp(0.75rem,1.5vw,1.25rem)]">
               <h1 className="text-[#ff6b6b] font-bold text-[clamp(1.5rem,4vw,2.5rem)] md:text-[clamp(1.75rem,3.5vw,2.5rem)] lg:text-[2.5rem] m-0">
@@ -105,7 +112,7 @@ export default function TokenDetailPage() {
                 )}
               </div>
             </div>
-          </div>
+          </div>}
       </div>
     </FrameReadyWrapper>
   )
