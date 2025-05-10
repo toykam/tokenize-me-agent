@@ -31,10 +31,10 @@ export default function AccountHeader({title = "TokenizedProfile"}: {title: stri
             ← Back
           </button>
         )}
-        <Avatar>
+        {!showBackButton && <Avatar>
           <AvatarImage src={`${user?.profileImageUrl}`} alt={`${user?.displayName} PFP`} />
           <AvatarFallback>{user?.displayName?.substring(0, 2)}</AvatarFallback>
-        </Avatar>
+        </Avatar>}
       </div>
     )}
 
@@ -47,7 +47,7 @@ export default function AccountHeader({title = "TokenizedProfile"}: {title: stri
         <Link href="/account/settings">
           <Settings color="white" />
         </Link>
-        <LogOutIcon color="red" onClick={logout} />
+        {/* <LogOutIcon color="red" onClick={logout} /> */}
       </div>
     )}
   </div>
