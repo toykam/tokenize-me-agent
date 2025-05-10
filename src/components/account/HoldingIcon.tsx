@@ -5,10 +5,10 @@ import React from 'react'
 export default function HoldingItemComponent({token} : {token: Token}) {
   return (
     <Link href={`/tokens/${token.address}`}>
-      <div className='flex gap-[12px]'>
+      <div className='flex gap-[12px] flex-auto'>
           <div className='max-h-[45px] max-w-[45px] bg-amber-300 rounded-2xl flex-1/6'></div>
 
-          <div className=''>
+          <div className='flex-1/2'>
               <p className='text-white font-extrabold text-[16px]'>{token.name}</p>
               <p className='text-[#6C757D] font-medium text-[14px]'>{token.symbol}</p>  
           </div>

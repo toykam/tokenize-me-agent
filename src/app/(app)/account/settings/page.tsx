@@ -10,7 +10,7 @@ import React from 'react'
 export default function SettingsPage() {
   return (
     <FrameReadyWrapper>
-      <div className="w-full max-w-7xl mx-auto">
+      <div className="w-screen mx-auto">
         <AccountHeader title='Settings' />
         
         <Tabs defaultValue="wallet" className="w-full">

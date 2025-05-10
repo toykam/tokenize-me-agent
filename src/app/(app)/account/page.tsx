@@ -7,15 +7,17 @@ import AccountHero from '@/components/account/AccountHero';
 import Link from 'next/link';
 import { useTokens } from '@/providers/TokensProvider';
 import FrameReadyWrapper from '@/components/FrameReadyWrapper';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function AccountPage() {
 
   const {
-    tokens
+    tokens,
+    isLoading
   } = useTokens();
   return (
     <FrameReadyWrapper>
-      <div className='h-full'>
+      <div className='h-full pb-3'>
 
         <AccountHeader title='TokenizedProfile' />
 
@@ -32,8 +34,19 @@ export default function AccountPage() {
             </Link>
           </div>
 
+
+
           <div className='flex flex-col gap-[32px]'>
-            {tokens.length == 0 && <p className='text-white text-center'>No Token have been launched. Tokenize your profile to start earning today.</p>}
+            {isLoading && <>
+              {[1,2,3,4,5].map((v) => <div className="flex items-center space-x-4">
+                <Skeleton className="h-12 w-12 rounded-full" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-[250px]" />
+                  <Skeleton className="h-4 w-[200px]" />
+                </div>
+              </div>)}
+            </>}
+            {!isLoading && tokens.length == 0 && <p className='text-white text-center'>No Token have been launched. Tokenize your profile to start earning today.</p>}
             {tokens.map((v) => {
               return <HoldingItemComponent token={v} key={v.address} />;
             })}
