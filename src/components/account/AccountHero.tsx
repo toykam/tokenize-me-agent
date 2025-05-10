@@ -40,8 +40,8 @@ export default function AccountHero() {
             </div>
     
             <div className='flex w-full flex-col justify-items-stretch items-stretch mt-[18px] gap-[16px]'>
-                <Button>Deposit</Button>
-                <Button variant={"outline"}>Withdraw</Button>
+                {/* <Button>Deposit</Button>
+                <Button variant={"outline"}>Withdraw</Button> */}
                 {!isLoading && <>
                     {account['token'] == null && <Link target='_blank' className='w-screen' href={`https://warpcast.com/~/compose?text=${encodeURIComponent(tokenizeMeCast)}`}>
                         <Button variant={"outline"}>Tokenize My Profile</Button>
