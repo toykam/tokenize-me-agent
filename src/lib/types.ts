@@ -5,6 +5,7 @@ export interface User {
     id: string,
     buyAmount?: BuyAmount,
     token?: Token,
+    pfp?: string,
     linkedAccounts: LinkedAccount[],
     displayName: string,
     fid: string,

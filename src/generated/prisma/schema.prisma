@@ -19,6 +19,7 @@ model User {
   fid            Int             @unique
   username       String
   displayName    String?
+  pfp            String?
   createdAt      DateTime        @default(now())
   wallet         UserWallet?
   linkedAccounts LinkedAccount[] @relation("LinkedAccounts")
@@ -46,6 +47,7 @@ model LinkedAccount {
   platform  String // e.g. "twitter", "lens", "threads"
   username  String
   accountId String // platform-specific user id
+  url       String @default("https://warpcast.com/")
 
   user User @relation("LinkedAccounts", fields: [userId], references: [id])
 }

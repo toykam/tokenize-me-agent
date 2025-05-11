@@ -1,4 +1,5 @@
 
+import { prisma } from "@/lib/prisma";
 import { createLinkedAccount, createUser, createWalletForUser, getUserByFID, initializeEngagementBuyAmount } from "@/lib/services/user.service";
 import { viemClient } from "@/lib/viem";
 import { NextResponse } from "next/server";
@@ -8,14 +9,15 @@ export async function POST(
     req: Request
 ) {
     try {
-        const { fid, display_name, username } = await req.json();
+        const { fid, display_name, username, pfp } = await req.json();
         let user = await getUserByFID(fid)
 
         if (!user) {
             user = await createUser({
                 fid: fid,
                 displayName: display_name,
-                username: username
+                username: username,
+                pfp: pfp
             });
             await Promise.all([
                 createWalletForUser(user.id),
@@ -29,6 +31,13 @@ export async function POST(
             ])
             
             user = await getUserByFID(fid);
+        }
+
+        if (user.pfp == null && pfp != null) {
+            await prisma.user.update({
+                where: {id: user.id},
+                data: {pfp}
+            })
         }
 
         // console.log("User ::: ", user);

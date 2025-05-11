@@ -49,7 +49,8 @@ export function ProfileProvider({ children }: HoldingsProviderProps) {
           const response = await axios.post("/api/account/profile", {
             'fid': user?.fid,
             'display_name': user?.display_name,
-            'username': user?.username
+            'username': user?.username,
+            'pfp': user?.profileImageUrl
           });
           const usr = response.data['user'];
           setAccount(response.data['user'] as User);

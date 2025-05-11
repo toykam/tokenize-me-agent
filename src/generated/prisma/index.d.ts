@@ -1550,6 +1550,7 @@ export namespace Prisma {
     fid: number | null
     username: string | null
     displayName: string | null
+    pfp: string | null
     createdAt: Date | null
   }
 
@@ -1558,6 +1559,7 @@ export namespace Prisma {
     fid: number | null
     username: string | null
     displayName: string | null
+    pfp: string | null
     createdAt: Date | null
   }
 
@@ -1566,6 +1568,7 @@ export namespace Prisma {
     fid: number
     username: number
     displayName: number
+    pfp: number
     createdAt: number
     _all: number
   }
@@ -1584,6 +1587,7 @@ export namespace Prisma {
     fid?: true
     username?: true
     displayName?: true
+    pfp?: true
     createdAt?: true
   }
 
@@ -1592,6 +1596,7 @@ export namespace Prisma {
     fid?: true
     username?: true
     displayName?: true
+    pfp?: true
     createdAt?: true
   }
 
@@ -1600,6 +1605,7 @@ export namespace Prisma {
     fid?: true
     username?: true
     displayName?: true
+    pfp?: true
     createdAt?: true
     _all?: true
   }
@@ -1695,6 +1701,7 @@ export namespace Prisma {
     fid: number
     username: string
     displayName: string | null
+    pfp: string | null
     createdAt: Date
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
@@ -1722,6 +1729,7 @@ export namespace Prisma {
     fid?: boolean
     username?: boolean
     displayName?: boolean
+    pfp?: boolean
     createdAt?: boolean
     wallet?: boolean | User$walletArgs<ExtArgs>
     linkedAccounts?: boolean | User$linkedAccountsArgs<ExtArgs>
@@ -1736,6 +1744,7 @@ export namespace Prisma {
     fid?: boolean
     username?: boolean
     displayName?: boolean
+    pfp?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1744,6 +1753,7 @@ export namespace Prisma {
     fid?: boolean
     username?: boolean
     displayName?: boolean
+    pfp?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["user"]>
 
@@ -1752,10 +1762,11 @@ export namespace Prisma {
     fid?: boolean
     username?: boolean
     displayName?: boolean
+    pfp?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fid" | "username" | "displayName" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fid" | "username" | "displayName" | "pfp" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     wallet?: boolean | User$walletArgs<ExtArgs>
     linkedAccounts?: boolean | User$linkedAccountsArgs<ExtArgs>
@@ -1781,6 +1792,7 @@ export namespace Prisma {
       fid: number
       username: string
       displayName: string | null
+      pfp: string | null
       createdAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -2214,6 +2226,7 @@ export namespace Prisma {
     readonly fid: FieldRef<"User", 'Int'>
     readonly username: FieldRef<"User", 'String'>
     readonly displayName: FieldRef<"User", 'String'>
+    readonly pfp: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
     
@@ -3826,6 +3839,7 @@ export namespace Prisma {
     platform: string | null
     username: string | null
     accountId: string | null
+    url: string | null
   }
 
   export type LinkedAccountMaxAggregateOutputType = {
@@ -3834,6 +3848,7 @@ export namespace Prisma {
     platform: string | null
     username: string | null
     accountId: string | null
+    url: string | null
   }
 
   export type LinkedAccountCountAggregateOutputType = {
@@ -3842,6 +3857,7 @@ export namespace Prisma {
     platform: number
     username: number
     accountId: number
+    url: number
     _all: number
   }
 
@@ -3852,6 +3868,7 @@ export namespace Prisma {
     platform?: true
     username?: true
     accountId?: true
+    url?: true
   }
 
   export type LinkedAccountMaxAggregateInputType = {
@@ -3860,6 +3877,7 @@ export namespace Prisma {
     platform?: true
     username?: true
     accountId?: true
+    url?: true
   }
 
   export type LinkedAccountCountAggregateInputType = {
@@ -3868,6 +3886,7 @@ export namespace Prisma {
     platform?: true
     username?: true
     accountId?: true
+    url?: true
     _all?: true
   }
 
@@ -3949,6 +3968,7 @@ export namespace Prisma {
     platform: string
     username: string
     accountId: string
+    url: string
     _count: LinkedAccountCountAggregateOutputType | null
     _min: LinkedAccountMinAggregateOutputType | null
     _max: LinkedAccountMaxAggregateOutputType | null
@@ -3974,6 +3994,7 @@ export namespace Prisma {
     platform?: boolean
     username?: boolean
     accountId?: boolean
+    url?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["linkedAccount"]>
 
@@ -3983,6 +4004,7 @@ export namespace Prisma {
     platform?: boolean
     username?: boolean
     accountId?: boolean
+    url?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["linkedAccount"]>
 
@@ -3992,6 +4014,7 @@ export namespace Prisma {
     platform?: boolean
     username?: boolean
     accountId?: boolean
+    url?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["linkedAccount"]>
 
@@ -4001,9 +4024,10 @@ export namespace Prisma {
     platform?: boolean
     username?: boolean
     accountId?: boolean
+    url?: boolean
   }
 
-  export type LinkedAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "platform" | "username" | "accountId", ExtArgs["result"]["linkedAccount"]>
+  export type LinkedAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "platform" | "username" | "accountId" | "url", ExtArgs["result"]["linkedAccount"]>
   export type LinkedAccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -4025,6 +4049,7 @@ export namespace Prisma {
       platform: string
       username: string
       accountId: string
+      url: string
     }, ExtArgs["result"]["linkedAccount"]>
     composites: {}
   }
@@ -4454,6 +4479,7 @@ export namespace Prisma {
     readonly platform: FieldRef<"LinkedAccount", 'String'>
     readonly username: FieldRef<"LinkedAccount", 'String'>
     readonly accountId: FieldRef<"LinkedAccount", 'String'>
+    readonly url: FieldRef<"LinkedAccount", 'String'>
   }
     
 
@@ -9460,6 +9486,7 @@ export namespace Prisma {
     fid: 'fid',
     username: 'username',
     displayName: 'displayName',
+    pfp: 'pfp',
     createdAt: 'createdAt'
   };
 
@@ -9484,7 +9511,8 @@ export namespace Prisma {
     userId: 'userId',
     platform: 'platform',
     username: 'username',
-    accountId: 'accountId'
+    accountId: 'accountId',
+    url: 'url'
   };
 
   export type LinkedAccountScalarFieldEnum = (typeof LinkedAccountScalarFieldEnum)[keyof typeof LinkedAccountScalarFieldEnum]
@@ -9666,6 +9694,7 @@ export namespace Prisma {
     fid?: IntFilter<"User"> | number
     username?: StringFilter<"User"> | string
     displayName?: StringNullableFilter<"User"> | string | null
+    pfp?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     wallet?: XOR<UserWalletNullableScalarRelationFilter, UserWalletWhereInput> | null
     linkedAccounts?: LinkedAccountListRelationFilter
@@ -9679,6 +9708,7 @@ export namespace Prisma {
     fid?: SortOrder
     username?: SortOrder
     displayName?: SortOrderInput | SortOrder
+    pfp?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     wallet?: UserWalletOrderByWithRelationInput
     linkedAccounts?: LinkedAccountOrderByRelationAggregateInput
@@ -9695,6 +9725,7 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     username?: StringFilter<"User"> | string
     displayName?: StringNullableFilter<"User"> | string | null
+    pfp?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     wallet?: XOR<UserWalletNullableScalarRelationFilter, UserWalletWhereInput> | null
     linkedAccounts?: LinkedAccountListRelationFilter
@@ -9708,6 +9739,7 @@ export namespace Prisma {
     fid?: SortOrder
     username?: SortOrder
     displayName?: SortOrderInput | SortOrder
+    pfp?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
@@ -9724,6 +9756,7 @@ export namespace Prisma {
     fid?: IntWithAggregatesFilter<"User"> | number
     username?: StringWithAggregatesFilter<"User"> | string
     displayName?: StringNullableWithAggregatesFilter<"User"> | string | null
+    pfp?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
@@ -9801,6 +9834,7 @@ export namespace Prisma {
     platform?: StringFilter<"LinkedAccount"> | string
     username?: StringFilter<"LinkedAccount"> | string
     accountId?: StringFilter<"LinkedAccount"> | string
+    url?: StringFilter<"LinkedAccount"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -9810,6 +9844,7 @@ export namespace Prisma {
     platform?: SortOrder
     username?: SortOrder
     accountId?: SortOrder
+    url?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -9822,6 +9857,7 @@ export namespace Prisma {
     platform?: StringFilter<"LinkedAccount"> | string
     username?: StringFilter<"LinkedAccount"> | string
     accountId?: StringFilter<"LinkedAccount"> | string
+    url?: StringFilter<"LinkedAccount"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -9831,6 +9867,7 @@ export namespace Prisma {
     platform?: SortOrder
     username?: SortOrder
     accountId?: SortOrder
+    url?: SortOrder
     _count?: LinkedAccountCountOrderByAggregateInput
     _max?: LinkedAccountMaxOrderByAggregateInput
     _min?: LinkedAccountMinOrderByAggregateInput
@@ -9845,6 +9882,7 @@ export namespace Prisma {
     platform?: StringWithAggregatesFilter<"LinkedAccount"> | string
     username?: StringWithAggregatesFilter<"LinkedAccount"> | string
     accountId?: StringWithAggregatesFilter<"LinkedAccount"> | string
+    url?: StringWithAggregatesFilter<"LinkedAccount"> | string
   }
 
   export type TokenWhereInput = {
@@ -10133,6 +10171,7 @@ export namespace Prisma {
     fid: number
     username: string
     displayName?: string | null
+    pfp?: string | null
     createdAt?: Date | string
     wallet?: UserWalletCreateNestedOneWithoutUserInput
     linkedAccounts?: LinkedAccountCreateNestedManyWithoutUserInput
@@ -10146,6 +10185,7 @@ export namespace Prisma {
     fid: number
     username: string
     displayName?: string | null
+    pfp?: string | null
     createdAt?: Date | string
     wallet?: UserWalletUncheckedCreateNestedOneWithoutUserInput
     linkedAccounts?: LinkedAccountUncheckedCreateNestedManyWithoutUserInput
@@ -10159,6 +10199,7 @@ export namespace Prisma {
     fid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    pfp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: UserWalletUpdateOneWithoutUserNestedInput
     linkedAccounts?: LinkedAccountUpdateManyWithoutUserNestedInput
@@ -10172,6 +10213,7 @@ export namespace Prisma {
     fid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    pfp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: UserWalletUncheckedUpdateOneWithoutUserNestedInput
     linkedAccounts?: LinkedAccountUncheckedUpdateManyWithoutUserNestedInput
@@ -10185,6 +10227,7 @@ export namespace Prisma {
     fid: number
     username: string
     displayName?: string | null
+    pfp?: string | null
     createdAt?: Date | string
   }
 
@@ -10193,6 +10236,7 @@ export namespace Prisma {
     fid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    pfp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10201,6 +10245,7 @@ export namespace Prisma {
     fid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    pfp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10278,6 +10323,7 @@ export namespace Prisma {
     platform: string
     username: string
     accountId: string
+    url?: string
     user: UserCreateNestedOneWithoutLinkedAccountsInput
   }
 
@@ -10287,6 +10333,7 @@ export namespace Prisma {
     platform: string
     username: string
     accountId: string
+    url?: string
   }
 
   export type LinkedAccountUpdateInput = {
@@ -10294,6 +10341,7 @@ export namespace Prisma {
     platform?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateOneRequiredWithoutLinkedAccountsNestedInput
   }
 
@@ -10303,6 +10351,7 @@ export namespace Prisma {
     platform?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type LinkedAccountCreateManyInput = {
@@ -10311,6 +10360,7 @@ export namespace Prisma {
     platform: string
     username: string
     accountId: string
+    url?: string
   }
 
   export type LinkedAccountUpdateManyMutationInput = {
@@ -10318,6 +10368,7 @@ export namespace Prisma {
     platform?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type LinkedAccountUncheckedUpdateManyInput = {
@@ -10326,6 +10377,7 @@ export namespace Prisma {
     platform?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type TokenCreateInput = {
@@ -10711,6 +10763,7 @@ export namespace Prisma {
     fid?: SortOrder
     username?: SortOrder
     displayName?: SortOrder
+    pfp?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -10723,6 +10776,7 @@ export namespace Prisma {
     fid?: SortOrder
     username?: SortOrder
     displayName?: SortOrder
+    pfp?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -10731,6 +10785,7 @@ export namespace Prisma {
     fid?: SortOrder
     username?: SortOrder
     displayName?: SortOrder
+    pfp?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -10845,6 +10900,7 @@ export namespace Prisma {
     platform?: SortOrder
     username?: SortOrder
     accountId?: SortOrder
+    url?: SortOrder
   }
 
   export type LinkedAccountMaxOrderByAggregateInput = {
@@ -10853,6 +10909,7 @@ export namespace Prisma {
     platform?: SortOrder
     username?: SortOrder
     accountId?: SortOrder
+    url?: SortOrder
   }
 
   export type LinkedAccountMinOrderByAggregateInput = {
@@ -10861,6 +10918,7 @@ export namespace Prisma {
     platform?: SortOrder
     username?: SortOrder
     accountId?: SortOrder
+    url?: SortOrder
   }
 
   export type BigIntFilter<$PrismaModel = never> = {
@@ -11812,6 +11870,7 @@ export namespace Prisma {
     platform: string
     username: string
     accountId: string
+    url?: string
   }
 
   export type LinkedAccountUncheckedCreateWithoutUserInput = {
@@ -11819,6 +11878,7 @@ export namespace Prisma {
     platform: string
     username: string
     accountId: string
+    url?: string
   }
 
   export type LinkedAccountCreateOrConnectWithoutUserInput = {
@@ -11963,6 +12023,7 @@ export namespace Prisma {
     platform?: StringFilter<"LinkedAccount"> | string
     username?: StringFilter<"LinkedAccount"> | string
     accountId?: StringFilter<"LinkedAccount"> | string
+    url?: StringFilter<"LinkedAccount"> | string
   }
 
   export type EngagementUpsertWithWhereUniqueWithoutUserInput = {
@@ -12061,6 +12122,7 @@ export namespace Prisma {
     fid: number
     username: string
     displayName?: string | null
+    pfp?: string | null
     createdAt?: Date | string
     linkedAccounts?: LinkedAccountCreateNestedManyWithoutUserInput
     engagements?: EngagementCreateNestedManyWithoutUserInput
@@ -12073,6 +12135,7 @@ export namespace Prisma {
     fid: number
     username: string
     displayName?: string | null
+    pfp?: string | null
     createdAt?: Date | string
     linkedAccounts?: LinkedAccountUncheckedCreateNestedManyWithoutUserInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutUserInput
@@ -12101,6 +12164,7 @@ export namespace Prisma {
     fid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    pfp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     linkedAccounts?: LinkedAccountUpdateManyWithoutUserNestedInput
     engagements?: EngagementUpdateManyWithoutUserNestedInput
@@ -12113,6 +12177,7 @@ export namespace Prisma {
     fid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    pfp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     linkedAccounts?: LinkedAccountUncheckedUpdateManyWithoutUserNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutUserNestedInput
@@ -12125,6 +12190,7 @@ export namespace Prisma {
     fid: number
     username: string
     displayName?: string | null
+    pfp?: string | null
     createdAt?: Date | string
     wallet?: UserWalletCreateNestedOneWithoutUserInput
     engagements?: EngagementCreateNestedManyWithoutUserInput
@@ -12137,6 +12203,7 @@ export namespace Prisma {
     fid: number
     username: string
     displayName?: string | null
+    pfp?: string | null
     createdAt?: Date | string
     wallet?: UserWalletUncheckedCreateNestedOneWithoutUserInput
     engagements?: EngagementUncheckedCreateNestedManyWithoutUserInput
@@ -12165,6 +12232,7 @@ export namespace Prisma {
     fid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    pfp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: UserWalletUpdateOneWithoutUserNestedInput
     engagements?: EngagementUpdateManyWithoutUserNestedInput
@@ -12177,6 +12245,7 @@ export namespace Prisma {
     fid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    pfp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: UserWalletUncheckedUpdateOneWithoutUserNestedInput
     engagements?: EngagementUncheckedUpdateManyWithoutUserNestedInput
@@ -12189,6 +12258,7 @@ export namespace Prisma {
     fid: number
     username: string
     displayName?: string | null
+    pfp?: string | null
     createdAt?: Date | string
     wallet?: UserWalletCreateNestedOneWithoutUserInput
     linkedAccounts?: LinkedAccountCreateNestedManyWithoutUserInput
@@ -12201,6 +12271,7 @@ export namespace Prisma {
     fid: number
     username: string
     displayName?: string | null
+    pfp?: string | null
     createdAt?: Date | string
     wallet?: UserWalletUncheckedCreateNestedOneWithoutUserInput
     linkedAccounts?: LinkedAccountUncheckedCreateNestedManyWithoutUserInput
@@ -12287,6 +12358,7 @@ export namespace Prisma {
     fid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    pfp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: UserWalletUpdateOneWithoutUserNestedInput
     linkedAccounts?: LinkedAccountUpdateManyWithoutUserNestedInput
@@ -12299,6 +12371,7 @@ export namespace Prisma {
     fid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    pfp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: UserWalletUncheckedUpdateOneWithoutUserNestedInput
     linkedAccounts?: LinkedAccountUncheckedUpdateManyWithoutUserNestedInput
@@ -12356,6 +12429,7 @@ export namespace Prisma {
     fid: number
     username: string
     displayName?: string | null
+    pfp?: string | null
     createdAt?: Date | string
     wallet?: UserWalletCreateNestedOneWithoutUserInput
     linkedAccounts?: LinkedAccountCreateNestedManyWithoutUserInput
@@ -12368,6 +12442,7 @@ export namespace Prisma {
     fid: number
     username: string
     displayName?: string | null
+    pfp?: string | null
     createdAt?: Date | string
     wallet?: UserWalletUncheckedCreateNestedOneWithoutUserInput
     linkedAccounts?: LinkedAccountUncheckedCreateNestedManyWithoutUserInput
@@ -12450,6 +12525,7 @@ export namespace Prisma {
     fid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    pfp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: UserWalletUpdateOneWithoutUserNestedInput
     linkedAccounts?: LinkedAccountUpdateManyWithoutUserNestedInput
@@ -12462,6 +12538,7 @@ export namespace Prisma {
     fid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    pfp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: UserWalletUncheckedUpdateOneWithoutUserNestedInput
     linkedAccounts?: LinkedAccountUncheckedUpdateManyWithoutUserNestedInput
@@ -12648,6 +12725,7 @@ export namespace Prisma {
     fid: number
     username: string
     displayName?: string | null
+    pfp?: string | null
     createdAt?: Date | string
     wallet?: UserWalletCreateNestedOneWithoutUserInput
     linkedAccounts?: LinkedAccountCreateNestedManyWithoutUserInput
@@ -12660,6 +12738,7 @@ export namespace Prisma {
     fid: number
     username: string
     displayName?: string | null
+    pfp?: string | null
     createdAt?: Date | string
     wallet?: UserWalletUncheckedCreateNestedOneWithoutUserInput
     linkedAccounts?: LinkedAccountUncheckedCreateNestedManyWithoutUserInput
@@ -12688,6 +12767,7 @@ export namespace Prisma {
     fid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    pfp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: UserWalletUpdateOneWithoutUserNestedInput
     linkedAccounts?: LinkedAccountUpdateManyWithoutUserNestedInput
@@ -12700,6 +12780,7 @@ export namespace Prisma {
     fid?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
+    pfp?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: UserWalletUncheckedUpdateOneWithoutUserNestedInput
     linkedAccounts?: LinkedAccountUncheckedUpdateManyWithoutUserNestedInput
@@ -12712,6 +12793,7 @@ export namespace Prisma {
     platform: string
     username: string
     accountId: string
+    url?: string
   }
 
   export type EngagementCreateManyUserInput = {
@@ -12728,6 +12810,7 @@ export namespace Prisma {
     platform?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type LinkedAccountUncheckedUpdateWithoutUserInput = {
@@ -12735,6 +12818,7 @@ export namespace Prisma {
     platform?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type LinkedAccountUncheckedUpdateManyWithoutUserInput = {
@@ -12742,6 +12826,7 @@ export namespace Prisma {
     platform?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type EngagementUpdateWithoutUserInput = {

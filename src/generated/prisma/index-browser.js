@@ -125,6 +125,7 @@ exports.Prisma.UserScalarFieldEnum = {
   fid: 'fid',
   username: 'username',
   displayName: 'displayName',
+  pfp: 'pfp',
   createdAt: 'createdAt'
 };
 
@@ -143,7 +144,8 @@ exports.Prisma.LinkedAccountScalarFieldEnum = {
   userId: 'userId',
   platform: 'platform',
   username: 'username',
-  accountId: 'accountId'
+  accountId: 'accountId',
+  url: 'url'
 };
 
 exports.Prisma.TokenScalarFieldEnum = {

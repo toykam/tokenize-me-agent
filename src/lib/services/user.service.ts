@@ -6,7 +6,8 @@ import { LinkedAccount } from "@/generated/prisma";
 interface CreateUser {
     fid: number;
     displayName: string;
-    username: string
+    username: string,
+    pfp?: string
 }
 
 interface AddLinkedAccount {
@@ -17,13 +18,14 @@ interface AddLinkedAccount {
 }
 
 export const createUser = async ({
-    fid, displayName, username
+    fid, displayName, username, pfp
 }: CreateUser) => {
     return await prisma.user.create({
         data: {
             fid: fid,
             username: username,
-            displayName: displayName
+            displayName: displayName,
+            pfp
         }
     });
 }
