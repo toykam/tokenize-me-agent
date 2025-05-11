@@ -7,7 +7,7 @@ export default function HoldingItemComponent({token} : {token: Token}) {
     <Link href={`/tokens/${token.address}`}>
       <div className='flex gap-[12px] flex-auto'>
           <div className='max-h-[45px] max-w-[45px] bg-amber-300 rounded-2xl flex-1/6'>
-            <img src={`${token.user?.pfp ?? '/splash-image.png'}`} className='max-h-[45px] max-w-[45px]' />
+            <img src={`${token.user?.pfp ?? '/splash-image.png'}`} className='w-full h-full rounded-2xl' />
           </div>
 
           <div className='flex-1/2'>
