@@ -13,7 +13,7 @@ export async function POST(_: Request, { params }: { params: Promise<{ address: 
             where: { address },
             select: {
                 user: {
-                    include: {linkedAccounts: {select: {platform: true, username: true}}}
+                    include: {linkedAccounts: {select: {platform: true, username: true, url: true}}}
                 }, address: true, name: true, decimals: true, symbol: true, createdAt: true,
                 _count: {select: {Engagement: true, transactions: true}}
             }

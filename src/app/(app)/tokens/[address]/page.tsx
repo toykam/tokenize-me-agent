@@ -60,7 +60,7 @@ export default function TokenDetailPage() {
             <div className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px] mb-[clamp(0.75rem,1.5vw,1.25rem)]">
               <h3 className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold mb-[0.5rem]">Social Accounts</h3>
               {socialLinks && socialLinks.length > 0 ? (
-                <div className="flex flex-wrap gap-x-[clamp(0.5rem,1vw,0.9375rem)] gap-y-[0.3125rem] md:gap-x-[0.9375rem]">
+                <div className="flex flex-col justify-start flex-wrap gap-x-[clamp(0.5rem,1vw,0.9375rem)] gap-y-[0.3125rem] md:gap-x-[0.9375rem]">
                   {socialLinks.map((link, index) => (
                     <a
                       key={index}
