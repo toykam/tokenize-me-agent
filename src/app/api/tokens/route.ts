@@ -9,6 +9,10 @@ export async function GET() {
             select: {
                 user: true, address: true, name: true, decimals: true, symbol: true, createdAt: true,
                 _count: {select: {Engagement: true, transactions: true}}
+            },
+            orderBy: {
+                Engagement: {_count: 'desc'},
+                transactions: {_count: 'desc'},
             }
         });
 
