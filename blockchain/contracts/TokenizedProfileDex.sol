@@ -2,12 +2,11 @@
 pragma solidity ^0.8.20;
 
 interface ISwapRouter {
-    struct   {
+    struct ExactInputSingleParams {
         address tokenIn;
         address tokenOut;
         uint24 fee;
         address recipient;
-        uint256 deadline;
         uint256 amountIn;
         uint256 amountOutMinimum;
         uint160 sqrtPriceLimitX96;
@@ -16,7 +15,6 @@ interface ISwapRouter {
     struct ExactInputParams {
         bytes path;
         address recipient;
-        uint256 deadline;
         uint256 amountIn;
         uint256 amountOutMinimum;
     }
@@ -71,9 +69,7 @@ contract TokenizedProfileDex {
     function swapETHForTokens(
         address tokenOut,
         uint256 amountOutMin,
-        uint256 deadline,
-        uint24 fee,
-        
+        uint24 fee
     ) external payable returns (uint256 amountOut) {
         require(msg.value > 0, "Must send ETH");
         require(tokenOut != address(0), "Invalid token address");
@@ -86,7 +82,6 @@ contract TokenizedProfileDex {
             tokenOut: tokenOut,
             fee: fee,
             recipient: msg.sender,
-            deadline: deadline,
             amountIn: msg.value,
             amountOutMinimum: amountOutMin,
             sqrtPriceLimitX96: 0
@@ -101,7 +96,6 @@ contract TokenizedProfileDex {
         address tokenIn,
         uint256 amountIn,
         uint256 amountOutMin,
-        uint256 deadline,
         uint24 fee
     ) external returns (uint256 amountOut) {
         require(amountIn > 0, "Must send tokens");
@@ -115,7 +109,6 @@ contract TokenizedProfileDex {
             tokenOut: WETH,
             fee: fee,
             recipient: address(this),
-            deadline: deadline,
             amountIn: amountIn,
             amountOutMinimum: amountOutMin,
             sqrtPriceLimitX96: 0
@@ -135,7 +128,6 @@ contract TokenizedProfileDex {
         address tokenOut,
         uint256 amountIn,
         uint256 amountOutMin,
-        uint256 deadline,
         uint24 fee
     ) external returns (uint256 amountOut) {
         require(amountIn > 0, "Must send tokens");
@@ -157,7 +149,6 @@ contract TokenizedProfileDex {
         ISwapRouter.ExactInputParams memory params = ISwapRouter.ExactInputParams({
             path: path,
             recipient: msg.sender,
-            deadline: deadline,
             amountIn: amountIn,
             amountOutMinimum: amountOutMin
         });

@@ -152,6 +152,7 @@ exports.Prisma.TokenScalarFieldEnum = {
   symbol: 'symbol',
   decimals: 'decimals',
   totalSupply: 'totalSupply',
+  feeTier: 'feeTier',
   createdAt: 'createdAt',
   userId: 'userId'
 };

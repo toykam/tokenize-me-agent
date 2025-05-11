@@ -91,8 +91,8 @@ export async function POST(
       "profileurl": `https://warpcast.com/${author.username}`,
       "salt": '',
       // 'initialTick': -227240,
-      'initialTick': -207240,
-      '_fee': 3000
+      'initialTick': -207200,
+      '_fee': 10000
       // '_fee': 3000
     };
 
@@ -147,6 +147,7 @@ export async function POST(
         name: tokenConfig.name,
         symbol: tokenConfig.symbol,
         totalSupply: 1000000000,
+        feeTier: 10000
       }
     })
 

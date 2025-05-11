@@ -25,11 +25,6 @@ const _abi = [
           },
           {
             internalType: "uint256",
-            name: "deadline",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
             name: "amountIn",
             type: "uint256",
           },
@@ -78,11 +73,6 @@ const _abi = [
             internalType: "address",
             name: "recipient",
             type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "deadline",
-            type: "uint256",
           },
           {
             internalType: "uint256",

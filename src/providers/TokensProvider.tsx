@@ -12,6 +12,7 @@ interface TokensContextType {
   isLoading: boolean;
   isLoadingTokenDetail: boolean;
   error: Error | null;
+  tokenBalance: string;
   refreshTokens: () => Promise<void>;
   setTokenId: (tokenId: string) => void;
 }
@@ -37,10 +38,12 @@ export function TokensProvider({ children }: TokensProviderProps) {
   const [isLoadingTokenDetail, setIsLoadingTokenDetail] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [tokenId, setTokenId] = useState<string | null>(null);
+  const [tokenBalance, setTokenBalance] = useState<string>("0");
 
 
   const {
-    isAuthenticated
+    isAuthenticated,
+    user
   } = useAuth()
 
   const refreshTokens = async () => {
@@ -65,12 +68,18 @@ export function TokensProvider({ children }: TokensProviderProps) {
     try {
         setIsLoadingTokenDetail(true)
         console.log("Wanting to load token detail");
-        const response = await fetch("/api/tokens/"+tokenId);
+        const response = await fetch("/api/tokens/"+tokenId, {
+          method: "POST",
+          body: JSON.stringify({
+            "fid": user.fid
+          })
+        });
         if (!response.ok) {
             throw new Error('Failed to fetch tokens');
         }
         const data = await response.json();
-        setToken(data);
+        setToken(data['token']);
+        setTokenBalance(data['balance']);
     } catch (err) {
 
       toast.error(err instanceof Error ? err.message : ('Unknown error occurred'));
@@ -99,7 +108,8 @@ export function TokensProvider({ children }: TokensProviderProps) {
     refreshTokens,
     token,
     setTokenId,
-    isLoadingTokenDetail
+    isLoadingTokenDetail,
+    tokenBalance
   };
 
   return (

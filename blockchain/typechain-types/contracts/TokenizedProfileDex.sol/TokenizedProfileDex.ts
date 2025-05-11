@@ -43,7 +43,7 @@ export interface TokenizedProfileDexInterface extends Interface {
   encodeFunctionData(functionFragment: "WETH", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "swapETHForTokens",
-    values: [AddressLike, BigNumberish, BigNumberish, BigNumberish]
+    values: [AddressLike, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "swapRouter",
@@ -51,24 +51,11 @@ export interface TokenizedProfileDexInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "swapTokensForETH",
-    values: [
-      AddressLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish
-    ]
+    values: [AddressLike, BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "swapTokensForTokens",
-    values: [
-      AddressLike,
-      AddressLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish
-    ]
+    values: [AddressLike, AddressLike, BigNumberish, BigNumberish, BigNumberish]
   ): string;
 
   decodeFunctionResult(functionFragment: "WETH", data: BytesLike): Result;
@@ -211,12 +198,7 @@ export interface TokenizedProfileDex extends BaseContract {
   WETH: TypedContractMethod<[], [string], "view">;
 
   swapETHForTokens: TypedContractMethod<
-    [
-      tokenOut: AddressLike,
-      amountOutMin: BigNumberish,
-      deadline: BigNumberish,
-      fee: BigNumberish
-    ],
+    [tokenOut: AddressLike, amountOutMin: BigNumberish, fee: BigNumberish],
     [bigint],
     "payable"
   >;
@@ -228,7 +210,6 @@ export interface TokenizedProfileDex extends BaseContract {
       tokenIn: AddressLike,
       amountIn: BigNumberish,
       amountOutMin: BigNumberish,
-      deadline: BigNumberish,
       fee: BigNumberish
     ],
     [bigint],
@@ -241,7 +222,6 @@ export interface TokenizedProfileDex extends BaseContract {
       tokenOut: AddressLike,
       amountIn: BigNumberish,
       amountOutMin: BigNumberish,
-      deadline: BigNumberish,
       fee: BigNumberish
     ],
     [bigint],
@@ -258,12 +238,7 @@ export interface TokenizedProfileDex extends BaseContract {
   getFunction(
     nameOrSignature: "swapETHForTokens"
   ): TypedContractMethod<
-    [
-      tokenOut: AddressLike,
-      amountOutMin: BigNumberish,
-      deadline: BigNumberish,
-      fee: BigNumberish
-    ],
+    [tokenOut: AddressLike, amountOutMin: BigNumberish, fee: BigNumberish],
     [bigint],
     "payable"
   >;
@@ -277,7 +252,6 @@ export interface TokenizedProfileDex extends BaseContract {
       tokenIn: AddressLike,
       amountIn: BigNumberish,
       amountOutMin: BigNumberish,
-      deadline: BigNumberish,
       fee: BigNumberish
     ],
     [bigint],
@@ -291,7 +265,6 @@ export interface TokenizedProfileDex extends BaseContract {
       tokenOut: AddressLike,
       amountIn: BigNumberish,
       amountOutMin: BigNumberish,
-      deadline: BigNumberish,
       fee: BigNumberish
     ],
     [bigint],

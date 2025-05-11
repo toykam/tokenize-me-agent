@@ -4883,11 +4883,13 @@ export namespace Prisma {
   export type TokenAvgAggregateOutputType = {
     decimals: number | null
     totalSupply: number | null
+    feeTier: number | null
   }
 
   export type TokenSumAggregateOutputType = {
     decimals: number | null
     totalSupply: bigint | null
+    feeTier: bigint | null
   }
 
   export type TokenMinAggregateOutputType = {
@@ -4896,6 +4898,7 @@ export namespace Prisma {
     symbol: string | null
     decimals: number | null
     totalSupply: bigint | null
+    feeTier: bigint | null
     createdAt: Date | null
     userId: string | null
   }
@@ -4906,6 +4909,7 @@ export namespace Prisma {
     symbol: string | null
     decimals: number | null
     totalSupply: bigint | null
+    feeTier: bigint | null
     createdAt: Date | null
     userId: string | null
   }
@@ -4916,6 +4920,7 @@ export namespace Prisma {
     symbol: number
     decimals: number
     totalSupply: number
+    feeTier: number
     createdAt: number
     userId: number
     _all: number
@@ -4925,11 +4930,13 @@ export namespace Prisma {
   export type TokenAvgAggregateInputType = {
     decimals?: true
     totalSupply?: true
+    feeTier?: true
   }
 
   export type TokenSumAggregateInputType = {
     decimals?: true
     totalSupply?: true
+    feeTier?: true
   }
 
   export type TokenMinAggregateInputType = {
@@ -4938,6 +4945,7 @@ export namespace Prisma {
     symbol?: true
     decimals?: true
     totalSupply?: true
+    feeTier?: true
     createdAt?: true
     userId?: true
   }
@@ -4948,6 +4956,7 @@ export namespace Prisma {
     symbol?: true
     decimals?: true
     totalSupply?: true
+    feeTier?: true
     createdAt?: true
     userId?: true
   }
@@ -4958,6 +4967,7 @@ export namespace Prisma {
     symbol?: true
     decimals?: true
     totalSupply?: true
+    feeTier?: true
     createdAt?: true
     userId?: true
     _all?: true
@@ -5055,6 +5065,7 @@ export namespace Prisma {
     symbol: string
     decimals: number
     totalSupply: bigint
+    feeTier: bigint
     createdAt: Date
     userId: string
     _count: TokenCountAggregateOutputType | null
@@ -5084,6 +5095,7 @@ export namespace Prisma {
     symbol?: boolean
     decimals?: boolean
     totalSupply?: boolean
+    feeTier?: boolean
     createdAt?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5098,6 +5110,7 @@ export namespace Prisma {
     symbol?: boolean
     decimals?: boolean
     totalSupply?: boolean
+    feeTier?: boolean
     createdAt?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5109,6 +5122,7 @@ export namespace Prisma {
     symbol?: boolean
     decimals?: boolean
     totalSupply?: boolean
+    feeTier?: boolean
     createdAt?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5120,11 +5134,12 @@ export namespace Prisma {
     symbol?: boolean
     decimals?: boolean
     totalSupply?: boolean
+    feeTier?: boolean
     createdAt?: boolean
     userId?: boolean
   }
 
-  export type TokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"address" | "name" | "symbol" | "decimals" | "totalSupply" | "createdAt" | "userId", ExtArgs["result"]["token"]>
+  export type TokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"address" | "name" | "symbol" | "decimals" | "totalSupply" | "feeTier" | "createdAt" | "userId", ExtArgs["result"]["token"]>
   export type TokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     transactions?: boolean | Token$transactionsArgs<ExtArgs>
@@ -5151,6 +5166,7 @@ export namespace Prisma {
       symbol: string
       decimals: number
       totalSupply: bigint
+      feeTier: bigint
       createdAt: Date
       userId: string
     }, ExtArgs["result"]["token"]>
@@ -5584,6 +5600,7 @@ export namespace Prisma {
     readonly symbol: FieldRef<"Token", 'String'>
     readonly decimals: FieldRef<"Token", 'Int'>
     readonly totalSupply: FieldRef<"Token", 'BigInt'>
+    readonly feeTier: FieldRef<"Token", 'BigInt'>
     readonly createdAt: FieldRef<"Token", 'DateTime'>
     readonly userId: FieldRef<"Token", 'String'>
   }
@@ -9479,6 +9496,7 @@ export namespace Prisma {
     symbol: 'symbol',
     decimals: 'decimals',
     totalSupply: 'totalSupply',
+    feeTier: 'feeTier',
     createdAt: 'createdAt',
     userId: 'userId'
   };
@@ -9838,6 +9856,7 @@ export namespace Prisma {
     symbol?: StringFilter<"Token"> | string
     decimals?: IntFilter<"Token"> | number
     totalSupply?: BigIntFilter<"Token"> | bigint | number
+    feeTier?: BigIntFilter<"Token"> | bigint | number
     createdAt?: DateTimeFilter<"Token"> | Date | string
     userId?: StringFilter<"Token"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -9851,6 +9870,7 @@ export namespace Prisma {
     symbol?: SortOrder
     decimals?: SortOrder
     totalSupply?: SortOrder
+    feeTier?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -9868,6 +9888,7 @@ export namespace Prisma {
     symbol?: StringFilter<"Token"> | string
     decimals?: IntFilter<"Token"> | number
     totalSupply?: BigIntFilter<"Token"> | bigint | number
+    feeTier?: BigIntFilter<"Token"> | bigint | number
     createdAt?: DateTimeFilter<"Token"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     transactions?: TokenTransactionListRelationFilter
@@ -9880,6 +9901,7 @@ export namespace Prisma {
     symbol?: SortOrder
     decimals?: SortOrder
     totalSupply?: SortOrder
+    feeTier?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
     _count?: TokenCountOrderByAggregateInput
@@ -9898,6 +9920,7 @@ export namespace Prisma {
     symbol?: StringWithAggregatesFilter<"Token"> | string
     decimals?: IntWithAggregatesFilter<"Token"> | number
     totalSupply?: BigIntWithAggregatesFilter<"Token"> | bigint | number
+    feeTier?: BigIntWithAggregatesFilter<"Token"> | bigint | number
     createdAt?: DateTimeWithAggregatesFilter<"Token"> | Date | string
     userId?: StringWithAggregatesFilter<"Token"> | string
   }
@@ -10311,6 +10334,7 @@ export namespace Prisma {
     symbol: string
     decimals: number
     totalSupply: bigint | number
+    feeTier?: bigint | number
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutTokenInput
     transactions?: TokenTransactionCreateNestedManyWithoutTokenInput
@@ -10323,6 +10347,7 @@ export namespace Prisma {
     symbol: string
     decimals: number
     totalSupply: bigint | number
+    feeTier?: bigint | number
     createdAt?: Date | string
     userId: string
     transactions?: TokenTransactionUncheckedCreateNestedManyWithoutTokenInput
@@ -10335,6 +10360,7 @@ export namespace Prisma {
     symbol?: StringFieldUpdateOperationsInput | string
     decimals?: IntFieldUpdateOperationsInput | number
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
+    feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTokenNestedInput
     transactions?: TokenTransactionUpdateManyWithoutTokenNestedInput
@@ -10347,6 +10373,7 @@ export namespace Prisma {
     symbol?: StringFieldUpdateOperationsInput | string
     decimals?: IntFieldUpdateOperationsInput | number
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
+    feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
     transactions?: TokenTransactionUncheckedUpdateManyWithoutTokenNestedInput
@@ -10359,6 +10386,7 @@ export namespace Prisma {
     symbol: string
     decimals: number
     totalSupply: bigint | number
+    feeTier?: bigint | number
     createdAt?: Date | string
     userId: string
   }
@@ -10369,6 +10397,7 @@ export namespace Prisma {
     symbol?: StringFieldUpdateOperationsInput | string
     decimals?: IntFieldUpdateOperationsInput | number
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
+    feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10378,6 +10407,7 @@ export namespace Prisma {
     symbol?: StringFieldUpdateOperationsInput | string
     decimals?: IntFieldUpdateOperationsInput | number
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
+    feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
   }
@@ -10860,6 +10890,7 @@ export namespace Prisma {
     symbol?: SortOrder
     decimals?: SortOrder
     totalSupply?: SortOrder
+    feeTier?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
   }
@@ -10867,6 +10898,7 @@ export namespace Prisma {
   export type TokenAvgOrderByAggregateInput = {
     decimals?: SortOrder
     totalSupply?: SortOrder
+    feeTier?: SortOrder
   }
 
   export type TokenMaxOrderByAggregateInput = {
@@ -10875,6 +10907,7 @@ export namespace Prisma {
     symbol?: SortOrder
     decimals?: SortOrder
     totalSupply?: SortOrder
+    feeTier?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
   }
@@ -10885,6 +10918,7 @@ export namespace Prisma {
     symbol?: SortOrder
     decimals?: SortOrder
     totalSupply?: SortOrder
+    feeTier?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
   }
@@ -10892,6 +10926,7 @@ export namespace Prisma {
   export type TokenSumOrderByAggregateInput = {
     decimals?: SortOrder
     totalSupply?: SortOrder
+    feeTier?: SortOrder
   }
 
   export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -11851,6 +11886,7 @@ export namespace Prisma {
     symbol: string
     decimals: number
     totalSupply: bigint | number
+    feeTier?: bigint | number
     createdAt?: Date | string
     transactions?: TokenTransactionCreateNestedManyWithoutTokenInput
     Engagement?: EngagementCreateNestedManyWithoutTokenInput
@@ -11862,6 +11898,7 @@ export namespace Prisma {
     symbol: string
     decimals: number
     totalSupply: bigint | number
+    feeTier?: bigint | number
     createdAt?: Date | string
     transactions?: TokenTransactionUncheckedCreateNestedManyWithoutTokenInput
     Engagement?: EngagementUncheckedCreateNestedManyWithoutTokenInput
@@ -12001,6 +12038,7 @@ export namespace Prisma {
     symbol?: StringFieldUpdateOperationsInput | string
     decimals?: IntFieldUpdateOperationsInput | number
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
+    feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transactions?: TokenTransactionUpdateManyWithoutTokenNestedInput
     Engagement?: EngagementUpdateManyWithoutTokenNestedInput
@@ -12012,6 +12050,7 @@ export namespace Prisma {
     symbol?: StringFieldUpdateOperationsInput | string
     decimals?: IntFieldUpdateOperationsInput | number
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
+    feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transactions?: TokenTransactionUncheckedUpdateManyWithoutTokenNestedInput
     Engagement?: EngagementUncheckedUpdateManyWithoutTokenNestedInput
@@ -12347,6 +12386,7 @@ export namespace Prisma {
     symbol: string
     decimals: number
     totalSupply: bigint | number
+    feeTier?: bigint | number
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutTokenInput
     transactions?: TokenTransactionCreateNestedManyWithoutTokenInput
@@ -12358,6 +12398,7 @@ export namespace Prisma {
     symbol: string
     decimals: number
     totalSupply: bigint | number
+    feeTier?: bigint | number
     createdAt?: Date | string
     userId: string
     transactions?: TokenTransactionUncheckedCreateNestedManyWithoutTokenInput
@@ -12445,6 +12486,7 @@ export namespace Prisma {
     symbol?: StringFieldUpdateOperationsInput | string
     decimals?: IntFieldUpdateOperationsInput | number
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
+    feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTokenNestedInput
     transactions?: TokenTransactionUpdateManyWithoutTokenNestedInput
@@ -12456,6 +12498,7 @@ export namespace Prisma {
     symbol?: StringFieldUpdateOperationsInput | string
     decimals?: IntFieldUpdateOperationsInput | number
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
+    feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
     transactions?: TokenTransactionUncheckedUpdateManyWithoutTokenNestedInput
@@ -12498,6 +12541,7 @@ export namespace Prisma {
     symbol: string
     decimals: number
     totalSupply: bigint | number
+    feeTier?: bigint | number
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutTokenInput
     Engagement?: EngagementCreateNestedManyWithoutTokenInput
@@ -12509,6 +12553,7 @@ export namespace Prisma {
     symbol: string
     decimals: number
     totalSupply: bigint | number
+    feeTier?: bigint | number
     createdAt?: Date | string
     userId: string
     Engagement?: EngagementUncheckedCreateNestedManyWithoutTokenInput
@@ -12564,6 +12609,7 @@ export namespace Prisma {
     symbol?: StringFieldUpdateOperationsInput | string
     decimals?: IntFieldUpdateOperationsInput | number
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
+    feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTokenNestedInput
     Engagement?: EngagementUpdateManyWithoutTokenNestedInput
@@ -12575,6 +12621,7 @@ export namespace Prisma {
     symbol?: StringFieldUpdateOperationsInput | string
     decimals?: IntFieldUpdateOperationsInput | number
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
+    feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
     Engagement?: EngagementUncheckedUpdateManyWithoutTokenNestedInput

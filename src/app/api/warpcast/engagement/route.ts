@@ -28,26 +28,29 @@ export async function POST(
     if (engagingUser != null) {
       if (engagingUser!.buyAmount!.likeAmount > 0) {
         const engagingUserWallet = engagingUser.wallet!;
+        console.log(engagingUserWallet);
         const likeAmount = engagingUser!.buyAmount!.likeAmount ?? 0;
-        const engagingUserBalance = await viemClient.getBalance({
-          address: engagingUser.wallet?.address as `0x${string}`
+
+        const rawBalance = await viemClient.getBalance({
+            address: engagingUserWallet.address as `0x${string}`
         });
 
-        const balance = parseFloat(formatEther(engagingUserBalance));
+        const balance = formatEther(rawBalance);
 
-        const cost = (likeAmount + 0.0005);
+        const cost = (likeAmount + 0.0001);
 
         console.log("EngagingUserBalance ::: ", balance, " ::: ", cost);
-        if ((balance) > cost) {
+        if (parseFloat(balance) > cost) {
           console.log("User have enough balance to buy token.");
           const authorUser = await prisma.user.findFirst({
             where: { fid: author.fid },
-            include: { token: true }
+            include: { token: true, wallet: {select: {address: true}} }
           });
 
           console.log("AuthorToken ::: ", authorUser?.token);
   
           const authorTokenAddress = authorUser?.token?.address;
+          const authorTokenFeeTier = authorUser?.token?.feeTier;
           const encryptedPrivateKeyData = {
             encrypted: engagingUserWallet.encryptedKey,
             iv: engagingUserWallet.iv,
@@ -56,8 +59,7 @@ export async function POST(
           const engagingUserWalletPrivateKey = decryptPrivateKey(encryptedPrivateKeyData);
           const engagingUserWalletClient = signerWalletClient(engagingUserWalletPrivateKey);
 
-          const currentTime = Math.floor(Date.now() / 1000);
-          const deadline = currentTime + 10 * 60; // 10 minutes
+          console.log(authorUser?.token);
 
           const { request } = await viemClient.simulateContract({
             address: DEX_CONTRACT as `0x${string}`,
@@ -66,8 +68,7 @@ export async function POST(
             args: [
               authorTokenAddress,
               BigInt(0),
-              BigInt(deadline),
-              Number(3000)
+              Number(authorTokenFeeTier)
             ],
             value: parseEther(`${likeAmount}`),
             account: engagingUserWalletClient.account
@@ -80,6 +81,26 @@ export async function POST(
           // Wait for the transaction to be mined (optional, depending on your needs)
           const receipt = await viemClient.waitForTransactionReceipt({ hash: txHash });
           console.log('Swap transaction mined:', receipt.transactionHash);
+
+          // create an engagement entry in the db
+          const tx = await prisma.tokenTransaction.create({
+            data: {
+              amount: likeAmount,
+              fromAddress: engagingUserWallet.address!,
+              toAddress: authorUser?.wallet?.address!,
+              txHash: txHash,
+              tokenAddress: authorTokenAddress!
+            }
+          })
+          await prisma.engagement.create({
+            data: {
+              postId: `${cast.hash}`,
+              type: "like_and_reaction",
+              userId: engagingUser.id,
+              tokenAddress: authorUser?.token?.address!,
+              transactionid: tx.id
+            }
+          })
 
           return NextResponse.json({ status: 'ok', txHash });
         }

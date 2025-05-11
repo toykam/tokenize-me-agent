@@ -33,7 +33,6 @@ model UserWallet {
   id           String   @id @default(uuid())
   userId       String   @unique
   address      String   @unique
-  newAddress   String   @unique @default(uuid())
   encryptedKey String
   iv           String
   authTag      String
@@ -58,6 +57,7 @@ model Token {
   symbol       String
   decimals     Int
   totalSupply  BigInt
+  feeTier  BigInt @default(3000)
   createdAt    DateTime @default(now())
 
   userId String @unique

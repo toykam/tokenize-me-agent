@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Token" ADD COLUMN     "feeTier" BIGINT NOT NULL DEFAULT 3000;

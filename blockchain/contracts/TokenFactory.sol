@@ -137,7 +137,7 @@ contract TokenFactory is Ownable {
         bytes32 salt // Added salt parameter
     ) external payable onlyOwner returns (address) {
         emit Debug("Checking requirements", msg.value);
-        require(userToToken[profileAddress] == address(0), "Token already exists for this user");
+        // require(userToToken[profileAddress] == address(0), "Token already exists for this user");
         require(profileAddress != address(0), "Invalid token owner");
 
         emit Debug("Deploying SocialToken with CREATE2", 0);

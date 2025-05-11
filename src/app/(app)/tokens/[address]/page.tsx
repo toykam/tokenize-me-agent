@@ -4,6 +4,7 @@ import AccountHeader from '@/components/account/AccountHeader'
 import FrameReadyWrapper from '@/components/FrameReadyWrapper'
 import { useTokens } from '@/providers/TokensProvider'
 import { LucideLoader2 } from 'lucide-react'
+import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import React, { useEffect } from 'react'
 
@@ -12,7 +13,8 @@ export default function TokenDetailPage() {
   const {
     token,
     isLoadingTokenDetail,
-    setTokenId
+    setTokenId,
+    tokenBalance
   } = useTokens()
 
   const { address } = useParams();
@@ -88,6 +90,28 @@ export default function TokenDetailPage() {
               </div>
             </div>
 
+            {/* Token Details Section */}
+            <div className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px] mb-[clamp(0.75rem,1.5vw,1.25rem)]">
+              <h3 className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold mb-[0.5rem]">Your Balance</h3>
+              <div className="space-y-[clamp(0.5rem,1vw,0.625rem)]">
+                <div className='flex flex-row gap-x-1'>
+                  <div className="text-[clamp(0.875rem,1.5vw,1.1rem)]">{tokenBalance} {token?.symbol}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Token Details Section */}
+            <div className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px] mb-[clamp(0.75rem,1.5vw,1.25rem)]">
+              <h3 className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold mb-[0.5rem]">Chart</h3>
+              <div className="space-y-[clamp(0.5rem,1vw,0.625rem)]">
+                <div className='flex flex-row gap-x-1'>
+                  <Link target='_blank' className='text-blue-400' href={`https://dexscreener.com/base/${token?.address}`}>DexScreener</Link>
+                  <Link target='_blank' className='text-blue-400' href={`https://www.dexview.com/base/${token?.address}`}>DexView</Link>
+                  <Link target='_blank' className='text-blue-400' href={`https://www.geckoterminal.com/base/pools/${token?.address}`}>GeckoTerminal</Link>
+                </div>
+              </div>
+            </div>
+
             {/* Engagement & Transaction Statistics Section */}
             <div className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px]">
               <h3 className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold mb-[0.5rem]">
@@ -97,7 +121,7 @@ export default function TokenDetailPage() {
                 {engagements && (
                   <>
                     <div className="flex flex-col md:flex-row md:justify-between text-[clamp(0.875rem,1.5vw,1.1rem)]">
-                      <span>Active Users:</span>
+                      <span>Engagements:</span>
                       <span>{engagements}</span>
                     </div>
                   </>

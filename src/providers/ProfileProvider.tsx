@@ -14,7 +14,7 @@ interface ProfileProviderContextType {
   refreshUser: () => Promise<void>;
   balance: string,
   updateBuyAmount: (likeAmount: number) => Promise<void>;
-  likeAmount: number
+  likeAmount: number,
 }
 
 const ProfileProviderContext = createContext<ProfileProviderContextType | undefined>(undefined);

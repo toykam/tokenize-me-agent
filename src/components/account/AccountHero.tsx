@@ -7,6 +7,7 @@ import { NeynarAuthButton } from '@neynar/react';
 import { useProfileProvider } from '@/providers/ProfileProvider';
 import { Button } from '../ui/button';
 import Link from 'next/link';
+import { RefreshCwIcon } from 'lucide-react';
 
 
 
@@ -15,7 +16,8 @@ export default function AccountHero() {
     const {
         balance,
         account,
-        isLoading
+        isLoading,
+        refreshUser
     } = useProfileProvider()
 
     const tokenizeMeCast = "Hey @tokenizeme, Put me onchain.";
@@ -29,14 +31,16 @@ export default function AccountHero() {
                 'rounded-2xl px-[20px] py-[12px] h-min-[110px] w-full',
                 'bg-gradient-to-tr from-[#93C9F2] via-[#FFDDA8] to-[#B0337A]',
             )}>
-            <p className='text-[16px] font-medium mb-[20px]'>Current Balance</p>
+                <p className='text-[16px] font-medium mb-[10px]'>Current Balance</p>
 
-            <div className='flex gap-2 items-center'>
-                <p className='text-[24px] font-extrabold'>{balance} ETH</p>
-                
-                {/* <ArrowUp color='#6552FE' size={10}/>
-                <p className='text-[#6552FE] font-bold font-inter'>10.2%</p> */}
-            </div>
+                <div className='flex gap-2 items-center'>
+                    <p className='text-[clamp(18px,1vw,24px)] font-extrabold'>{balance} ETH</p>
+                </div>
+
+                <p className='text-black cursor-pointer flex flex-row gap-1 items-center' onClick={refreshUser}>
+                    {isLoading && <RefreshCwIcon width={10} height={10} />}
+                    refresh
+                </p>
             </div>
     
             <div className='flex w-full flex-col justify-items-stretch items-stretch mt-[18px] gap-[16px]'>

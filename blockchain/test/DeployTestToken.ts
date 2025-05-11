@@ -21,9 +21,10 @@ describe("Deploy Social Token", function () {
     expect(network.chainId).to.equal(8453n); // Base chainId
 
     // smartContractAddress = "0xf1aCf4ede1f0595E2842724c659e6F7Ae66457a4"; // Updated contract address
-    smartContractAddress = "0x8f7F216Db426a875DAC14C9f8cdEAc844e21367E"; // Working TokenFactory contract address
-    // smartContractAddress = "0xAD881F5F5aCa1ecF3FD8ceBD0e0C02f09983111E"; // Working TokenFactory contract address working
+    smartContractAddress = "0x0D4594a03eaB506758D55B5c57a794883bf3219e"; // Working TokenFactory contract address
+    // smartContractAddress = "0x8f7F216Db426a875DAC14C9f8cdEAc844e21367E"; // Working TokenFactory contract address
 
+    
     // Connect to the deployed TokenFactory contract
     const TokenFactory = await hre.ethers.getContractFactory("TokenFactory", owner);
     tokenFactory = TokenFactory.attach(smartContractAddress);
@@ -74,9 +75,9 @@ describe("Deploy Social Token", function () {
       "platform": "Farcaster",
       "profileurl": "https://warpcast.com/~/tokenizeme",
       "salt": newSalt,
-      // 'initialTick': -227240,
-      'initialTick': -207240,
-      '_fee': 3000
+      'initialTick': -207200,
+      // 'initialTick': -207240,
+      '_fee': 10000
       // '_fee': 3000
     };
     

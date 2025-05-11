@@ -25,7 +25,6 @@ export declare namespace ISwapRouter {
   export type ExactInputParamsStruct = {
     path: BytesLike;
     recipient: AddressLike;
-    deadline: BigNumberish;
     amountIn: BigNumberish;
     amountOutMinimum: BigNumberish;
   };
@@ -33,13 +32,11 @@ export declare namespace ISwapRouter {
   export type ExactInputParamsStructOutput = [
     path: string,
     recipient: string,
-    deadline: bigint,
     amountIn: bigint,
     amountOutMinimum: bigint
   ] & {
     path: string;
     recipient: string;
-    deadline: bigint;
     amountIn: bigint;
     amountOutMinimum: bigint;
   };
@@ -49,7 +46,6 @@ export declare namespace ISwapRouter {
     tokenOut: AddressLike;
     fee: BigNumberish;
     recipient: AddressLike;
-    deadline: BigNumberish;
     amountIn: BigNumberish;
     amountOutMinimum: BigNumberish;
     sqrtPriceLimitX96: BigNumberish;
@@ -60,7 +56,6 @@ export declare namespace ISwapRouter {
     tokenOut: string,
     fee: bigint,
     recipient: string,
-    deadline: bigint,
     amountIn: bigint,
     amountOutMinimum: bigint,
     sqrtPriceLimitX96: bigint
@@ -69,7 +64,6 @@ export declare namespace ISwapRouter {
     tokenOut: string;
     fee: bigint;
     recipient: string;
-    deadline: bigint;
     amountIn: bigint;
     amountOutMinimum: bigint;
     sqrtPriceLimitX96: bigint;
