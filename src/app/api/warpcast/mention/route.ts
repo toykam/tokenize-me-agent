@@ -152,7 +152,7 @@ export async function POST(
     })
 
 
-    const responseText = `Hey @${info.data.author.username}, Your account have been successfully tokenized.\nCA: ${token.address}\nName: ${token.name}\nSymbol: ${token.symbol}\n\nYour tokenized profile can be traded anywhere on the dex.`;
+    const responseText = `Hey @${info.data.author.username}, Your account have been successfully tokenized.\nCA: ${token.address}\nName: ${token.name}\nSymbol: ${token.symbol}\n\nYour tokenized profile can be traded anywhere on the dex. \n\n${process.env.NEXT_PUBLIC_URL}/token/${token.address}`;
       await farcasterAgentClient.publishCast({
         text: responseText,
         parent_hash: info.data.hash, // Reply to the mentioning cast
