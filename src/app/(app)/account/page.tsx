@@ -13,7 +13,8 @@ export default function AccountPage() {
 
   const {
     tokens,
-    isLoading
+    isLoading,
+    refreshTokens
   } = useTokens();
   return (
     <FrameReadyWrapper>
@@ -29,9 +30,14 @@ export default function AccountPage() {
           <div className='flex justify-between mb-[32px]'>
             <p className='text-white text-[20px] font-bold'>Tokens</p>
 
-            <Link href={"/tokens"}>
-            <p className='underline text-white'>see all</p>
-            </Link>
+
+            <div className='flex flex-row gap-2'>
+              <p className='underline text-white cursor-pointer' onClick={refreshTokens}>refresh</p>
+              <Link href={"/tokens"}>
+                <p className='underline text-white'>see all</p>
+              </Link>
+            </div>
+
           </div>
 
 

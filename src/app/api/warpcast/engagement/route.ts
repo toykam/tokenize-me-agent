@@ -12,11 +12,9 @@ export async function POST(
 
   try {
     const info = await req.json();
-    console.log(info);
     
     const {cast, user} = info.data;
     const { author } = cast;
-
 
     // console.log(author);
 
@@ -50,9 +48,19 @@ export async function POST(
 
           if (authorUser != null) {
             console.log("AuthorToken ::: ", authorUser?.token);
-    
-            const authorTokenAddress = authorUser?.token?.address;
-            const authorTokenFeeTier = authorUser?.token?.feeTier;
+
+
+            
+            const authorTokenAddress = authorUser!.token!.address;
+            const authorTokenFeeTier = authorUser!.token!.feeTier;
+            const engagement = await prisma.engagement.create({
+              data: {
+                postId: `${cast.hash}`,
+                type: "like_and_reaction",
+                userId: engagingUser!.id,
+                tokenAddress: authorTokenAddress!
+              }
+            })
             const encryptedPrivateKeyData = {
               encrypted: engagingUserWallet.encryptedKey,
               iv: engagingUserWallet.iv,
@@ -94,12 +102,10 @@ export async function POST(
                 tokenAddress: authorTokenAddress!
               }
             })
-            await prisma.engagement.create({
+            await prisma.engagement.update({
+              where: {id: engagement.id},
               data: {
-                postId: `${cast.hash}`,
-                type: "like_and_reaction",
-                userId: engagingUser!.id,
-                tokenAddress: authorUser!.token!.address!,
+                tokenAddress: authorTokenAddress,
                 transactionid: tx.id
               }
             })
