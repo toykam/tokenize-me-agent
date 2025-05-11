@@ -64,7 +64,7 @@ export default function TokenDetailPage() {
                   {socialLinks.map((link, index) => (
                     <a
                       key={index}
-                      href={link.username}
+                      href={`${link.url}${link.username.toLowerCase()}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#4ecdc4] text-[clamp(0.875rem,1.5vw,1rem)] hover:text-[#ff6b6b] transition-colors duration-200"
