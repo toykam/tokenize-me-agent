@@ -53,7 +53,7 @@ export default function AccountPage() {
               </div>)}
             </>}
             {!isLoading && tokens.length == 0 && <p className='text-white text-center'>No Token have been launched. Tokenize your profile to start earning today.</p>}
-            {tokens.map((v) => {
+            {!isLoading && tokens.map((v) => {
               return <HoldingItemComponent token={v} key={v.address} />;
             })}
           </div>
