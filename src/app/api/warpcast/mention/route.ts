@@ -41,7 +41,7 @@ export async function POST(
         username: `${author.username}`
       });
       
-      const responseText = `Hey @${info.data.author.username}, welcome to the world of profile tokenization, your profile token will created shortly. A wallet have been created for you ${wallet.address}. You can export the wallet in your profile page using our frame`;
+      const responseText = `Hey @${info.data.author.username}, welcome to the world of profile tokenization, your profile token will created shortly. A wallet have been created for you ${wallet.address}. You can export the wallet in your profile page using our frame. ${process.env.NEXT_PUBLIC_URL}/account`;
       await farcasterAgentClient.publishCast({
         text: responseText,
         parent_hash: info.data.hash, // Reply to the mentioning cast
