@@ -15,12 +15,6 @@ export default function HoldingItemComponent({token} : {token: Token}) {
               <p className='text-[#6C757D] font-medium text-[14px]'>{token.symbol}</p>  
           </div>
 
-
-          {/* <div className='flex-1/2 flex justify-center'>
-              <img src="/graph.png" alt="" className='h-[30px]' />
-          </div> */}
-
-
           <div className='flex-1/2 flex justify-end flex-col items-end-safe'>
               <p className='text-[#6C757D] font-medium text-[14px]'>tx: {token._count?.transactions}</p>
               <p className='text-[#6C757D] font-medium text-[14px]'>{token._count?.Engagement} engagements</p>

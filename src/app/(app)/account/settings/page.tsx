@@ -15,9 +15,9 @@ export default function SettingsPage() {
         
         <Tabs defaultValue="wallet" className="w-full">
           <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 gap-2 mb-6">
-            <TabsTrigger value="wallet" className="px-4 py-2">Wallet</TabsTrigger>
-            <TabsTrigger value="engagement-buys" className="px-4 py-2">Buy Amount</TabsTrigger>
-            <TabsTrigger value="linked-accounts" className="px-4 py-2">Linked Accounts</TabsTrigger>
+            <TabsTrigger value="wallet" className="px-4 py-2 text-white">Wallet</TabsTrigger>
+            <TabsTrigger value="engagement-buys" className="px-4 py-2 text-white">Buy Amount</TabsTrigger>
+            <TabsTrigger value="linked-accounts" className="px-4 py-2 text-white">Linked Accounts</TabsTrigger>
           </TabsList>
           <TabsContent value="wallet">
             <Card className="w-full">
