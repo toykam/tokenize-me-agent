@@ -20,7 +20,7 @@ describe("Deploy Social Token", function () {
     const network = await baseProvider.getNetwork();
     expect(network.chainId).to.equal(8453n); // Base chainId
 
-    // smartContractAddress = "0xf1aCf4ede1f0595E2842724c659e6F7Ae66457a4"; // Updated contract address
+  
     smartContractAddress = "0x0D4594a03eaB506758D55B5c57a794883bf3219e"; // Working TokenFactory contract address
     // smartContractAddress = "0x8f7F216Db426a875DAC14C9f8cdEAc844e21367E"; // Working TokenFactory contract address
 
@@ -68,12 +68,25 @@ describe("Deploy Social Token", function () {
     const nonce = Math.random().toString(36).substring(2);
     const newSalt = ethers.id(nonce); // Generate bytes32 salt
 
+    // const tokenConfig = {
+    //   'name': "TokenizeMeAgent",
+    //   'symbol': "tokenizeme".toUpperCase(),
+    //   "handle": "tokenizeme",
+    //   "platform": "Farcaster",
+    //   "profileurl": "https://warpcast.com/~/tokenizeme",
+    //   "salt": newSalt,
+    //   'initialTick': -207200,
+    //   // 'initialTick': -207240,
+    //   '_fee': 10000
+    //   // '_fee': 3000
+    // };
+
     const tokenConfig = {
-      'name': "TokenizeMeAgent",
-      'symbol': "tokenizeme".toUpperCase(),
-      "handle": "tokenizeme",
+      'name': "Test",
+      'symbol': "test".toUpperCase(),
+      "handle": "test",
       "platform": "Farcaster",
-      "profileurl": "https://warpcast.com/~/tokenizeme",
+      "profileurl": "https://warpcast.com/~/test",
       "salt": newSalt,
       'initialTick': -207200,
       // 'initialTick': -207240,
