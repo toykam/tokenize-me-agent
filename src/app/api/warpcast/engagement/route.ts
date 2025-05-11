@@ -28,6 +28,7 @@ export async function POST(
     if (engagingUser != null) {
       if (engagingUser!.buyAmount!.likeAmount > 0) {
         const engagingUserWallet = engagingUser.wallet!;
+        const engagingUserAddress = engagingUserWallet.address ?? ""
         console.log(engagingUserWallet);
         const likeAmount = engagingUser!.buyAmount!.likeAmount ?? 0;
 
@@ -47,62 +48,65 @@ export async function POST(
             include: { token: true, wallet: {select: {address: true}} }
           });
 
-          console.log("AuthorToken ::: ", authorUser?.token);
+          if (authorUser != null) {
+            console.log("AuthorToken ::: ", authorUser?.token);
+    
+            const authorTokenAddress = authorUser?.token?.address;
+            const authorTokenFeeTier = authorUser?.token?.feeTier;
+            const encryptedPrivateKeyData = {
+              encrypted: engagingUserWallet.encryptedKey,
+              iv: engagingUserWallet.iv,
+              authTag: engagingUserWallet.authTag,
+            };
+            const engagingUserWalletPrivateKey = decryptPrivateKey(encryptedPrivateKeyData);
+            const engagingUserWalletClient = signerWalletClient(engagingUserWalletPrivateKey);
   
-          const authorTokenAddress = authorUser?.token?.address;
-          const authorTokenFeeTier = authorUser?.token?.feeTier;
-          const encryptedPrivateKeyData = {
-            encrypted: engagingUserWallet.encryptedKey,
-            iv: engagingUserWallet.iv,
-            authTag: engagingUserWallet.authTag,
-          };
-          const engagingUserWalletPrivateKey = decryptPrivateKey(encryptedPrivateKeyData);
-          const engagingUserWalletClient = signerWalletClient(engagingUserWalletPrivateKey);
+            console.log(authorUser?.token);
+  
+            const { request } = await viemClient.simulateContract({
+              address: DEX_CONTRACT as `0x${string}`,
+              abi: dexAbi.abi,
+              functionName: "swapETHForTokens",
+              args: [
+                authorTokenAddress,
+                BigInt(0),
+                Number(authorTokenFeeTier)
+              ],
+              value: parseEther(`${likeAmount}`),
+              account: engagingUserWalletClient.account
+            })
+  
+            // Execute the swap
+            const txHash = await engagingUserWalletClient.writeContract(request);
+            console.log('Swap transaction hash:', txHash);
+  
+            // Wait for the transaction to be mined (optional, depending on your needs)
+            const receipt = await viemClient.waitForTransactionReceipt({ hash: txHash });
+            console.log('Swap transaction mined:', receipt.transactionHash);
+  
+            // create an engagement entry in the db
+            const tx = await prisma.tokenTransaction.create({
+              data: {
+                amount: likeAmount,
+                fromAddress: engagingUserAddress,
+                toAddress: authorUser?.wallet?.address ?? "",
+                txHash: txHash,
+                tokenAddress: authorTokenAddress!
+              }
+            })
+            await prisma.engagement.create({
+              data: {
+                postId: `${cast.hash}`,
+                type: "like_and_reaction",
+                userId: engagingUser!.id,
+                tokenAddress: authorUser!.token!.address!,
+                transactionid: tx.id
+              }
+            })
+          }
 
-          console.log(authorUser?.token);
 
-          const { request } = await viemClient.simulateContract({
-            address: DEX_CONTRACT as `0x${string}`,
-            abi: dexAbi.abi,
-            functionName: "swapETHForTokens",
-            args: [
-              authorTokenAddress,
-              BigInt(0),
-              Number(authorTokenFeeTier)
-            ],
-            value: parseEther(`${likeAmount}`),
-            account: engagingUserWalletClient.account
-          })
-
-          // Execute the swap
-          const txHash = await engagingUserWalletClient.writeContract(request);
-          console.log('Swap transaction hash:', txHash);
-
-          // Wait for the transaction to be mined (optional, depending on your needs)
-          const receipt = await viemClient.waitForTransactionReceipt({ hash: txHash });
-          console.log('Swap transaction mined:', receipt.transactionHash);
-
-          // create an engagement entry in the db
-          const tx = await prisma.tokenTransaction.create({
-            data: {
-              amount: likeAmount,
-              fromAddress: engagingUserWallet.address!,
-              toAddress: authorUser?.wallet?.address!,
-              txHash: txHash,
-              tokenAddress: authorTokenAddress!
-            }
-          })
-          await prisma.engagement.create({
-            data: {
-              postId: `${cast.hash}`,
-              type: "like_and_reaction",
-              userId: engagingUser.id,
-              tokenAddress: authorUser?.token?.address!,
-              transactionid: tx.id
-            }
-          })
-
-          return NextResponse.json({ status: 'ok', txHash });
+          return NextResponse.json({ status: 'ok' });
         }
       }
     }
