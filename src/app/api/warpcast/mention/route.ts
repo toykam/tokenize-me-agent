@@ -173,7 +173,7 @@ export async function POST(
       farcasterClient.updateWebhook({
         webhookId: ENGAGEMENT_WEBHOOK_ID,
         name: "Engagement Tracker",
-        url: "https://1531-102-88-111-194.ngrok-free.app/api/warpcast/engagement",
+        url: `${process.env.NEXT_PUBLIC_URL}/api/warpcast/engagement`,
         subscription: {
           "reaction.created": {
             target_fids: fids
