@@ -156,7 +156,8 @@ exports.Prisma.TokenScalarFieldEnum = {
   totalSupply: 'totalSupply',
   feeTier: 'feeTier',
   createdAt: 'createdAt',
-  userId: 'userId'
+  userId: 'userId',
+  upgraded: 'upgraded'
 };
 
 exports.Prisma.EngagementScalarFieldEnum = {

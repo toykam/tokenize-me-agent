@@ -147,7 +147,8 @@ export async function POST(
         name: tokenConfig.name,
         symbol: tokenConfig.symbol,
         totalSupply: 1000000000,
-        feeTier: 10000
+        feeTier: tokenConfig._fee,
+        upgraded: true
       }
     })
 

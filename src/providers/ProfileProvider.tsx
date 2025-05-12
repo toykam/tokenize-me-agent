@@ -12,6 +12,7 @@ interface ProfileProviderContextType {
   account: any;
   error: any;
   refreshUser: () => Promise<void>;
+  claimReward: () => Promise<void>;
   balance: string,
   updateBuyAmount: (likeAmount: number) => Promise<void>;
   likeAmount: number,
@@ -91,6 +92,30 @@ export function ProfileProvider({ children }: HoldingsProviderProps) {
     }
   }, [isAuthenticated]);
 
+  const claimReward = async () => {
+    try {
+      toast.info("Claiming your rewards...");
+      const response = await axios.post("/api/account/claim-reward", {
+        'fid': user?.fid
+      });
+      
+      const data = response.data;
+
+      console.log(data['hash']);
+
+      toast.success("All reward have been claimed", {
+        action: {
+          label: "view transaction",
+          onClick(_) {
+            window.location.href = `https://basescan.org/tx/${data['hash']}`;
+          },
+        }
+      })
+    } catch (error) {
+      toast.error(`Error: ${error}`);
+    }
+  }
+
   const value = {
     account,
     isLoading,
@@ -98,7 +123,8 @@ export function ProfileProvider({ children }: HoldingsProviderProps) {
     refreshUser: fetchAccount,
     balance: ethBalance,
     updateBuyAmount,
-    likeAmount
+    likeAmount,
+    claimReward
   };
 
   return (

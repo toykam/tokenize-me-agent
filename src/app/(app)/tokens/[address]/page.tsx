@@ -6,6 +6,7 @@ import SellTokenComponent from '@/components/account/SellTokenComponent'
 import TransferTokenComponent from '@/components/account/TransferTokenComponent'
 // import SellTokenComponent from '@/components/account/SellTokenComponent'
 import FrameReadyWrapper from '@/components/FrameReadyWrapper'
+import { Button } from '@/components/ui/button'
 // import { Button } from '@/components/ui/button'
 import { toMoneyFormat } from '@/lib/utils'
 import { useProfileProvider } from '@/providers/ProfileProvider'
@@ -14,6 +15,7 @@ import { LucideLoader2 } from 'lucide-react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import React, { useEffect } from 'react'
+import { toast } from 'sonner'
 
 
 export default function TokenDetailPage() {
@@ -25,7 +27,9 @@ export default function TokenDetailPage() {
   } = useTokens()
 
   const {
-    balance
+    balance,
+    account,
+    claimReward
   } = useProfileProvider();
 
   const { address } = useParams();
@@ -44,6 +48,8 @@ export default function TokenDetailPage() {
   const contractAddress = token?.address ?? "";
   const engagements = token?._count?.Engagement ?? 0;
   const transactions = token?._count?.transactions ?? 0;
+
+  console.log(account);
 
   return (
     <FrameReadyWrapper>
@@ -65,29 +71,16 @@ export default function TokenDetailPage() {
               <h2 className="text-[#4ecdc4] font-semibold text-[clamp(1rem,2.5vw,1.5rem)] md:text-[clamp(1.1rem,2vw,1.5rem)] lg:text-[1.5rem] mt-[0.3125rem] mb-0">
                 {token?.symbol}
               </h2>
-
-              {/* <div className='flex gap-x-2 flex-row items-center flex-growc'>
-                <div className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px] mb-[clamp(0.75rem,1.5vw,1.25rem)]">
-                  <h3 className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold mb-[0.5rem]">Market Cap</h3>
-                  <div className="space-y-[clamp(0.5rem,1vw,0.625rem)]">
-                    <div className='flex flex-row gap-x-1'>
-                      <div className="text-[clamp(0.875rem,1.5vw,1.1rem)]">{formatCurrency(tokenBalance)}</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px] mb-[clamp(0.75rem,1.5vw,1.25rem)]">
-                  <h3 className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold mb-[0.5rem]">Holders</h3>
-                  <div className="space-y-[clamp(0.5rem,1vw,0.625rem)]">
-                    <div className='flex flex-row gap-x-1'>
-                      <div className="text-[clamp(0.875rem,1.5vw,1.1rem)]">{toMoneyFormat(1000)}</div>
-                    </div>
-                  </div>
-                </div>
-
-
-              </div> */}
             </div>
+
+
+            {/* Token Details Section */}
+            {token?.address == account.token.address && <div className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px] mb-[clamp(0.75rem,1.5vw,1.25rem)]">
+              <h3 className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold mb-[0.5rem]">Reward</h3>
+              <div className="space-y-[clamp(0.5rem,1vw,0.625rem)]">
+                <Button className='mt-4' onClick={(_) => claimReward()}>Claim Reward</Button>
+              </div>
+            </div>}
 
             {/* Social Accounts Section */}
             <div className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px] mb-[clamp(0.75rem,1.5vw,1.25rem)]">

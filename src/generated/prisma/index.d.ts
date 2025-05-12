@@ -4945,6 +4945,7 @@ export namespace Prisma {
     feeTier: bigint | null
     createdAt: Date | null
     userId: string | null
+    upgraded: boolean | null
   }
 
   export type TokenMaxAggregateOutputType = {
@@ -4956,6 +4957,7 @@ export namespace Prisma {
     feeTier: bigint | null
     createdAt: Date | null
     userId: string | null
+    upgraded: boolean | null
   }
 
   export type TokenCountAggregateOutputType = {
@@ -4967,6 +4969,7 @@ export namespace Prisma {
     feeTier: number
     createdAt: number
     userId: number
+    upgraded: number
     _all: number
   }
 
@@ -4992,6 +4995,7 @@ export namespace Prisma {
     feeTier?: true
     createdAt?: true
     userId?: true
+    upgraded?: true
   }
 
   export type TokenMaxAggregateInputType = {
@@ -5003,6 +5007,7 @@ export namespace Prisma {
     feeTier?: true
     createdAt?: true
     userId?: true
+    upgraded?: true
   }
 
   export type TokenCountAggregateInputType = {
@@ -5014,6 +5019,7 @@ export namespace Prisma {
     feeTier?: true
     createdAt?: true
     userId?: true
+    upgraded?: true
     _all?: true
   }
 
@@ -5112,6 +5118,7 @@ export namespace Prisma {
     feeTier: bigint
     createdAt: Date
     userId: string
+    upgraded: boolean
     _count: TokenCountAggregateOutputType | null
     _avg: TokenAvgAggregateOutputType | null
     _sum: TokenSumAggregateOutputType | null
@@ -5142,6 +5149,7 @@ export namespace Prisma {
     feeTier?: boolean
     createdAt?: boolean
     userId?: boolean
+    upgraded?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     transactions?: boolean | Token$transactionsArgs<ExtArgs>
     Engagement?: boolean | Token$EngagementArgs<ExtArgs>
@@ -5157,6 +5165,7 @@ export namespace Prisma {
     feeTier?: boolean
     createdAt?: boolean
     userId?: boolean
+    upgraded?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["token"]>
 
@@ -5169,6 +5178,7 @@ export namespace Prisma {
     feeTier?: boolean
     createdAt?: boolean
     userId?: boolean
+    upgraded?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["token"]>
 
@@ -5181,9 +5191,10 @@ export namespace Prisma {
     feeTier?: boolean
     createdAt?: boolean
     userId?: boolean
+    upgraded?: boolean
   }
 
-  export type TokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"address" | "name" | "symbol" | "decimals" | "totalSupply" | "feeTier" | "createdAt" | "userId", ExtArgs["result"]["token"]>
+  export type TokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"address" | "name" | "symbol" | "decimals" | "totalSupply" | "feeTier" | "createdAt" | "userId" | "upgraded", ExtArgs["result"]["token"]>
   export type TokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     transactions?: boolean | Token$transactionsArgs<ExtArgs>
@@ -5213,6 +5224,7 @@ export namespace Prisma {
       feeTier: bigint
       createdAt: Date
       userId: string
+      upgraded: boolean
     }, ExtArgs["result"]["token"]>
     composites: {}
   }
@@ -5647,6 +5659,7 @@ export namespace Prisma {
     readonly feeTier: FieldRef<"Token", 'BigInt'>
     readonly createdAt: FieldRef<"Token", 'DateTime'>
     readonly userId: FieldRef<"Token", 'String'>
+    readonly upgraded: FieldRef<"Token", 'Boolean'>
   }
     
 
@@ -9557,7 +9570,8 @@ export namespace Prisma {
     totalSupply: 'totalSupply',
     feeTier: 'feeTier',
     createdAt: 'createdAt',
-    userId: 'userId'
+    userId: 'userId',
+    upgraded: 'upgraded'
   };
 
   export type TokenScalarFieldEnum = (typeof TokenScalarFieldEnum)[keyof typeof TokenScalarFieldEnum]
@@ -9684,6 +9698,13 @@ export namespace Prisma {
    * Reference to a field of type 'BigInt[]'
    */
   export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -9943,6 +9964,7 @@ export namespace Prisma {
     feeTier?: BigIntFilter<"Token"> | bigint | number
     createdAt?: DateTimeFilter<"Token"> | Date | string
     userId?: StringFilter<"Token"> | string
+    upgraded?: BoolFilter<"Token"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     transactions?: TokenTransactionListRelationFilter
     Engagement?: EngagementListRelationFilter
@@ -9957,6 +9979,7 @@ export namespace Prisma {
     feeTier?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
+    upgraded?: SortOrder
     user?: UserOrderByWithRelationInput
     transactions?: TokenTransactionOrderByRelationAggregateInput
     Engagement?: EngagementOrderByRelationAggregateInput
@@ -9974,6 +9997,7 @@ export namespace Prisma {
     totalSupply?: BigIntFilter<"Token"> | bigint | number
     feeTier?: BigIntFilter<"Token"> | bigint | number
     createdAt?: DateTimeFilter<"Token"> | Date | string
+    upgraded?: BoolFilter<"Token"> | boolean
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     transactions?: TokenTransactionListRelationFilter
     Engagement?: EngagementListRelationFilter
@@ -9988,6 +10012,7 @@ export namespace Prisma {
     feeTier?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
+    upgraded?: SortOrder
     _count?: TokenCountOrderByAggregateInput
     _avg?: TokenAvgOrderByAggregateInput
     _max?: TokenMaxOrderByAggregateInput
@@ -10007,6 +10032,7 @@ export namespace Prisma {
     feeTier?: BigIntWithAggregatesFilter<"Token"> | bigint | number
     createdAt?: DateTimeWithAggregatesFilter<"Token"> | Date | string
     userId?: StringWithAggregatesFilter<"Token"> | string
+    upgraded?: BoolWithAggregatesFilter<"Token"> | boolean
   }
 
   export type EngagementWhereInput = {
@@ -10439,6 +10465,7 @@ export namespace Prisma {
     totalSupply: bigint | number
     feeTier?: bigint | number
     createdAt?: Date | string
+    upgraded?: boolean
     user: UserCreateNestedOneWithoutTokenInput
     transactions?: TokenTransactionCreateNestedManyWithoutTokenInput
     Engagement?: EngagementCreateNestedManyWithoutTokenInput
@@ -10453,6 +10480,7 @@ export namespace Prisma {
     feeTier?: bigint | number
     createdAt?: Date | string
     userId: string
+    upgraded?: boolean
     transactions?: TokenTransactionUncheckedCreateNestedManyWithoutTokenInput
     Engagement?: EngagementUncheckedCreateNestedManyWithoutTokenInput
   }
@@ -10465,6 +10493,7 @@ export namespace Prisma {
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
     feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    upgraded?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutTokenNestedInput
     transactions?: TokenTransactionUpdateManyWithoutTokenNestedInput
     Engagement?: EngagementUpdateManyWithoutTokenNestedInput
@@ -10479,6 +10508,7 @@ export namespace Prisma {
     feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
+    upgraded?: BoolFieldUpdateOperationsInput | boolean
     transactions?: TokenTransactionUncheckedUpdateManyWithoutTokenNestedInput
     Engagement?: EngagementUncheckedUpdateManyWithoutTokenNestedInput
   }
@@ -10492,6 +10522,7 @@ export namespace Prisma {
     feeTier?: bigint | number
     createdAt?: Date | string
     userId: string
+    upgraded?: boolean
   }
 
   export type TokenUpdateManyMutationInput = {
@@ -10502,6 +10533,7 @@ export namespace Prisma {
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
     feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    upgraded?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type TokenUncheckedUpdateManyInput = {
@@ -10513,6 +10545,7 @@ export namespace Prisma {
     feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
+    upgraded?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type EngagementCreateInput = {
@@ -10990,6 +11023,11 @@ export namespace Prisma {
     not?: NestedBigIntFilter<$PrismaModel> | bigint | number
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type TokenTransactionListRelationFilter = {
     every?: TokenTransactionWhereInput
     some?: TokenTransactionWhereInput
@@ -11009,6 +11047,7 @@ export namespace Prisma {
     feeTier?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
+    upgraded?: SortOrder
   }
 
   export type TokenAvgOrderByAggregateInput = {
@@ -11026,6 +11065,7 @@ export namespace Prisma {
     feeTier?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
+    upgraded?: SortOrder
   }
 
   export type TokenMinOrderByAggregateInput = {
@@ -11037,6 +11077,7 @@ export namespace Prisma {
     feeTier?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
+    upgraded?: SortOrder
   }
 
   export type TokenSumOrderByAggregateInput = {
@@ -11059,6 +11100,14 @@ export namespace Prisma {
     _sum?: NestedBigIntFilter<$PrismaModel>
     _min?: NestedBigIntFilter<$PrismaModel>
     _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type TokenScalarRelationFilter = {
@@ -11520,6 +11569,10 @@ export namespace Prisma {
     divide?: bigint | number
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type UserUpdateOneRequiredWithoutTokenNestedInput = {
     create?: XOR<UserCreateWithoutTokenInput, UserUncheckedCreateWithoutTokenInput>
     connectOrCreate?: UserCreateOrConnectWithoutTokenInput
@@ -11865,6 +11918,11 @@ export namespace Prisma {
     not?: NestedBigIntFilter<$PrismaModel> | bigint | number
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
     in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
@@ -11879,6 +11937,14 @@ export namespace Prisma {
     _sum?: NestedBigIntFilter<$PrismaModel>
     _min?: NestedBigIntFilter<$PrismaModel>
     _max?: NestedBigIntFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedDecimalFilter<$PrismaModel = never> = {
@@ -12047,6 +12113,7 @@ export namespace Prisma {
     totalSupply: bigint | number
     feeTier?: bigint | number
     createdAt?: Date | string
+    upgraded?: boolean
     transactions?: TokenTransactionCreateNestedManyWithoutTokenInput
     Engagement?: EngagementCreateNestedManyWithoutTokenInput
   }
@@ -12059,6 +12126,7 @@ export namespace Prisma {
     totalSupply: bigint | number
     feeTier?: bigint | number
     createdAt?: Date | string
+    upgraded?: boolean
     transactions?: TokenTransactionUncheckedCreateNestedManyWithoutTokenInput
     Engagement?: EngagementUncheckedCreateNestedManyWithoutTokenInput
   }
@@ -12200,6 +12268,7 @@ export namespace Prisma {
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
     feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    upgraded?: BoolFieldUpdateOperationsInput | boolean
     transactions?: TokenTransactionUpdateManyWithoutTokenNestedInput
     Engagement?: EngagementUpdateManyWithoutTokenNestedInput
   }
@@ -12212,6 +12281,7 @@ export namespace Prisma {
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
     feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    upgraded?: BoolFieldUpdateOperationsInput | boolean
     transactions?: TokenTransactionUncheckedUpdateManyWithoutTokenNestedInput
     Engagement?: EngagementUncheckedUpdateManyWithoutTokenNestedInput
   }
@@ -12565,6 +12635,7 @@ export namespace Prisma {
     totalSupply: bigint | number
     feeTier?: bigint | number
     createdAt?: Date | string
+    upgraded?: boolean
     user: UserCreateNestedOneWithoutTokenInput
     transactions?: TokenTransactionCreateNestedManyWithoutTokenInput
   }
@@ -12578,6 +12649,7 @@ export namespace Prisma {
     feeTier?: bigint | number
     createdAt?: Date | string
     userId: string
+    upgraded?: boolean
     transactions?: TokenTransactionUncheckedCreateNestedManyWithoutTokenInput
   }
 
@@ -12669,6 +12741,7 @@ export namespace Prisma {
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
     feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    upgraded?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutTokenNestedInput
     transactions?: TokenTransactionUpdateManyWithoutTokenNestedInput
   }
@@ -12682,6 +12755,7 @@ export namespace Prisma {
     feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
+    upgraded?: BoolFieldUpdateOperationsInput | boolean
     transactions?: TokenTransactionUncheckedUpdateManyWithoutTokenNestedInput
   }
 
@@ -12726,6 +12800,7 @@ export namespace Prisma {
     totalSupply: bigint | number
     feeTier?: bigint | number
     createdAt?: Date | string
+    upgraded?: boolean
     user: UserCreateNestedOneWithoutTokenInput
     Engagement?: EngagementCreateNestedManyWithoutTokenInput
   }
@@ -12739,6 +12814,7 @@ export namespace Prisma {
     feeTier?: bigint | number
     createdAt?: Date | string
     userId: string
+    upgraded?: boolean
     Engagement?: EngagementUncheckedCreateNestedManyWithoutTokenInput
   }
 
@@ -12794,6 +12870,7 @@ export namespace Prisma {
     totalSupply?: BigIntFieldUpdateOperationsInput | bigint | number
     feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    upgraded?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutTokenNestedInput
     Engagement?: EngagementUpdateManyWithoutTokenNestedInput
   }
@@ -12807,6 +12884,7 @@ export namespace Prisma {
     feeTier?: BigIntFieldUpdateOperationsInput | bigint | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
+    upgraded?: BoolFieldUpdateOperationsInput | boolean
     Engagement?: EngagementUncheckedUpdateManyWithoutTokenNestedInput
   }
 

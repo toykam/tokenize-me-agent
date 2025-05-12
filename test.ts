@@ -1,64 +1,100 @@
-import { config } from "dotenv";
-import { CdpClient } from "@coinbase/cdp-sdk"
-import { Coinbase, Wallet } from "@coinbase/coinbase-sdk"
-import { viemClient } from "@/lib/viem";
 import { prisma } from "@/lib/prisma";
+import { config } from "dotenv";
+import tokenFactoryAbi from "@/../blockchain/artifacts/contracts/TokenFactory.sol/TokenFactory.json"
+import { privateKeyToAccount } from "viem/accounts";
+import { DEPLOYER_PRIVATE_KEY, TOKEN_FACTORY_CONTRACT } from "@/lib/utils";
+import { signerWalletClient, viemClient } from "@/lib/viem";
 
 config();
 
 // const cdp = new CdpClient();
 
 const main = async () => {
+    const token = await prisma.token.findFirst({
+        include: {user: {
+            include: {wallet: true},
+        }},
+        where: {upgraded: false}
+    });
+
+    // 
+
+    if (token != null) {
+        console.log(`Deploying token ${token.address}...`);
+        // deploy the token
+        const tokenConfig = {
+            'name': `${token.name}`,
+            'symbol': `${token.symbol}`.toUpperCase(),
+            "handle": `${token.user.username}`,
+            "platform": "Farcaster",
+            "profileurl": `https://warpcast.com/${token.user.username}`,
+            "salt": '',
+            // 'initialTick': -227240,
+            'initialTick': -207200,
+            '_fee': 10000
+            // '_fee': 3000
+        };
     
-    let coinbase = Coinbase.configure({
-        apiKeyName: process.env.CDP_API_KEY_ID!,
-        privateKey: process.env.CDP_API_KEY_SECRET!
-    })
-
-    const wallet = await Wallet.create();
-
-    console.log(`Wallet Default Address ::: ${wallet.getDefaultAddress()}`)
-
-    // const userwallets = await prisma.userWallet.findMany({});
-
-    // userwallets.forEach(async (value, index) => {
-    //     const account = await cdp.evm.createAccount({
-    //         name: value.userId,
-    //         idempotencyKey: value.userId
-    //     });
-
-    //     await prisma.userWallet.update({
-    //         where: {id: value.id},
-    //         data: {
-    //             address: account.address
-    //         }
-    //     })
-    // })
-    // const account = await cdp.evm.getOrCreateAccount({
-    //     address: "0xEAf75B465F791b24C3B3E17a2F4793A67e3941fD"
-    // });
+        const account = privateKeyToAccount(`0x${DEPLOYER_PRIVATE_KEY}` as `0x${string}`)
     
-    // console.log(account.address);
+    
+        const salt: any = await viemClient.readContract({
+            address: TOKEN_FACTORY_CONTRACT as `0x${string}`,
+            abi: tokenFactoryAbi.abi,
+            functionName: 'generateSalt',
+            args: [
+                account.address,
+                tokenConfig.name, 
+                tokenConfig.symbol,
+                tokenConfig.handle, 
+                tokenConfig.platform,
+                tokenConfig.profileurl
+            ],
+            account
+        });
+    
+        console.log(salt)
+    
+        tokenConfig.salt = salt[0];
+    
+        console.log(tokenConfig);
+        console.log(token.user.wallet?.address);
+        console.log(TOKEN_FACTORY_CONTRACT);
+    
+        const deployedToken: any = await signerWalletClient(`0x${DEPLOYER_PRIVATE_KEY}`).writeContract({
+            address: TOKEN_FACTORY_CONTRACT as `0x${string}`,
+            abi: tokenFactoryAbi.abi,
+            functionName: 'deployToken',
+            args: [
+                tokenConfig.name,
+                tokenConfig.symbol,
+                account.address,
+                token.user.wallet?.address,
+                tokenConfig.handle,
+                tokenConfig.platform,
+                tokenConfig.profileurl,
+                tokenConfig.initialTick,
+                tokenConfig._fee,
+                tokenConfig.salt
+            ],
+            account,
+        });
+        
+        await prisma.token.update({
+            where: {address: token.address},
+            data: {
+                address: salt[1],
+                upgraded: true,
+                feeTier: tokenConfig._fee
+            }
+        });
+    
+        console.log(`Token ${token.symbol} is deployed to ${salt[1]} and updated successfully`);
+    }
 
-    // const {transactionHash} = await cdp.evm.requestFaucet({
-    //     address: account.address,
-    //     network: "base-sepolia",
-    //     token: "eth"
-    // })
-
-    // const {status} = await viemClient.waitForTransactionReceipt({
-    //     hash: transactionHash
-    // })
-
-    // console.log("Status ::: ", status);
-
-    // const { balances, nextPageToken }= await cdp.evm.listTokenBalances({
-    //     address: "0xEAf75B465F791b24C3B3E17a2F4793A67e3941fD",
-    //     network: "base"
-    // })
-
-    // console.log(balances, '  ', nextPageToken);
 }
+
+
 
 
 main().catch(error => console.log(`Error ::: `, error))

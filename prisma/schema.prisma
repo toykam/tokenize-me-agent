@@ -65,6 +65,8 @@ model Token {
   userId String @unique
   user User @relation(fields: [userId], references: [id])
 
+  upgraded Boolean @default(false)
+
   transactions TokenTransaction[]
 
   Engagement Engagement[]
