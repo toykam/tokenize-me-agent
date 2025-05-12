@@ -42,7 +42,7 @@ export default function BuyTokenComponent({
     const buyToken = async () => {
         try {
             if (!amountToSell) {
-                toast.error('Please provide a valid amount to sell')
+                toast.error('Please provide a valid amount to buy')
                 return;
             }
             setIsSwapping(true);
@@ -60,7 +60,7 @@ export default function BuyTokenComponent({
                 toast.error(`Swap failed...`);
                 return;
             }
-            
+
             await refreshUser();
             await response.json();
             setIsOpened(false);
@@ -82,7 +82,7 @@ export default function BuyTokenComponent({
         </AlertDialogTrigger>
         <AlertDialogContent>
             <AlertDialogHeader>
-                <AlertDialogTitle>Sell {token.symbol}</AlertDialogTitle>
+                <AlertDialogTitle>Buy {token.symbol}</AlertDialogTitle>
                 <AlertDialogDescription>
                     Enter the amount of token you want to buy (in ETH).
                 </AlertDialogDescription>
@@ -97,7 +97,7 @@ export default function BuyTokenComponent({
             <AlertDialogFooter>
                 <AlertDialogCancel disabled={isSwapping}>{isSwapping ? 'Cancel' : 'Close'}</AlertDialogCancel>
                 <Button disabled={isSwapping} variant={"destructive"} onClick={buyToken}>
-                    {isSwapping ? <LoaderCircleIcon /> : "Sell"}
+                    {isSwapping ? <LoaderCircleIcon /> : "Buy"}
                 </Button>
             </AlertDialogFooter>
         </AlertDialogContent>
