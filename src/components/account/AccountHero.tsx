@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react'
-import { cn } from '@/lib/utils'
+import { cn, formatCurrency } from '@/lib/utils'
 import { useAuth } from '@/hooks/useAuth'
 import { NeynarAuthButton } from '@neynar/react';
 import { useProfileProvider } from '@/providers/ProfileProvider';
@@ -34,7 +34,7 @@ export default function AccountHero() {
                 <p className='text-[16px] font-medium mb-[10px]'>Current Balance</p>
 
                 <div className='flex gap-2 items-center'>
-                    <p className='text-[clamp(18px,1vw,24px)] font-extrabold'>{balance} ETH</p>
+                    <p className='text-[clamp(18px,1vw,24px)] font-extrabold'>{(balance)} ETH</p>
                 </div>
 
                 <p className='text-black cursor-pointer flex flex-row gap-1 items-center' onClick={refreshUser}>

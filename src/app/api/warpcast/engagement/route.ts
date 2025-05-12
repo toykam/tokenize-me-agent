@@ -53,13 +53,8 @@ export async function POST(
             
             const authorTokenAddress = authorUser!.token!.address;
             const authorTokenFeeTier = authorUser!.token!.feeTier;
-            const engagement = await prisma.engagement.create({
-              data: {
-                postId: `${cast.hash}`,
-                type: "like_and_reaction",
-                userId: engagingUser!.id,
-                tokenAddress: authorTokenAddress!
-              }
+            const existingEngament = await prisma.engagement.findFirst({
+              where: {postId: `${cast.hash}`, userId: engagingUser!.id},
             })
             const encryptedPrivateKeyData = {
               encrypted: engagingUserWallet.encryptedKey,
@@ -102,13 +97,24 @@ export async function POST(
                 tokenAddress: authorTokenAddress!
               }
             })
-            await prisma.engagement.update({
-              where: {id: engagement.id},
-              data: {
-                tokenAddress: authorTokenAddress,
-                transactionid: tx.id
-              }
-            })
+
+            if (!existingEngament) {
+              const engagement = await prisma.engagement.create({
+                data: {
+                  postId: `${cast.hash}`,
+                  type: "like_and_reaction",
+                  userId: engagingUser!.id,
+                  tokenAddress: authorTokenAddress!
+                }
+              })
+              await prisma.engagement.update({
+                where: {id: engagement.id},
+                data: {
+                  tokenAddress: authorTokenAddress,
+                  transactionid: tx.id
+                }
+              })
+            }
           }
 
 
