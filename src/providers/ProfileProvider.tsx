@@ -106,7 +106,7 @@ export function ProfileProvider({ children }: HoldingsProviderProps) {
       toast.success("All reward have been claimed", {
         action: {
           label: "view transaction",
-          onClick(_) {
+          onClick() {
             window.location.href = `https://basescan.org/tx/${data['hash']}`;
           },
         }

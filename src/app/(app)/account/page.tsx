@@ -32,7 +32,7 @@ export default function AccountPage() {
 
 
             <div className='flex flex-row gap-2'>
-              <p className='underline text-white cursor-pointer' onClick={(e) => refreshTokens({})}>refresh</p>
+              <p className='underline text-white cursor-pointer' onClick={() => refreshTokens({})}>refresh</p>
               <Link href={"/tokens"}>
                 <p className='underline text-white'>see all</p>
               </Link>

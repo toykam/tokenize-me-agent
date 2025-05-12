@@ -15,7 +15,6 @@ import { LucideLoader2 } from 'lucide-react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import React, { useEffect } from 'react'
-import { toast } from 'sonner'
 
 
 export default function TokenDetailPage() {
@@ -78,7 +77,7 @@ export default function TokenDetailPage() {
             {token?.address == account.token.address && <div className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px] mb-[clamp(0.75rem,1.5vw,1.25rem)]">
               <h3 className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold mb-[0.5rem]">Reward</h3>
               <div className="space-y-[clamp(0.5rem,1vw,0.625rem)]">
-                <Button className='mt-4' onClick={(_) => claimReward()}>Claim Reward</Button>
+                <Button className='mt-4' onClick={() => claimReward()}>Claim Reward</Button>
               </div>
             </div>}
 
