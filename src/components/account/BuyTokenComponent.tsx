@@ -96,7 +96,7 @@ export default function BuyTokenComponent({
 
             <AlertDialogFooter>
                 <AlertDialogCancel disabled={isSwapping}>{isSwapping ? 'Cancel' : 'Close'}</AlertDialogCancel>
-                <Button disabled={isSwapping} variant={"destructive"} onClick={buyToken}>
+                <Button disabled={isSwapping} variant={"default"} onClick={buyToken}>
                     {isSwapping ? <LoaderCircleIcon /> : "Buy"}
                 </Button>
             </AlertDialogFooter>
