@@ -48,7 +48,7 @@ export default function AccountHero() {
                 {/* <Button>Deposit</Button> */}
                 {/* <Button variant={"outline"}>Withdraw</Button> */}
 
-                <TransferTokenComponent 
+                {!isLoading && <TransferTokenComponent 
                     token={{
                         name: "ETH",
                         symbol: "ETH",
@@ -56,7 +56,7 @@ export default function AccountHero() {
                     }}
                     type='eth'
                     balance={Number(balance)}
-                />
+                />}
                 {!isLoading && <>
                     {account['token'] == null && <Link target='_blank' className='w-screen' href={`https://warpcast.com/~/compose?text=${encodeURIComponent(tokenizeMeCast)}`}>
                         <Button variant={"outline"}>Tokenize My Profile</Button>
