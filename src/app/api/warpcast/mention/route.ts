@@ -71,7 +71,7 @@ export async function POST(
     });
 
     if (userToken) {
-      const responseText = `Hey @${info.data.author.username}, It seems you already tokenized your profile already. CA: ${userToken.address}`;
+      const responseText = `Hey @${info.data.author.username}, It seems you already tokenized your profile already. CA: ${userToken.address}\n\n${process.env.NEXT_PUBLIC_URL}/tokens/${userToken.address}`;
       await farcasterAgentClient.publishCast({
         text: responseText,
         parent_hash: info.data.hash, // Reply to the mentioning cast
