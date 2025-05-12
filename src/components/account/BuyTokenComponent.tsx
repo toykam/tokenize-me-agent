@@ -28,7 +28,7 @@ export default function BuyTokenComponent({
     balance
 }: BuyTokenComponentProp) {
     
-    const [amountToSell, setAmountToSell] = useState<number>();
+    const [amountToBuy, setAmountToBuy] = useState<number>();
     const [isSwapping, setIsSwapping] = useState<boolean>(false);
     const [isOpened, setIsOpened] = useState<boolean>(false);
     const { user } = useAuth();
@@ -36,22 +36,22 @@ export default function BuyTokenComponent({
 
     useEffect(() => {
         console.log("Balance ::: ", balance)
-        setAmountToSell(balance)
+        setAmountToBuy(balance)
     }, [])
 
     const buyToken = async () => {
         try {
-            if (!amountToSell) {
+            if (!amountToBuy) {
                 toast.error('Please provide a valid amount to buy')
                 return;
             }
             setIsSwapping(true);
-            toast.info(`Swapping ${amountToSell} ETH to ${token.symbol}`)
+            toast.info(`Swapping ${amountToBuy} ETH to ${token.symbol}`)
             const response = await fetch(`/api/tokens/${token.address}/buy`, {
                 method: 'POST',
                 body: JSON.stringify({
                     'tokenAddress': token.address,
-                    'amount': amountToSell,
+                    'amount': amountToBuy,
                     'fid': user.fid
                 })
             });
@@ -91,7 +91,7 @@ export default function BuyTokenComponent({
 
             <div className='space-y-2'>
                 <Label>Amount</Label>
-                <Input type='number' onChange={(e) => setAmountToSell(Number(e.target.value))} value={amountToSell} max={balance}/>
+                <Input type='number' onChange={(e) => setAmountToBuy(Number(e.target.value))} value={amountToBuy} max={balance}/>
             </div>
 
             <AlertDialogFooter>
