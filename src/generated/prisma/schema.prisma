@@ -84,13 +84,14 @@ model Engagement {
 }
 
 model TokenTransaction {
-  id           String   @id @default(uuid())
+  id           String               @id @default(uuid())
   tokenAddress String
   fromAddress  String
   toAddress    String
   amount       Decimal
   txHash       String
-  createdAt    DateTime @default(now())
+  type         TokenTransactionType @default(buy)
+  createdAt    DateTime             @default(now())
 
   token Token @relation(fields: [tokenAddress], references: [address])
 
@@ -107,4 +108,10 @@ model BuyAmount {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+}
+
+enum TokenTransactionType {
+  buy
+  sell
+  transfer
 }

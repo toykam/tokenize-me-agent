@@ -61,7 +61,7 @@ export const POST = async (request: Request) => {
         const amountInEther = parseEther(`${amount}`)
 
         
-        const sellHash = await userWallerClient.writeContract({
+        const buyHash = await userWallerClient.writeContract({
             abi: dexAbi.abi,
             functionName: "swapETHForTokens",
             address: DEX_CONTRACT as `0x${string}`,
@@ -73,16 +73,26 @@ export const POST = async (request: Request) => {
             value: amountInEther
         });
 
-        console.log(sellHash);
+        console.log(buyHash);
 
         const {status: sellStatus} = await viemClient.waitForTransactionReceipt({
-            hash: sellHash
+            hash: buyHash
         })
 
         if (sellStatus == "reverted") {
             console.log("Swap failed...")
             return NextResponse.json({message: "Something went wrong."}, {status: 400})
         }
+
+        await prisma.tokenTransaction.create({
+            data: {
+                amount: amount,
+                fromAddress: tokenAddress,
+                toAddress: userWallet.address,
+                txHash: buyHash,
+                tokenAddress: tokenAddress
+            }
+        })
         console.log("Swap successful");
 
         return NextResponse.json({message: 'Sell successful'}, {status: 200})

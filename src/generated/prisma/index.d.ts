@@ -50,6 +50,24 @@ export type TokenTransaction = $Result.DefaultSelection<Prisma.$TokenTransaction
 export type BuyAmount = $Result.DefaultSelection<Prisma.$BuyAmountPayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const TokenTransactionType: {
+  buy: 'buy',
+  sell: 'sell',
+  transfer: 'transfer'
+};
+
+export type TokenTransactionType = (typeof TokenTransactionType)[keyof typeof TokenTransactionType]
+
+}
+
+export type TokenTransactionType = $Enums.TokenTransactionType
+
+export const TokenTransactionType: typeof $Enums.TokenTransactionType
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -7237,6 +7255,7 @@ export namespace Prisma {
     toAddress: string | null
     amount: Decimal | null
     txHash: string | null
+    type: $Enums.TokenTransactionType | null
     createdAt: Date | null
   }
 
@@ -7247,6 +7266,7 @@ export namespace Prisma {
     toAddress: string | null
     amount: Decimal | null
     txHash: string | null
+    type: $Enums.TokenTransactionType | null
     createdAt: Date | null
   }
 
@@ -7257,6 +7277,7 @@ export namespace Prisma {
     toAddress: number
     amount: number
     txHash: number
+    type: number
     createdAt: number
     _all: number
   }
@@ -7277,6 +7298,7 @@ export namespace Prisma {
     toAddress?: true
     amount?: true
     txHash?: true
+    type?: true
     createdAt?: true
   }
 
@@ -7287,6 +7309,7 @@ export namespace Prisma {
     toAddress?: true
     amount?: true
     txHash?: true
+    type?: true
     createdAt?: true
   }
 
@@ -7297,6 +7320,7 @@ export namespace Prisma {
     toAddress?: true
     amount?: true
     txHash?: true
+    type?: true
     createdAt?: true
     _all?: true
   }
@@ -7394,6 +7418,7 @@ export namespace Prisma {
     toAddress: string
     amount: Decimal
     txHash: string
+    type: $Enums.TokenTransactionType
     createdAt: Date
     _count: TokenTransactionCountAggregateOutputType | null
     _avg: TokenTransactionAvgAggregateOutputType | null
@@ -7423,6 +7448,7 @@ export namespace Prisma {
     toAddress?: boolean
     amount?: boolean
     txHash?: boolean
+    type?: boolean
     createdAt?: boolean
     token?: boolean | TokenDefaultArgs<ExtArgs>
     Engagement?: boolean | TokenTransaction$EngagementArgs<ExtArgs>
@@ -7436,6 +7462,7 @@ export namespace Prisma {
     toAddress?: boolean
     amount?: boolean
     txHash?: boolean
+    type?: boolean
     createdAt?: boolean
     token?: boolean | TokenDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tokenTransaction"]>
@@ -7447,6 +7474,7 @@ export namespace Prisma {
     toAddress?: boolean
     amount?: boolean
     txHash?: boolean
+    type?: boolean
     createdAt?: boolean
     token?: boolean | TokenDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tokenTransaction"]>
@@ -7458,10 +7486,11 @@ export namespace Prisma {
     toAddress?: boolean
     amount?: boolean
     txHash?: boolean
+    type?: boolean
     createdAt?: boolean
   }
 
-  export type TokenTransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tokenAddress" | "fromAddress" | "toAddress" | "amount" | "txHash" | "createdAt", ExtArgs["result"]["tokenTransaction"]>
+  export type TokenTransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tokenAddress" | "fromAddress" | "toAddress" | "amount" | "txHash" | "type" | "createdAt", ExtArgs["result"]["tokenTransaction"]>
   export type TokenTransactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     token?: boolean | TokenDefaultArgs<ExtArgs>
     Engagement?: boolean | TokenTransaction$EngagementArgs<ExtArgs>
@@ -7487,6 +7516,7 @@ export namespace Prisma {
       toAddress: string
       amount: Prisma.Decimal
       txHash: string
+      type: $Enums.TokenTransactionType
       createdAt: Date
     }, ExtArgs["result"]["tokenTransaction"]>
     composites: {}
@@ -7919,6 +7949,7 @@ export namespace Prisma {
     readonly toAddress: FieldRef<"TokenTransaction", 'String'>
     readonly amount: FieldRef<"TokenTransaction", 'Decimal'>
     readonly txHash: FieldRef<"TokenTransaction", 'String'>
+    readonly type: FieldRef<"TokenTransaction", 'TokenTransactionType'>
     readonly createdAt: FieldRef<"TokenTransaction", 'DateTime'>
   }
     
@@ -9552,6 +9583,7 @@ export namespace Prisma {
     toAddress: 'toAddress',
     amount: 'amount',
     txHash: 'txHash',
+    type: 'type',
     createdAt: 'createdAt'
   };
 
@@ -9666,6 +9698,20 @@ export namespace Prisma {
    * Reference to a field of type 'Decimal[]'
    */
   export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TokenTransactionType'
+   */
+  export type EnumTokenTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TokenTransactionType'>
+    
+
+
+  /**
+   * Reference to a field of type 'TokenTransactionType[]'
+   */
+  export type ListEnumTokenTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TokenTransactionType[]'>
     
 
 
@@ -10044,6 +10090,7 @@ export namespace Prisma {
     toAddress?: StringFilter<"TokenTransaction"> | string
     amount?: DecimalFilter<"TokenTransaction"> | Decimal | DecimalJsLike | number | string
     txHash?: StringFilter<"TokenTransaction"> | string
+    type?: EnumTokenTransactionTypeFilter<"TokenTransaction"> | $Enums.TokenTransactionType
     createdAt?: DateTimeFilter<"TokenTransaction"> | Date | string
     token?: XOR<TokenScalarRelationFilter, TokenWhereInput>
     Engagement?: EngagementListRelationFilter
@@ -10056,6 +10103,7 @@ export namespace Prisma {
     toAddress?: SortOrder
     amount?: SortOrder
     txHash?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     token?: TokenOrderByWithRelationInput
     Engagement?: EngagementOrderByRelationAggregateInput
@@ -10071,6 +10119,7 @@ export namespace Prisma {
     toAddress?: StringFilter<"TokenTransaction"> | string
     amount?: DecimalFilter<"TokenTransaction"> | Decimal | DecimalJsLike | number | string
     txHash?: StringFilter<"TokenTransaction"> | string
+    type?: EnumTokenTransactionTypeFilter<"TokenTransaction"> | $Enums.TokenTransactionType
     createdAt?: DateTimeFilter<"TokenTransaction"> | Date | string
     token?: XOR<TokenScalarRelationFilter, TokenWhereInput>
     Engagement?: EngagementListRelationFilter
@@ -10083,6 +10132,7 @@ export namespace Prisma {
     toAddress?: SortOrder
     amount?: SortOrder
     txHash?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     _count?: TokenTransactionCountOrderByAggregateInput
     _avg?: TokenTransactionAvgOrderByAggregateInput
@@ -10101,6 +10151,7 @@ export namespace Prisma {
     toAddress?: StringWithAggregatesFilter<"TokenTransaction"> | string
     amount?: DecimalWithAggregatesFilter<"TokenTransaction"> | Decimal | DecimalJsLike | number | string
     txHash?: StringWithAggregatesFilter<"TokenTransaction"> | string
+    type?: EnumTokenTransactionTypeWithAggregatesFilter<"TokenTransaction"> | $Enums.TokenTransactionType
     createdAt?: DateTimeWithAggregatesFilter<"TokenTransaction"> | Date | string
   }
 
@@ -10537,6 +10588,7 @@ export namespace Prisma {
     toAddress: string
     amount: Decimal | DecimalJsLike | number | string
     txHash: string
+    type?: $Enums.TokenTransactionType
     createdAt?: Date | string
     token: TokenCreateNestedOneWithoutTransactionsInput
     Engagement?: EngagementCreateNestedManyWithoutTransactionInput
@@ -10549,6 +10601,7 @@ export namespace Prisma {
     toAddress: string
     amount: Decimal | DecimalJsLike | number | string
     txHash: string
+    type?: $Enums.TokenTransactionType
     createdAt?: Date | string
     Engagement?: EngagementUncheckedCreateNestedManyWithoutTransactionInput
   }
@@ -10559,6 +10612,7 @@ export namespace Prisma {
     toAddress?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     txHash?: StringFieldUpdateOperationsInput | string
+    type?: EnumTokenTransactionTypeFieldUpdateOperationsInput | $Enums.TokenTransactionType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     token?: TokenUpdateOneRequiredWithoutTransactionsNestedInput
     Engagement?: EngagementUpdateManyWithoutTransactionNestedInput
@@ -10571,6 +10625,7 @@ export namespace Prisma {
     toAddress?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     txHash?: StringFieldUpdateOperationsInput | string
+    type?: EnumTokenTransactionTypeFieldUpdateOperationsInput | $Enums.TokenTransactionType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Engagement?: EngagementUncheckedUpdateManyWithoutTransactionNestedInput
   }
@@ -10582,6 +10637,7 @@ export namespace Prisma {
     toAddress: string
     amount: Decimal | DecimalJsLike | number | string
     txHash: string
+    type?: $Enums.TokenTransactionType
     createdAt?: Date | string
   }
 
@@ -10591,6 +10647,7 @@ export namespace Prisma {
     toAddress?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     txHash?: StringFieldUpdateOperationsInput | string
+    type?: EnumTokenTransactionTypeFieldUpdateOperationsInput | $Enums.TokenTransactionType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10601,6 +10658,7 @@ export namespace Prisma {
     toAddress?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     txHash?: StringFieldUpdateOperationsInput | string
+    type?: EnumTokenTransactionTypeFieldUpdateOperationsInput | $Enums.TokenTransactionType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -11054,6 +11112,13 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
+  export type EnumTokenTransactionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TokenTransactionType | EnumTokenTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TokenTransactionType[] | ListEnumTokenTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TokenTransactionType[] | ListEnumTokenTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTokenTransactionTypeFilter<$PrismaModel> | $Enums.TokenTransactionType
+  }
+
   export type TokenTransactionCountOrderByAggregateInput = {
     id?: SortOrder
     tokenAddress?: SortOrder
@@ -11061,6 +11126,7 @@ export namespace Prisma {
     toAddress?: SortOrder
     amount?: SortOrder
     txHash?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -11075,6 +11141,7 @@ export namespace Prisma {
     toAddress?: SortOrder
     amount?: SortOrder
     txHash?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -11085,6 +11152,7 @@ export namespace Prisma {
     toAddress?: SortOrder
     amount?: SortOrder
     txHash?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -11106,6 +11174,16 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type EnumTokenTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TokenTransactionType | EnumTokenTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TokenTransactionType[] | ListEnumTokenTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TokenTransactionType[] | ListEnumTokenTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTokenTransactionTypeWithAggregatesFilter<$PrismaModel> | $Enums.TokenTransactionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTokenTransactionTypeFilter<$PrismaModel>
+    _max?: NestedEnumTokenTransactionTypeFilter<$PrismaModel>
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -11578,6 +11656,10 @@ export namespace Prisma {
     divide?: Decimal | DecimalJsLike | number | string
   }
 
+  export type EnumTokenTransactionTypeFieldUpdateOperationsInput = {
+    set?: $Enums.TokenTransactionType
+  }
+
   export type TokenUpdateOneRequiredWithoutTransactionsNestedInput = {
     create?: XOR<TokenCreateWithoutTransactionsInput, TokenUncheckedCreateWithoutTransactionsInput>
     connectOrCreate?: TokenCreateOrConnectWithoutTransactionsInput
@@ -11810,6 +11892,13 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
+  export type NestedEnumTokenTransactionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TokenTransactionType | EnumTokenTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TokenTransactionType[] | ListEnumTokenTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TokenTransactionType[] | ListEnumTokenTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTokenTransactionTypeFilter<$PrismaModel> | $Enums.TokenTransactionType
+  }
+
   export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
@@ -11824,6 +11913,16 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTokenTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TokenTransactionType | EnumTokenTransactionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TokenTransactionType[] | ListEnumTokenTransactionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TokenTransactionType[] | ListEnumTokenTransactionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTokenTransactionTypeWithAggregatesFilter<$PrismaModel> | $Enums.TokenTransactionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTokenTransactionTypeFilter<$PrismaModel>
+    _max?: NestedEnumTokenTransactionTypeFilter<$PrismaModel>
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -12290,6 +12389,7 @@ export namespace Prisma {
     toAddress: string
     amount: Decimal | DecimalJsLike | number | string
     txHash: string
+    type?: $Enums.TokenTransactionType
     createdAt?: Date | string
     Engagement?: EngagementCreateNestedManyWithoutTransactionInput
   }
@@ -12300,6 +12400,7 @@ export namespace Prisma {
     toAddress: string
     amount: Decimal | DecimalJsLike | number | string
     txHash: string
+    type?: $Enums.TokenTransactionType
     createdAt?: Date | string
     Engagement?: EngagementUncheckedCreateNestedManyWithoutTransactionInput
   }
@@ -12405,6 +12506,7 @@ export namespace Prisma {
     toAddress?: StringFilter<"TokenTransaction"> | string
     amount?: DecimalFilter<"TokenTransaction"> | Decimal | DecimalJsLike | number | string
     txHash?: StringFilter<"TokenTransaction"> | string
+    type?: EnumTokenTransactionTypeFilter<"TokenTransaction"> | $Enums.TokenTransactionType
     createdAt?: DateTimeFilter<"TokenTransaction"> | Date | string
   }
 
@@ -12490,6 +12592,7 @@ export namespace Prisma {
     toAddress: string
     amount: Decimal | DecimalJsLike | number | string
     txHash: string
+    type?: $Enums.TokenTransactionType
     createdAt?: Date | string
     token: TokenCreateNestedOneWithoutTransactionsInput
   }
@@ -12501,6 +12604,7 @@ export namespace Prisma {
     toAddress: string
     amount: Decimal | DecimalJsLike | number | string
     txHash: string
+    type?: $Enums.TokenTransactionType
     createdAt?: Date | string
   }
 
@@ -12598,6 +12702,7 @@ export namespace Prisma {
     toAddress?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     txHash?: StringFieldUpdateOperationsInput | string
+    type?: EnumTokenTransactionTypeFieldUpdateOperationsInput | $Enums.TokenTransactionType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     token?: TokenUpdateOneRequiredWithoutTransactionsNestedInput
   }
@@ -12609,6 +12714,7 @@ export namespace Prisma {
     toAddress?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     txHash?: StringFieldUpdateOperationsInput | string
+    type?: EnumTokenTransactionTypeFieldUpdateOperationsInput | $Enums.TokenTransactionType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12862,6 +12968,7 @@ export namespace Prisma {
     toAddress: string
     amount: Decimal | DecimalJsLike | number | string
     txHash: string
+    type?: $Enums.TokenTransactionType
     createdAt?: Date | string
   }
 
@@ -12880,6 +12987,7 @@ export namespace Prisma {
     toAddress?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     txHash?: StringFieldUpdateOperationsInput | string
+    type?: EnumTokenTransactionTypeFieldUpdateOperationsInput | $Enums.TokenTransactionType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Engagement?: EngagementUpdateManyWithoutTransactionNestedInput
   }
@@ -12890,6 +12998,7 @@ export namespace Prisma {
     toAddress?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     txHash?: StringFieldUpdateOperationsInput | string
+    type?: EnumTokenTransactionTypeFieldUpdateOperationsInput | $Enums.TokenTransactionType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Engagement?: EngagementUncheckedUpdateManyWithoutTransactionNestedInput
   }
@@ -12900,6 +13009,7 @@ export namespace Prisma {
     toAddress?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     txHash?: StringFieldUpdateOperationsInput | string
+    type?: EnumTokenTransactionTypeFieldUpdateOperationsInput | $Enums.TokenTransactionType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

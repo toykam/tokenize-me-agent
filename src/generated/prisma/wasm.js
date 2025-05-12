@@ -176,6 +176,7 @@ exports.Prisma.TokenTransactionScalarFieldEnum = {
   toAddress: 'toAddress',
   amount: 'amount',
   txHash: 'txHash',
+  type: 'type',
   createdAt: 'createdAt'
 };
 
@@ -202,7 +203,11 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.TokenTransactionType = exports.$Enums.TokenTransactionType = {
+  buy: 'buy',
+  sell: 'sell',
+  transfer: 'transfer'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',

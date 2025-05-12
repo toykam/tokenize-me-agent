@@ -91,6 +91,7 @@ model TokenTransaction {
   toAddress    String
   amount       Decimal
   txHash       String
+  type        TokenTransactionType @default(buy)
   createdAt    DateTime @default(now())
 
   token        Token    @relation(fields: [tokenAddress], references: [address])
@@ -108,4 +109,11 @@ model BuyAmount {
 
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())
+}
+
+
+enum TokenTransactionType {
+  buy
+  sell
+  transfer
 }

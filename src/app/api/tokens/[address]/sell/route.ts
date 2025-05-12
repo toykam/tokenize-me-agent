@@ -109,6 +109,17 @@ export const POST = async (request: Request) => {
         }
         console.log("Swap successful");
 
+        await prisma.tokenTransaction.create({
+            data: {
+                amount: amount,
+                fromAddress: userWallet.address,
+                toAddress: tokenAddress,
+                txHash: sellHash,
+                tokenAddress: tokenAddress,
+                type: "sell"
+            }
+        })
+
         return NextResponse.json({message: 'Sell successful'}, {status: 200})
     } catch (error) {
         console.log("CatchError ::: ", error);
