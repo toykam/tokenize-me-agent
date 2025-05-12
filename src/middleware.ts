@@ -3,7 +3,6 @@ import CryptoJS from 'crypto-js';
 import { NEYNAR_ENGAGEMENT_WEBHOOK_SECRET, NEYNAR_MENTION_WEBHOOK_SECRET } from './lib/utils';
 
 export const middleware = async (request: NextRequest) => {
-    console.log("PATH ::: ", request.nextUrl.pathname);
   if (request.nextUrl.pathname.startsWith('/api/warpcast')) {
     console.log('this was called here...');
 

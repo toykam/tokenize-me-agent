@@ -5,7 +5,6 @@ import { Token } from '@/lib/types';
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { toast } from "sonner"
 
-
 interface TokensContextType {
   tokens: Token[];
   token: Token | null;
@@ -13,7 +12,7 @@ interface TokensContextType {
   isLoadingTokenDetail: boolean;
   error: Error | null;
   tokenBalance: string;
-  refreshTokens: () => Promise<void>;
+  refreshTokens: (params?: { search?: string; sortBy?: string }) => Promise<void>;
   setTokenId: (tokenId: string) => void;
 }
 
@@ -40,23 +39,29 @@ export function TokensProvider({ children }: TokensProviderProps) {
   const [tokenId, setTokenId] = useState<string | null>(null);
   const [tokenBalance, setTokenBalance] = useState<string>("0");
 
-
   const {
     isAuthenticated,
     user
   } = useAuth()
 
-  const refreshTokens = async () => {
+  const refreshTokens = async (params?: { search?: string; sortBy?: string }) => {
     try {
-        setIsLoading(true);
-        setError(null);
-        
-        const response = await fetch('/api/tokens');
-        if (!response.ok) {
-          throw new Error('Failed to fetch tokens');
-        }
-        const data = await response.json();
-        setTokens(data);
+      setIsLoading(true);
+      setError(null);
+      
+      const searchParams = new URLSearchParams();
+      if (params?.search) searchParams.set('name', params.search);
+      if (params?.sortBy) searchParams.set('sortBy', params.sortBy);
+      
+      const queryString = searchParams.toString();
+      const url = `/api/tokens${queryString ? `?${queryString}` : ''}`;
+      
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Failed to fetch tokens');
+      }
+      const data = await response.json();
+      setTokens(data);
     } catch (err) {
       setError(err instanceof Error ? err : new Error('Unknown error occurred'));
     } finally {

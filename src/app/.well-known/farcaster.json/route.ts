@@ -25,8 +25,9 @@ export async function GET() {
       "tags": [
           "rewards",
           "leaderboard",
-          "warpcast",
-          "earn"
+          "tokenization",
+          "earn",
+          "social"
       ],
       "heroImageUrl": process.env.NEXT_PUBLIC_SPLASH_IMAGE_URL,
       "tagline": "Tokenize your profile",
