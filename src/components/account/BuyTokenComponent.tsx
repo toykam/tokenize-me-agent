@@ -16,38 +16,39 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { toast } from 'sonner';
 import { useAuth } from '@/hooks/useAuth';
-import { useTokens } from '@/providers/TokensProvider';
+import { useProfileProvider } from '@/providers/ProfileProvider';
 import { LoaderCircleIcon } from 'lucide-react';
 
-interface SellTokenComponentProp {
+interface BuyTokenComponentProp {
     token: Token;
     balance: number
 }
 
-export default function SellTokenComponent({
+export default function BuyTokenComponent({
     token, 
     balance
-}: SellTokenComponentProp) {
+}: BuyTokenComponentProp) {
     
     const [amountToSell, setAmountToSell] = useState<number>();
     const [isSwapping, setIsSwapping] = useState<boolean>(false);
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpened, setIsOpened] = useState<boolean>(false);
     const { user } = useAuth();
+    const { refreshUser } = useProfileProvider();
 
     useEffect(() => {
         console.log("Balance ::: ", balance)
         setAmountToSell(balance)
     }, [])
 
-    const sellToken = async () => {
+    const buyToken = async () => {
         try {
             if (!amountToSell) {
                 toast.error('Please provide a valid amount to sell')
                 return;
             }
             setIsSwapping(true);
-            toast.info(`Swapping ${amountToSell} ${token.symbol}`)
-            const response = await fetch(`/api/tokens/${token.address}/sell`, {
+            toast.info(`Swapping ${amountToSell} ETH to ${token.symbol}`)
+            const response = await fetch(`/api/tokens/${token.address}/buy`, {
                 method: 'POST',
                 body: JSON.stringify({
                     'tokenAddress': token.address,
@@ -62,10 +63,10 @@ export default function SellTokenComponent({
             }
 
             const data = await response.json();
+            await refreshUser();
+            setIsOpened(false);
 
             toast.success(`Swap successful...`);
-
-            setIsOpen(false); // Close the dialog on success
 
         } catch (error) {
             console.log("CatchError ::: ", error)
@@ -76,27 +77,27 @@ export default function SellTokenComponent({
     }
     
     return (
-        <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+        <AlertDialog open={isOpened} onOpenChange={setIsOpened}>
         <AlertDialogTrigger asChild>
-            <Button variant="destructive">Sell</Button>
+            <Button variant="default">Buy</Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
             <AlertDialogHeader>
                 <AlertDialogTitle>Sell {token.symbol}</AlertDialogTitle>
                 <AlertDialogDescription>
-                    Enter the quantity of token you want to sell.
+                    Enter the amount of token you want to buy (in ETH).
                 </AlertDialogDescription>
             </AlertDialogHeader>
 
 
             <div className='space-y-2'>
                 <Label>Amount</Label>
-                <Input disabled={isSwapping} type='number' onChange={(e) => setAmountToSell(Number(e.target.value))} value={amountToSell} max={balance}/>
+                <Input type='number' onChange={(e) => setAmountToSell(Number(e.target.value))} value={amountToSell} max={balance}/>
             </div>
 
             <AlertDialogFooter>
                 <AlertDialogCancel disabled={isSwapping}>{isSwapping ? 'Cancel' : 'Close'}</AlertDialogCancel>
-                <Button disabled={isSwapping} variant={"destructive"} onClick={sellToken}>
+                <Button disabled={isSwapping} variant={"destructive"} onClick={buyToken}>
                     {isSwapping ? <LoaderCircleIcon /> : "Sell"}
                 </Button>
             </AlertDialogFooter>

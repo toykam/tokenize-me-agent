@@ -27,17 +27,14 @@ export const POST = async (request: Request) => {
         const userWallet = user.wallet!;
 
         // confirm balance is enough
-        const rawBalance = await viemClient.readContract({
-            address: tokenAddress as `0x${string}`,
-            abi: erc20Abi,
-            functionName: "balanceOf",
-            args: [userWallet.address as `0x${string}`]
+        const rawBalance = await viemClient.getBalance({
+            address: userWallet.address as `0x${string}`
         });
 
         const tokenBalance = Number(formatEther(rawBalance));
 
         if (amount > tokenBalance) {
-            return NextResponse.json({message: "Insufficient token balance"}, {status: 400})
+            return NextResponse.json({message: "Insufficient ETH balance"}, {status: 400})
         }
 
         // lets approve the dex contract to able to spend the token.
@@ -63,38 +60,17 @@ export const POST = async (request: Request) => {
 
         const amountInEther = parseEther(`${amount}`)
 
-        console.log("AmountInEther ::: ", amountInEther)
-
-        const approvalHash = await userWallerClient.writeContract({
-            abi: erc20Abi,
-            address: token.address as `0x${string}`,
-            functionName: "approve",
-            args: [
-                DEX_CONTRACT as `0x${string}`,
-                amountInEther
-            ]
-        });
-
-        const {status} = await viemClient.waitForTransactionReceipt({
-            hash: approvalHash
-        })
-
-        if (status == "reverted") {
-            console.log("Approval Reverted ");
-            return NextResponse.json({message: "Something went wrong."}, {status: 400})
-        }
-
-        console.log('Token approved')
+        
         const sellHash = await userWallerClient.writeContract({
             abi: dexAbi.abi,
-            functionName: "swapTokensForETH",
+            functionName: "swapETHForTokens",
             address: DEX_CONTRACT as `0x${string}`,
             args: [
                 token.address as `0x${string}`,
                 amountInEther,
-                BigInt(0),
                 Number(`${token.feeTier}`)
-            ]
+            ],
+            value: amountInEther
         });
 
         console.log(sellHash);

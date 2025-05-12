@@ -1,10 +1,13 @@
 "use client"
 
 import AccountHeader from '@/components/account/AccountHeader'
+import BuyTokenComponent from '@/components/account/BuyTokenComponent'
+import SellTokenComponent from '@/components/account/SellTokenComponent'
 // import SellTokenComponent from '@/components/account/SellTokenComponent'
 import FrameReadyWrapper from '@/components/FrameReadyWrapper'
 // import { Button } from '@/components/ui/button'
 import { formatCurrency, toMoneyFormat } from '@/lib/utils'
+import { useProfileProvider } from '@/providers/ProfileProvider'
 import { useTokens } from '@/providers/TokensProvider'
 import { LucideLoader2 } from 'lucide-react'
 import Link from 'next/link'
@@ -19,6 +22,10 @@ export default function TokenDetailPage() {
     setTokenId,
     tokenBalance
   } = useTokens()
+
+  const {
+    balance
+  } = useProfileProvider();
 
   const { address } = useParams();
 
@@ -166,7 +173,8 @@ export default function TokenDetailPage() {
             <div className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px] mb-[clamp(0.75rem,1.5vw,1.25rem)]">
               <h3 className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold mb-[0.5rem]">Trade</h3>
               <div className="space-y-[clamp(0.5rem,1vw,0.625rem)] flex gap-2">
-                {/* <SellTokenComponent token={token!} balance={Number(tokenBalance)} /> */}
+                <SellTokenComponent token={token!} balance={Number(tokenBalance)} />
+                <BuyTokenComponent token={token!} balance={Number(balance)} />
                 {/* <div className="text-[clamp(0.875rem,1.5vw,1.1rem)]">Symbol: {token?.symbol}</div>
                 <div className="text-[clamp(0.875rem,1.5vw,1.1rem)]">Name: {token?.name}</div> */}
               </div>
