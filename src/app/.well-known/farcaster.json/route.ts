@@ -33,7 +33,8 @@ export async function GET() {
       "tagline": "Tokenize your profile",
       "ogTitle": process.env.NEXT_PUBLIC_ONCHAINKIT_PROJECT_NAME,
       "ogDescription": "Tokenize your social account and earn from trading fees.",
-      "ogImageUrl": process.env.NEXT_PUBLIC_SPLASH_IMAGE_URL
+      "ogImageUrl": process.env.NEXT_PUBLIC_SPLASH_IMAGE_URL,
+      "webhookUrl": process.env.WEBHOOK_URL
     },
   };
 
