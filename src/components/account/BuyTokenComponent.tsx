@@ -7,8 +7,7 @@ import {
     AlertDialogTitle, 
     AlertDialogDescription,
     AlertDialogFooter,
-    AlertDialogCancel,
-    AlertDialogAction
+    AlertDialogCancel
 } from '../ui/alert-dialog';
 import { Button } from '../ui/button';
 import { Token } from '@/lib/types';
@@ -61,9 +60,9 @@ export default function BuyTokenComponent({
                 toast.error(`Swap failed...`);
                 return;
             }
-
-            const data = await response.json();
+            
             await refreshUser();
+            await response.json();
             setIsOpened(false);
 
             toast.success(`Swap successful...`);

@@ -1,13 +1,14 @@
 "use client";
 
 import React from 'react'
-import { cn, formatCurrency } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import { useAuth } from '@/hooks/useAuth'
 import { NeynarAuthButton } from '@neynar/react';
 import { useProfileProvider } from '@/providers/ProfileProvider';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import { RefreshCwIcon } from 'lucide-react';
+import TransferTokenComponent from './TransferTokenComponent';
 
 
 
@@ -44,8 +45,18 @@ export default function AccountHero() {
             </div>
     
             <div className='flex w-full flex-col justify-items-stretch items-stretch mt-[18px] gap-[16px]'>
-                {/* <Button>Deposit</Button>
-                <Button variant={"outline"}>Withdraw</Button> */}
+                {/* <Button>Deposit</Button> */}
+                {/* <Button variant={"outline"}>Withdraw</Button> */}
+
+                <TransferTokenComponent 
+                    token={{
+                        name: "ETH",
+                        symbol: "ETH",
+                        address: "ETH"
+                    }}
+                    type='eth'
+                    balance={Number(balance)}
+                />
                 {!isLoading && <>
                     {account['token'] == null && <Link target='_blank' className='w-screen' href={`https://warpcast.com/~/compose?text=${encodeURIComponent(tokenizeMeCast)}`}>
                         <Button variant={"outline"}>Tokenize My Profile</Button>

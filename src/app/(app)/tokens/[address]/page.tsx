@@ -3,6 +3,7 @@
 import AccountHeader from '@/components/account/AccountHeader'
 import BuyTokenComponent from '@/components/account/BuyTokenComponent'
 import SellTokenComponent from '@/components/account/SellTokenComponent'
+import TransferTokenComponent from '@/components/account/TransferTokenComponent'
 // import SellTokenComponent from '@/components/account/SellTokenComponent'
 import FrameReadyWrapper from '@/components/FrameReadyWrapper'
 // import { Button } from '@/components/ui/button'
@@ -175,6 +176,7 @@ export default function TokenDetailPage() {
               <div className="space-y-[clamp(0.5rem,1vw,0.625rem)] flex gap-2">
                 <SellTokenComponent token={token!} balance={Number(tokenBalance)} />
                 <BuyTokenComponent token={token!} balance={Number(balance)} />
+                <TransferTokenComponent type='token' token={token!} balance={Number(tokenBalance)} />
                 {/* <div className="text-[clamp(0.875rem,1.5vw,1.1rem)]">Symbol: {token?.symbol}</div>
                 <div className="text-[clamp(0.875rem,1.5vw,1.1rem)]">Name: {token?.name}</div> */}
               </div>

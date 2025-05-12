@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { DEX_CONTRACT } from "@/lib/utils";
 import { signerWalletClient, viemClient } from "@/lib/viem";
 import { NextResponse } from "next/server"
-import { erc20Abi, formatEther, parseEther } from "viem";
+import { formatEther, parseEther } from "viem";
 import dexAbi from "@/../blockchain/artifacts/contracts/TokenizedProfileDex.sol/TokenizedProfileDex.json";
 
 export const POST = async (request: Request) => {
