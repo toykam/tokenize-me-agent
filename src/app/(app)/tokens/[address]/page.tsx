@@ -66,7 +66,7 @@ export default function TokenDetailPage() {
                 {token?.symbol}
               </h2>
 
-              <div className='flex gap-x-2 flex-row items-center flex-growc'>
+              {/* <div className='flex gap-x-2 flex-row items-center flex-growc'>
                 <div className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px] mb-[clamp(0.75rem,1.5vw,1.25rem)]">
                   <h3 className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold mb-[0.5rem]">Market Cap</h3>
                   <div className="space-y-[clamp(0.5rem,1vw,0.625rem)]">
@@ -86,7 +86,7 @@ export default function TokenDetailPage() {
                 </div>
 
 
-              </div>
+              </div> */}
             </div>
 
             {/* Social Accounts Section */}
