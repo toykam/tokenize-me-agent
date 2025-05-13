@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { TokenPriceChart } from "./TokenChart";
 import { getTokenPriceHistory } from "@/lib/chainbase";
 
-export function TokenMarketInfo({tokenAddress, createdAt}: {tokenAddress: string, createdAt: Date}) {
+export function TokenMarketInfo({tokenAddress, createdAt, tokenSymbol}: {tokenAddress: string, createdAt: Date, tokenSymbol: string}) {
   const [marketInfo, setMarketInfo] = useState<{ price: number; marketCap: string; }>({
     marketCap: "0", price: 0
   });
@@ -76,7 +76,7 @@ export function TokenMarketInfo({tokenAddress, createdAt}: {tokenAddress: string
         {!loadingMarketInfo && priceHistory.length > 0 ? (
           <TokenPriceChart 
             data={priceHistory} 
-            tokenSymbol={"dd"} 
+            tokenSymbol={tokenSymbol} 
           />
         ) : (
           <div className="h-[400px] flex items-center justify-center text-gray-400">

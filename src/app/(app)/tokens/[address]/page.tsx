@@ -73,7 +73,7 @@ export default function TokenDetailPage() {
 
 
             {/* Market Information Section */}
-            <TokenMarketInfo tokenAddress={token!.address!} createdAt={token!.createdAt!}/>
+            <TokenMarketInfo tokenAddress={token!.address!} createdAt={token!.createdAt!} tokenSymbol={token!.symbol!}/>
 
 
             {/* Token Details Section */}
