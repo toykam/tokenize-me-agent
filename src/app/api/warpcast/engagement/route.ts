@@ -66,6 +66,10 @@ export async function POST(
   
             console.log(authorUser?.token);
 
+            const nonce = await viemClient.getTransactionCount({
+              address: engagingUserWalletClient.account.address
+            });
+
             const { request } = await viemClient.simulateContract({
               address: DEX_CONTRACT as `0x${string}`,
               abi: dexAbi.abi,
@@ -76,11 +80,15 @@ export async function POST(
                 Number(authorTokenFeeTier)
               ],
               value: parseEther(`${likeAmount}`),
-              account: engagingUserWalletClient.account
+              account: engagingUserWalletClient.account,
+              nonce: nonce
             })
   
             // Execute the swap
-            const txHash = await engagingUserWalletClient.writeContract(request);
+            const txHash = await engagingUserWalletClient.writeContract({
+              ...request,
+              nonce: nonce
+            });
             console.log('Swap transaction hash:', txHash);
   
             // Wait for the transaction to be mined (optional, depending on your needs)
