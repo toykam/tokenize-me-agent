@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./interface.sol";
 
 // SocialToken represents a tokenized social media profile with Uniswap V3 LP fee distribution on Base
-contract SocialToken is ERC20, Ownable {
+contract SocialToken is ERC20 {
 
     // Struct to store social profile metadata
     struct SocialProfile {
@@ -27,7 +27,7 @@ contract SocialToken is ERC20, Ownable {
         string memory _handle,
         string memory _platform,
         string memory _profileUrl
-    ) ERC20(name, symbol) Ownable(msg.sender) {
+    ) ERC20(name, symbol) {
         uint256 initialSupply = 1_000_000_000 * 10 ** decimals(); // 1 billion tokens
         _mint(msg.sender, initialSupply);
         emit Debug("Minted initial supply", initialSupply);

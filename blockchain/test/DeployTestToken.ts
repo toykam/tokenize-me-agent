@@ -20,10 +20,8 @@ describe("Deploy Social Token", function () {
     const network = await baseProvider.getNetwork();
     expect(network.chainId).to.equal(8453n); // Base chainId
 
-  
-    // smartContractAddress = "0x0D4594a03eaB506758D55B5c57a794883bf3219e"; // Working TokenFactory contract address
-    smartContractAddress = "0xAd5210f248cae92D46D7ef81F63CEe607dd4E84C"; // Working TokenFactory contract address
-    // smartContractAddress = "0x8f7F216Db426a875DAC14C9f8cdEAc844e21367E"; // Working TokenFactory contract address
+    smartContractAddress = "0x9aFA7B52E6664F8199ea685406D2a2A6eE10e989"; // Working TokenFactory contract address
+    // smartContractAddress = "0xAd5210f248cae92D46D7ef81F63CEe607dd4E84C"; // Working TokenFactory contract address
 
     
     // Connect to the deployed TokenFactory contract
@@ -205,13 +203,10 @@ describe("Deploy Social Token", function () {
       // Verify token details
       const name = await socialToken.name();
       const symbol = await socialToken.symbol();
-      const tokenOwner = await socialToken.owner();
-      // const tokenId = await socialToken.positionTokenId();
 
       console.log("Token details:");
       console.log("- Name:", name);
       console.log("- Symbol:", symbol);
-      console.log("- Owner:", tokenOwner);
       // console.log("- Position Token ID:", tokenId.toString());
 
       // Wait before verification
