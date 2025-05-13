@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import Providers from '@/providers/providers';
 import { Toaster } from '@/components/ui/sonner';

@@ -5,40 +5,41 @@ export async function GET(request: Request) {
     try {
         const { searchParams } = new URL(request.url);
         const searchName = searchParams.get('name');
+        const section = searchParams.get('section')?.toLowerCase();
         const sortBy = searchParams.get('sortBy')?.toLowerCase();
 
+        let where: any = {};
         let orderBy: any[] = [];
-        
-        // Add sorting based on parameter
-        if (sortBy === 'engagement') {
-            orderBy.push({ Engagement: { _count: 'desc' } });
-        } else if (sortBy === 'transactions') {
-            orderBy.push({ transactions: { _count: 'desc' } });
-        } else {
-            // Default sorting by both
+
+        // Add search conditions
+        if (searchName) {
+            where.OR = [
+                { name: { contains: searchName, mode: 'insensitive' } },
+                { symbol: { contains: searchName, mode: 'insensitive' } }
+            ];
+        }
+
+        // Add section conditions
+        if (section === 'new') {
+            const twentyFourHoursAgo = new Date();
+            twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
+            where.createdAt = { gte: twentyFourHoursAgo };
+        }
+
+        // Add sorting based on section and parameter
+        if (section === 'trending' || sortBy === 'engagement') {
             orderBy = [
                 { Engagement: { _count: 'desc' } },
                 { transactions: { _count: 'desc' } }
             ];
+        } else if (section === 'new') {
+            orderBy = [{ createdAt: 'desc' }];
+        } else if (sortBy === 'transactions') {
+            orderBy = [{ transactions: { _count: 'desc' } }];
         }
 
         const tokens = await prisma.token.findMany({
-            where: searchName ? {
-                OR: [
-                    {
-                        name: {
-                            contains: searchName,
-                            mode: 'insensitive'
-                        }
-                    },
-                    {
-                        symbol: {
-                            contains: searchName,
-                            mode: 'insensitive'
-                        }
-                    }
-                ]
-            } : undefined,
+            where,
             select: {
                 user: true,
                 address: true,

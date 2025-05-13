@@ -12,7 +12,7 @@ interface TokensContextType {
   isLoadingTokenDetail: boolean;
   error: Error | null;
   tokenBalance: string;
-  refreshTokens: (params?: { search?: string; sortBy?: string }) => Promise<void>;
+  refreshTokens: (params?: { search?: string; sortBy?: string, section?: string }) => Promise<void>;
   setTokenId: (tokenId: string) => void;
 }
 
@@ -44,7 +44,7 @@ export function TokensProvider({ children }: TokensProviderProps) {
     user
   } = useAuth()
 
-  const refreshTokens = async (params?: { search?: string; sortBy?: string }) => {
+  const refreshTokens = async (params?: { search?: string; sortBy?: string, section?: string }) => {
     try {
       setIsLoading(true);
       setError(null);
@@ -52,6 +52,7 @@ export function TokensProvider({ children }: TokensProviderProps) {
       const searchParams = new URLSearchParams();
       if (params?.search) searchParams.set('name', params.search);
       if (params?.sortBy) searchParams.set('sortBy', params.sortBy);
+      if (params?.section) searchParams.set('section', params.section);
       
       const queryString = searchParams.toString();
       const url = `/api/tokens${queryString ? `?${queryString}` : ''}`;
