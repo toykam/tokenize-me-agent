@@ -4,7 +4,7 @@ export async function getTokenPriceHistory(tokenAddress: string, createdAt: Date
   
   try {
     const response = await fetch(
-      `https://api.chainbase.online/v1/token/price/history?chain_id=8453&contract_address=${tokenAddress}&from_timestamp=${tokenCreationTime}&end_timestamp=${now}`,
+      `/api/tokens/${tokenAddress}/price-history?address=${tokenAddress}&from=${tokenCreationTime}&to=${now}`,
       {
         headers: {
           'x-api-key': process.env.CHAINBASE_API_KEY!,
