@@ -231,17 +231,18 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMmVmYzcxOGMtNjQ3Ni00YmM5LWEwN2YtY2I1MWZmMjY1ZjRlIiwidGVuYW50X2lkIjoiY2E5NjcwMDkyZDYzMzE0YmJjNzAwZWUwNDE1ZGEwMzI4NDMxZmJlYThmODVjMjBlMTk1ZGY0ODZjYjBkNmUzMCIsImludGVybmFsX3NlY3JldCI6ImZhZDA5Yjk2LWY5MDMtNGE0NC04Y2JkLWFmMGRjMDgzMThiYiJ9.enszj8JfjONlPz2hbIDA0ZrTmm8Q7htfz3yCgAsAdIs"
+        "value": null
       }
     }
   },
   "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id             String          @id @default(uuid())\n  fid            Int             @unique\n  username       String\n  displayName    String?\n  pfp            String?\n  createdAt      DateTime        @default(now())\n  wallet         UserWallet?\n  linkedAccounts LinkedAccount[] @relation(\"LinkedAccounts\")\n  engagements    Engagement[]\n  buyAmount      BuyAmount?\n\n  token Token?\n}\n\nmodel UserWallet {\n  id           String   @id @default(uuid())\n  userId       String   @unique\n  address      String   @unique\n  encryptedKey String\n  iv           String\n  authTag      String\n  createdAt    DateTime @default(now())\n\n  user User @relation(fields: [userId], references: [id])\n}\n\nmodel LinkedAccount {\n  id        String @id @default(uuid())\n  userId    String\n  platform  String // e.g. \"twitter\", \"lens\", \"threads\"\n  username  String\n  accountId String // platform-specific user id\n  url       String @default(\"https://warpcast.com/\")\n\n  user User @relation(\"LinkedAccounts\", fields: [userId], references: [id])\n}\n\nmodel Token {\n  address     String   @id\n  name        String\n  symbol      String\n  decimals    Int\n  totalSupply BigInt\n  feeTier     BigInt   @default(3000)\n  createdAt   DateTime @default(now())\n\n  userId String @unique\n  user   User   @relation(fields: [userId], references: [id])\n\n  upgraded Boolean @default(false)\n\n  transactions TokenTransaction[]\n\n  Engagement Engagement[]\n}\n\nmodel Engagement {\n  id           String   @id @default(uuid())\n  userId       String\n  tokenAddress String\n  type         String // 'like', 'reply', 'recast', etc.\n  postId       String\n  triggeredAt  DateTime @default(now())\n\n  user          User              @relation(fields: [userId], references: [id])\n  token         Token             @relation(fields: [tokenAddress], references: [address])\n  transaction   TokenTransaction? @relation(fields: [transactionid], references: [id])\n  transactionid String?\n}\n\nmodel TokenTransaction {\n  id           String               @id @default(uuid())\n  tokenAddress String\n  fromAddress  String\n  toAddress    String\n  amount       Decimal\n  txHash       String\n  type         TokenTransactionType @default(buy)\n  createdAt    DateTime             @default(now())\n\n  token Token @relation(fields: [tokenAddress], references: [address])\n\n  Engagement Engagement[]\n}\n\nmodel BuyAmount {\n  id     String @id @default(uuid())\n  userId String @unique\n  user   User   @relation(fields: [userId], references: [id])\n\n  likeAmount    Float @default(0)\n  retweetAmount Float @default(0)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @default(now())\n}\n\nenum TokenTransactionType {\n  buy\n  sell\n  transfer\n}\n",
   "inlineSchemaHash": "c2188b5cd38c2c1bfd31e48158e88259a6461ce961a7d569aebcf7ef2c6fa3d4",
-  "copyEngine": false
+  "copyEngine": true
 }
 
 const fs = require('fs')
@@ -278,3 +279,9 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node");
+path.join(process.cwd(), "src/generated/prisma/libquery_engine-darwin-arm64.dylib.node")
+// file annotations for bundling tools to include these files
+path.join(__dirname, "schema.prisma");
+path.join(process.cwd(), "src/generated/prisma/schema.prisma")

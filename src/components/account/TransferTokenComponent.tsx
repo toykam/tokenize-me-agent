@@ -36,7 +36,7 @@ export default function TransferTokenComponent({
     const { user } = useAuth();
 
     useEffect(() => {
-        console.log("Balance ::: ", balance)
+        // console.log("Balance ::: ", balance)
         setAmountToTransfer(balance)
     }, [])
 

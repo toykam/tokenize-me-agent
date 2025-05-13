@@ -98,3 +98,21 @@
 
 
 // main().catch(error => console.log(`Error ::: `, error))
+
+
+// const main = async () => {
+//     const network_id = '1'; // See https://docs.chainbase.com/reference/supported-chains to get the id of different chains.
+//     const token_addr = '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984'; // Take Uniswap as an example.
+//     const start_time = '1675209600'; // 2023-02-01 00:00:00 GMT in the format of epoch time.
+//     const end_time = '1677628800'; // 2023-03-01 00:00:00 GMT in the format of epoch time.
+
+//     fetch(`https://api.chainbase.online/v1/token/price/history?chain_id=${network_id}&contract_address=${token_addr}&from_timestamp=${start_time}&end_timestamp=${end_time}`, {
+//         method: 'GET',
+//         headers: {
+//             'x-api-key': CHAINBASE_API_KEY, // Replace the field with your API key.
+//             'accept': 'application/json'
+//         }
+//     }).then(response => response.json())
+//         .then(data => console.log(data.data))
+//         .catch(error => console.error(error));
+// }

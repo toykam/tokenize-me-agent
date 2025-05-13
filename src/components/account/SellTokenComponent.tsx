@@ -33,7 +33,7 @@ export default function SellTokenComponent({
     const { user } = useAuth();
 
     useEffect(() => {
-        console.log("Balance ::: ", balance)
+        // console.log("Balance ::: ", balance)
         setAmountToSell(balance)
     }, [])
 

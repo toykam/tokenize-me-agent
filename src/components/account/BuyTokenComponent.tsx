@@ -35,7 +35,7 @@ export default function BuyTokenComponent({
     const { refreshUser } = useProfileProvider();
 
     useEffect(() => {
-        console.log("Balance ::: ", balance)
+        // console.log("Balance ::: ", balance)
         setAmountToBuy(balance)
     }, [])
 

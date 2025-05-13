@@ -5,7 +5,6 @@ import { NextResponse } from 'next/server';
 import { formatEther, parseEther } from 'viem';
 import dexAbi from "@/../blockchain/artifacts/contracts/TokenizedProfileDex.sol/TokenizedProfileDex.json"
 import { DEX_CONTRACT } from '@/lib/utils';
-import * as crypto from 'crypto';
 
 export async function POST(
   req: Request
