@@ -4,13 +4,7 @@ export async function getTokenPriceHistory(tokenAddress: string, createdAt: Date
   
   try {
     const response = await fetch(
-      `/api/tokens/${tokenAddress}/price-history?address=${tokenAddress}&from=${tokenCreationTime}&to=${now}`,
-      {
-        headers: {
-          'x-api-key': process.env.CHAINBASE_API_KEY!,
-          'accept': 'application/json'
-        }
-      }
+      `/api/tokens/${tokenAddress}/price-history?address=${tokenAddress}&from=${tokenCreationTime}&to=${now}`
     );
 
     const data = await response.json();

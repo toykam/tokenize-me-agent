@@ -6,6 +6,8 @@ export async function GET(request: Request) {
   const fromTimestamp = searchParams.get('from');
   const endTimestamp = searchParams.get('to');
 
+  console.log(tokenAddress, fromTimestamp, endTimestamp);
+
   if (!tokenAddress || !fromTimestamp || !endTimestamp) {
     return NextResponse.json(
       { error: 'Missing required parameters' },
