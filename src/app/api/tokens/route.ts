@@ -8,7 +8,7 @@ export async function GET(request: Request) {
         const section = searchParams.get('section')?.toLowerCase();
         const sortBy = searchParams.get('sortBy')?.toLowerCase();
 
-        let where: any = {};
+        const where: any = {};
         let orderBy: any[] = [];
 
         // Add search conditions

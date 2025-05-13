@@ -6,6 +6,11 @@ import { base } from "viem/chains"
 const chain = base;
 
 export const viemClient = createPublicClient({
+    batch: {
+        multicall: {
+            wait: 10
+        }
+    },
     transport: http(),
     chain: chain
 });
