@@ -9,6 +9,7 @@ import { Button } from '../ui/button';
 import Link from 'next/link';
 import { RefreshCwIcon } from 'lucide-react';
 import TransferTokenComponent from './TransferTokenComponent';
+import { motion } from "framer-motion"
 
 
 
@@ -28,7 +29,10 @@ export default function AccountHero() {
     
             <p className='text-white text-[24px] font-bold mb-2'>Hello {user?.displayName}</p>
     
-            <div className={cn(
+            <motion.div
+                whileInView={{opacity: 1}}
+                initial={{opacity: .1}}
+            className={cn(
                 'rounded-2xl px-[20px] py-[12px] h-min-[110px] w-full',
                 'bg-gradient-to-tr from-[#93C9F2] via-[#FFDDA8] to-[#B0337A]',
             )}>
@@ -42,7 +46,7 @@ export default function AccountHero() {
                     {isLoading && <RefreshCwIcon width={10} height={10} />}
                     refresh
                 </p>
-            </div>
+            </motion.div>
     
             <div className='flex w-full flex-col justify-items-stretch items-stretch mt-[18px] gap-[16px]'>
                 {/* <Button>Deposit</Button> */}

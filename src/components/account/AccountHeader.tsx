@@ -8,6 +8,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import "@neynar/react/dist/style.css";
 import { usePathname, useRouter } from 'next/navigation'
+import { motion } from "framer-motion"
 
 
 export default function AccountHeader({title = "TokenizedProfile"}: {title: string}) {
@@ -20,7 +21,10 @@ export default function AccountHeader({title = "TokenizedProfile"}: {title: stri
 
     
   return (
-    <div className="flex justify-between mb-[16px] px-[24px] sticky top-0 z-10 py-[18px] items-center bg-[#070707]">
+    <motion.div 
+    initial={{opacity: 0}}
+    animate={{opacity: 1}}
+    className="flex justify-between mb-[16px] px-[24px] sticky top-0 z-10 py-[18px] items-center bg-[#070707]">
     {isAuthenticated && (
       <div className='flex gap-2'>
         {showBackButton && (
@@ -44,12 +48,16 @@ export default function AccountHeader({title = "TokenizedProfile"}: {title: stri
 
     {isAuthenticated && (
       <div className="flex gap-[16px]">
-        <Link href="/account/settings">
-          <Settings color="white" />
-        </Link>
-        {isNeynar && <LogOutIcon className='text-red-500' onClick={logout} />}
+        <motion.div initial={{scale: 0}} animate={{scale: 1}}>
+          <Link href="/account/settings">
+            <Settings color="white" />
+          </Link>
+        </motion.div>
+        {isNeynar && <motion.div initial={{scale: 0}} animate={{scale: 1}}>
+          <LogOutIcon className='text-red-500' onClick={logout} />  
+        </motion.div>}
       </div>
     )}
-  </div>
+  </motion.div>
   )
 }

@@ -1,6 +1,9 @@
+"use client"
+
 import { useEffect, useState } from "react";
-import { TokenPriceChart } from "./TokenChart";
+import { TokenPriceChart } from "@/components/TokenDetail/TokenChart";
 import { getTokenPriceHistory } from "@/lib/chainbase";
+import { motion } from "framer-motion"
 
 export function TokenMarketInfo({tokenAddress, createdAt, tokenSymbol}: {tokenAddress: string, createdAt: Date, tokenSymbol: string}) {
   const [marketInfo, setMarketInfo] = useState<{ price: number; marketCap: string; }>({
@@ -47,7 +50,7 @@ export function TokenMarketInfo({tokenAddress, createdAt, tokenSymbol}: {tokenAd
   }, [])
   return (
     <>
-      <div className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px] mb-[clamp(0.75rem,1.5vw,1.25rem)]">
+      <motion.div initial={{opacity: 0}} animate={{opacity: 1}}  className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px] mb-[clamp(0.75rem,1.5vw,1.25rem)]">
         <h3 className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold mb-[0.5rem]">Market Information</h3>
         
         {error.length == 0 && <p className='text-center text-red-500'>{error}</p>}
@@ -65,14 +68,12 @@ export function TokenMarketInfo({tokenAddress, createdAt, tokenSymbol}: {tokenAd
             </div>
           </div>
         </div>}
-      </div>
+      </motion.div>
 
-      <div className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px] mb-[clamp(0.75rem,1.5vw,1.25rem)]">
-        <h3 className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold mb-[0.5rem]">Chart</h3>
-        
+      <motion.div initial={{opacity: 0}} animate={{opacity: 1}} className="bg-[#16213e] py-[clamp(0.75rem,1.5vw,1.25rem)] px-[clamp(0.625rem,1.5vw,1.25rem)] rounded-[10px] mb-[clamp(0.75rem,1.5vw,1.25rem)]">
+        <h4 className="text-[clamp(1rem,1.8vw,1.3rem)] font-semibold mb-4">Price Chart</h4>
         {error.length != 0 && <p className='text-center text-red-500'>{error}</p>}
         {error.length == 0 && <div className="mt-6">
-        <h4 className="text-[clamp(1rem,1.8vw,1.3rem)] font-semibold mb-4">Price Chart</h4>
         {!loadingMarketInfo && priceHistory.length > 0 ? (
           <TokenPriceChart 
             data={priceHistory} 
@@ -84,7 +85,7 @@ export function TokenMarketInfo({tokenAddress, createdAt, tokenSymbol}: {tokenAd
           </div>
         )}
       </div>}
-      </div>
+      </motion.div>
     </>
   )
 }

@@ -1,11 +1,18 @@
 import { Token } from '@/lib/types'
 import Link from 'next/link'
 import React from 'react'
+import { motion, scale } from "framer-motion"
 
 export default function HoldingItemComponent({token} : {token: Token}) {
   return (
     <Link href={`/tokens/${token.address}`}>
-      <div className='flex gap-[12px] flex-auto transition-all duration-500'>
+      <motion.div
+        // whileHover={{scale: 1.008}}
+        whileInView={{scale: 1}}
+        animate={{opacity: 1}}
+        initial={{opacity: 0}}
+        exit={{scale: 0}}
+        className='flex gap-[12px] flex-auto transition-all duration-500'>
           <div className='max-h-[45px] max-w-[45px] bg-amber-300 rounded-2xl flex-1/6'>
             <img src={`${token.user?.pfp ?? '/splash-image.png'}`} className='w-full h-full rounded-2xl' />
           </div>
@@ -19,7 +26,7 @@ export default function HoldingItemComponent({token} : {token: Token}) {
               <p className='text-[#6C757D] font-medium text-[14px]'>tx: {token._count?.transactions}</p>
               <p className='text-[#6C757D] font-medium text-[14px]'>{token._count?.Engagement} engagements</p>
           </div>
-      </div>
+      </motion.div>
     </Link>
   )
 }

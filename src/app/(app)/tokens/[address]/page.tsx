@@ -6,7 +6,7 @@ import SellTokenComponent from '@/components/account/SellTokenComponent'
 import TransferTokenComponent from '@/components/account/TransferTokenComponent'
 // import SellTokenComponent from '@/components/account/SellTokenComponent'
 import FrameReadyWrapper from '@/components/FrameReadyWrapper'
-import { TokenMarketInfo } from '@/components/TokenMarketInfo'
+import { TokenMarketInfo } from '@/components/TokenDetail/TokenMarketInfo'
 import { Button } from '@/components/ui/button'
 // import { Button } from '@/components/ui/button'
 import { toMoneyFormat } from '@/lib/utils'
@@ -16,6 +16,7 @@ import { LucideLoader2 } from 'lucide-react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import React, { useEffect } from 'react'
+import { toast } from 'sonner'
 
 
 export default function TokenDetailPage() {
@@ -112,7 +113,12 @@ export default function TokenDetailPage() {
               <h3 className="text-[clamp(1.1rem,2vw,1.5rem)] font-semibold mb-[0.5rem]">Token Details</h3>
               <div className="space-y-[clamp(0.5rem,1vw,0.625rem)]">
                 <div className="text-[clamp(0.875rem,1.5vw,1.1rem)] break-all">
-                  Contract Address: {contractAddress}
+                  Contract Address (<span className='font-thin italic'>tap to copy</span>): <p className='text-green-200 font-bold cursor-pointer' onClick={() => {
+                    if (token?.address != null) {
+                      navigator.clipboard.writeText(token?.address ?? "");
+                      toast.success("CA copied to clipboard")
+                    }
+                  }}>{contractAddress}</p>
                 </div>
                 <div className="text-[clamp(0.875rem,1.5vw,1.1rem)]">Symbol: {token?.symbol}</div>
                 <div className="text-[clamp(0.875rem,1.5vw,1.1rem)]">Name: {token?.name}</div>
