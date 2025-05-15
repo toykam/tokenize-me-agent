@@ -1,17 +1,16 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { TokenPriceChart } from "@/components/TokenDetail/TokenChart";
-import { getTokenPriceHistory } from "@/lib/chainbase";
 import { motion } from "framer-motion"
+import { PriceChartWidget } from "./TokenChart2";
 
 export function TokenMarketInfo({tokenAddress, createdAt, tokenSymbol}: {tokenAddress: string, createdAt: Date, tokenSymbol: string}) {
-  const [marketInfo, setMarketInfo] = useState<{ price: number; marketCap: string; }>({
-    marketCap: "0", price: 0
+  console.log(createdAt, tokenSymbol);
+  const [marketInfo, setMarketInfo] = useState<{ price: number; marketCap: string; pairAddress: string}>({
+    marketCap: "0", price: 0, pairAddress: ""
   });
   const [loadingMarketInfo, setIsLoadingMarketInfo] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
-  const [priceHistory, setPriceHistory] = useState<Array<{ time: string; value: number }>>([]);
 
   
   useEffect(() => {
@@ -23,18 +22,15 @@ export function TokenMarketInfo({tokenAddress, createdAt, tokenSymbol}: {tokenAd
         const priceData = await priceResponse.json();
         const data = {
           price: 0,
-          marketCap: "0"
+          marketCap: "0",
+          pairAddress: ""
         };
 
         const pairs = priceData.pairs?.[0];
         if (pairs) {
             data.price = pairs.priceUsd;
             data.marketCap = (Number(pairs.priceUsd) * (1_000_000_000)).toString(); // Using 1B total supply
-
-
-            // Format historical data for the chart
-            const history = await getTokenPriceHistory(tokenAddress, createdAt);
-            setPriceHistory(history);
+            // data.pairAddress = pairs
         }
         
         setMarketInfo(data);
@@ -74,10 +70,11 @@ export function TokenMarketInfo({tokenAddress, createdAt, tokenSymbol}: {tokenAd
         <h4 className="text-[clamp(1rem,1.8vw,1.3rem)] font-semibold mb-4">Price Chart</h4>
         {error.length != 0 && <p className='text-center text-red-500'>{error}</p>}
         {error.length == 0 && <div className="mt-6">
-        {!loadingMarketInfo && priceHistory.length > 0 ? (
-          <TokenPriceChart 
-            data={priceHistory} 
-            tokenSymbol={tokenSymbol} 
+        {!loadingMarketInfo ? (
+          <PriceChartWidget
+              pairAddress={tokenAddress}
+            // data={priceHistory} 
+            // tokenSymbol={tokenSymbol} 
           />
         ) : (
           <div className="h-[400px] flex items-center justify-center text-gray-400">
