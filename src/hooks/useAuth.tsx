@@ -65,9 +65,9 @@ export const useAuth = () => {
   }
 
   useEffect(() => {
-      setTimeout(() => {
-        setLoading(false)
-      }, 3000)
+    setTimeout(() => {
+      setLoading(false)
+    }, 1500)
   }, [])
 
   return {
