@@ -51,7 +51,7 @@ export async function POST(
     }
 
 
-    const triggerPhrases = ['put me onchain', 'tokenize me', 'tokenize my profile'];
+    const triggerPhrases = ['put me onchain', 'tokenize me', 'tokenize my profile', 'put me onchain'];
     const shouldProceed = triggerPhrases.some(phrase => text.toLowerCase().includes(phrase.toLowerCase()));
     if (!shouldProceed) {
       const responseText = `Hey @${info.data.author.username}, Do you want to tokenize your profile? Just tell me to put you onchain, and boom you will become tradeable onchain.`;
