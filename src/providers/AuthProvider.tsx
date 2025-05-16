@@ -4,11 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { redirect, usePathname } from 'next/navigation';
 import React, { createContext, useContext, useEffect, ReactNode } from 'react';
 
-interface AuthContextType {
-  isAuthenticated: boolean
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<string>("");
 
 export function useAuthContext() {
   const context = useContext(AuthContext);
@@ -44,10 +40,5 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }, [isAuthenticated, loading, pathname]); // Removed 'user' from dependencies
 
-  const value = {
-    // Add values like isAuthenticated or user if needed
-    isAuthenticated: isAuthenticated
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={""}>{children}</AuthContext.Provider>;
 }

@@ -4,8 +4,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Toaster } from "@/components/ui/sonner";
-import { MiniKitContextProvider } from "@/providers/MiniKitContextProvider";
 import "@neynar/react/dist/style.css";
+import Head from "next/head";
+import { MiniKitContextProvider } from "@/providers/MiniKitContextProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -48,12 +49,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <body
         className={`bg-[#1a1a2e] ${inter.variable} ${montserrat.variable} antialiased`}
       >
         <MiniKitContextProvider>
           <SpeedInsights />
-          {children}
+            {children}
           <Toaster />
         </MiniKitContextProvider>
       </body>
