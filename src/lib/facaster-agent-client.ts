@@ -12,6 +12,18 @@ export const farcasterAgentClient = {
         parent: parent_hash
     });
   },
+  // publishFrameAction: async ({ text, parent_hash }: { text: string; parent_hash: string }) => {
+  //   console.log(process.env.AGENT_SIGNER_UUID!);
+  //   return farcasterClient.postFrameAction({
+  //       signerUuid: process.env.AGENT_SIGNER_UUID!,
+  //       action: {
+  //         button: {title: "Trade", action_type: "link", index: 1},
+  //         frames_url: "https://tokenizeme.vercel.app/tokens/0x182f278953c6AB55050b6c1f34B4F89D52025238",
+  //         post_url: ""
+  //       },
+  //       // baseUrl: "https://tokenizeme.vercel.app/tokens/0x182f278953c6AB55050b6c1f34B4F89D52025238"
+  //   });
+  // },
   getAgentFidByUsername: async (username: string): Promise<number> => {
     const response = await farcasterClient.lookupUserByUsername({username});
     if (!response?.user?.fid) {

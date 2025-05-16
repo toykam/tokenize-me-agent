@@ -5,10 +5,10 @@
 // import { DEPLOYER_PRIVATE_KEY, TOKEN_FACTORY_CONTRACT } from "@/lib/utils";
 // import { signerWalletClient, viemClient } from "@/lib/viem";
 
-import { farcasterAgentClient } from "@/lib/facaster-agent-client";
-import { config } from "dotenv";
+// import { farcasterAgentClient } from "@/lib/facaster-agent-client";
+// import { config } from "dotenv";
 
-config();
+// config();
 
 // // const cdp = new CdpClient();
 
@@ -103,10 +103,13 @@ config();
 // main().catch(error => console.log(`Error ::: `, error))
 
 
-const main = async () => {
-    const casts = await farcasterAgentClient.getAgentFidByUsername("toykam");
-    console.log(casts);
-}
+// const main = async () => {
+//     const casts = await farcasterAgentClient.publishFrameAction({
+//         parent_hash: "",
+//         text: ""
+//     });
+//     console.log(casts);
+// }
 
 
-main();
+// main();
