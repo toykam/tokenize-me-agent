@@ -1,5 +1,6 @@
 import { useMiniKit } from "@coinbase/onchainkit/minikit";
 import { useNeynarContext } from "@neynar/react";
+import { useEffect, useState } from "react";
 
 
 interface User {
@@ -16,12 +17,15 @@ export const useAuth = () => {
   const {
     isAuthenticated,
     logoutUser,
-    user: neynarUser,
+    user: neynarUser
+
   } = useNeynarContext();
 
   const {
     context,
   } = useMiniKit();
+
+  const [loading, setLoading] = useState<boolean>(true);
 
   const isNeynar = isAuthenticated;
 
@@ -49,11 +53,22 @@ export const useAuth = () => {
     : {};
 
   // Determine authentication status
-  const loading = !isAuthenticated && !context?.user;
+  // Determine if authentication is still loading
+  // setLoading(!isAuthenticated && !miniReady);
   const authenticated = isAuthenticated != false ? isAuthenticated : context?.user != null;
 
   // Merge user data, prioritizing Neynar if authenticated
   const usr: User = authenticated && normalizedNeynarUser.fid ? normalizedNeynarUser : normalizedContextUser || {};
+
+  if (usr == null) {
+    console.log("user is not logged in...");
+  }
+
+  useEffect(() => {
+      setTimeout(() => {
+        setLoading(false)
+      }, 3000)
+  }, [])
 
   return {
     loading,

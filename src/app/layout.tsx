@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Toaster } from "@/components/ui/sonner";
 import { MiniKitContextProvider } from "@/providers/MiniKitContextProvider";
+import "@neynar/react/dist/style.css";
 
 const inter = Inter({
   variable: "--font-inter",

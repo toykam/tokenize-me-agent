@@ -5,6 +5,7 @@ import { HoldingsProvider } from './HoldingsProvider'
 import { NeynarContextProvider, Theme } from "@neynar/react";
 import { ProfileProvider } from './ProfileProvider';
 import { TokensProvider } from './TokensProvider';
+import { AuthProvider } from './AuthProvider';
 
 export default function Providers({
     children
@@ -18,13 +19,15 @@ export default function Providers({
             }
         }}
         >
-        <ProfileProvider>
-            <HoldingsProvider>
-                <TokensProvider>
-                    {children}
-                </TokensProvider>
-            </HoldingsProvider>
-        </ProfileProvider>
+        <AuthProvider>
+            <ProfileProvider>
+                <HoldingsProvider>
+                    <TokensProvider>
+                        {children}
+                    </TokensProvider>
+                </HoldingsProvider>
+            </ProfileProvider>
+        </AuthProvider>
     </NeynarContextProvider>
   )
 }
